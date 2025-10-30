@@ -1,0 +1,118 @@
+:root {
+  --color-primario: #2C3E50;   /* azul oscuro */
+  --color-secundario: #3498DB; /* azul claro */
+  --color-fondo: #ECF0F1;      /* gris claro */
+  --color-texto: #2C3E50;      /* texto principal */
+  --color-blanco: #ffffff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--color-fondo);
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: var(--color-primario);
+  padding: 15px;
+  text-align: center;
+}
+
+header h1 {
+  color: var(--color-blanco);
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background: var(--color-secundario);
+  padding: 10px;
+}
+
+nav a {
+  color: var(--color-blanco);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+/* ======== TABLA DE CERTIFICADOS ======== */
+table {
+  width: 90%;
+  margin: 30px auto;
+  border-collapse: collapse;
+  background-color: var(--color-blanco);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Cabecera */
+thead {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+thead th {
+  padding: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Cuerpo de la tabla */
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: var(--color-texto);
+}
+
+/* Alternar color de filas */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover en filas */
+tbody tr:hover {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  transition: 0.2s ease;
+}
+
+/* Pequeño efecto al pasar por encima */
+table, th, td {
+  border: none;
+}
+
+/* Centrar texto en columnas */
+th, td {
+  text-align: center;
+}
+
+/* ======== SECCIÓN TABLA DE CERTIFICADOS ======== */
+.tabla-certificados-container {
+  width: 90%;
+  margin: 40px auto;
+  background-color: var(--color-blanco);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-certificados-container h2 {
+  color: var(--color-primario);
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  text-align: center;
+  border-bottom: 2px solid var(--color-secundario);
+  padding-bottom: 10px;
+}
