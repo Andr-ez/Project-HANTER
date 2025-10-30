@@ -46,7 +46,7 @@ main {
   text-align: center;
 }
 
-/* ======== TABLA DE CERTIFICADOS ======== */
+/*  TABLA DE CERTIFICADOS  */
 table {
   width: 90%;
   margin: 30px auto;
@@ -98,7 +98,7 @@ th, td {
   text-align: center;
 }
 
-/* ======== SECCIÓN TABLA DE CERTIFICADOS ======== */
+/* SECCIÓN TABLA DE CERTIFICADOS */
 .tabla-certificados-container {
   width: 90%;
   margin: 40px auto;

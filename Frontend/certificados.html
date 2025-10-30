@@ -11,6 +11,7 @@
     <header>
     <h1>Certificados</h1>
   </header>
+
   <!-- Barra de navegación -->
   <nav>
     <a href="index.html">Inicio</a>
@@ -22,6 +23,7 @@
   <main>
     <h1>Gestión de Certificados</h1>
 
+    <!-- codificacion de tabla -->
     <section class="tabla-certificados-container">
       <h2>📜 Lista de Certificados</h2>
     <table class="tabla-certificados">
@@ -41,14 +43,14 @@
   </main>
 
   <script>
-    // Espera a que cargue la página
+    
     document.addEventListener("DOMContentLoaded", () => {
       const tbody = document.getElementById("tabla-certificados");
 
       fetch("http://localhost:8080/api/certificados")
         .then(response => response.json())
         .then(data => {
-          tbody.innerHTML = ""; // Limpia cualquier fila previa
+          tbody.innerHTML = ""; 
           data.forEach(certificado => {
             const fila = document.createElement("tr");
             fila.innerHTML = `
