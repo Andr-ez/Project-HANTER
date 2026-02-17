@@ -1,0 +1,147 @@
+:root {
+  --color-fondo: #3F88C5;   /* Azul acento */
+  --color-titulos: #2F2E41; /* Gris antracita */
+  --color-texto: #6E6B7B;      /* gris claro, usado tambien para los detalles */
+  --color-contenedores: #C8C6C6;      /* contenedores */
+  --color-blanco: #ffffff;
+}
+
+/* Estilos globales para la página de inicio */
+.bienvenido-page {
+  font-family: 'Darumadrop One', sans-serif;
+  background-color: var(--color-fondo);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+/* Círculo blanco del fondo */
+.bienvenido-page .circuloFondo {
+  width: 2200px;
+  height: 700px;
+  background-color: var(--color-blanco);
+  border-radius: 50%;
+  position: fixed;
+   top: 93%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* CONTENEDOR DEL LOGO */
+.bienvenido-page .logo-container {
+  position: absolute;
+  top: 5px;            
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+}
+
+/* LOGO */
+.bienvenido-page .logo-container img {
+  width: 350px;
+  height: auto;
+}
+
+/* TITULO DE BIENVENIDA */
+.bienvenido-page .title {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--color-titulos);
+  font-size: 19px;
+}
+
+/* BOTONES CENTRALES */
+.bienvenido-page .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.bienvenido-page .btnInicioSesion, .bienvenido-page .btnRegistrarse {
+  background-color: var(--color-fondo);
+  color: var(--color-titulos);
+  border: none;
+  border-radius: 30px;
+  padding: 8px 45px;
+  font-size: 32px;
+  cursor: pointer;
+  white-space: nowrap; 
+  width: 260px;
+  font-family:'Darumadrop One', sans-serif;
+  display: flex;             
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* BOTONES CIRCULARES */
+.bienvenido-page .btnReporte, .bienvenido-page .btnDudas {
+  position: fixed;
+  bottom: 30px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-fondo);
+  color: var(--color-titulos);
+  font-size: 50px;
+  cursor: pointer;
+  font-family:'Darumadrop One', sans-serif;
+  display: flex;             
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.bienvenido-page .btnDudas {
+  left: 450px;
+}
+
+.bienvenido-page .btnReporte {
+  right: 450px;
+}
+
+
+/* decoraciones*/
+
+.bienvenido-page .circulosDecorativos {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bienvenido-page .circulosDecorativos div {
+  position: absolute;
+  background-color: var(--color-titulos);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.bienvenido-page .circulo1 {
+  width: 35px;
+  height: 35px;
+  top: 69%;
+  left: 25%;
+}
+
+.bienvenido-page .circulo2 {
+  width: 16px;
+  height: 16px;
+  top: 70%;
+  left: 70%;
+}
+
+
+.bienvenido-page .circulo3 {
+  width: 8px;
+  height: 8px;
+  top: 55%;
+  left: 35%;
+}

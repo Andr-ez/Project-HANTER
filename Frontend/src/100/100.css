@@ -1,0 +1,115 @@
+:root { 
+  --color-fondo: #3F88C5; 
+  --color-titulos: #2F2E41; 
+  --color-texto: #6E6B7B; 
+  --color-contenedores: #C8C6C6; 
+  --color-blanco: #ffffff;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.inicio-page{
+  font-family: 'Darumadrop One', sans-serif;
+  background: var(--color-fondo);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* FLECHA */
+.inicio-page .back-btn {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  font-size: 30px;
+  color: var(--color-fondo);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.inicio-page .back-btn::before {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* FONDO BLANCO */
+.inicio-page .circuloFondo {
+  width: 130%;
+  height: 80%;
+  background: var(--color-blanco);
+  position: fixed;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* CONTENIDO */
+.inicio-page .menu-container{
+  width: 85%;
+  max-width: 400px;
+  margin: 125px auto 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* TÍTULO */
+.inicio-page .menu-container h1{
+  font-size: 55px;
+  color: var(--color-titulos);
+  margin-bottom: 40px;
+}
+
+/* BOTONES */
+.inicio-page .menu-btn{
+  display: block;
+  width: 100%;
+  margin: 18px auto;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  background: var(--color-fondo);
+  color: var(--color-blanco);
+  font-size: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform .2s ease;
+}
+
+.inicio-page .menu-btn:hover{
+  transform: scale(1.05);
+}
+
+/* DECORACIONES */
+.inicio-page .cGDecor-1,
+.inicio-page .cGDecor-2,
+.inicio-page .cGDecor-3 {
+  position: fixed;
+  background: var(--color-texto);
+  border-radius: 50%;
+}
+
+.inicio-page .cGDecor-1 { width: 50px; height: 50px; top: 150px; right: 15%; }
+.inicio-page .cGDecor-2 { width: 60px; height: 60px; top: 180px; right: 80%; }
+.inicio-page .cGDecor-3 { width: 30px; height: 30px; top: 500px; right: 5%; }
+
+.inicio-page .cADecor-1 {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background: var(--color-fondo);
+  border-radius: 50%;
+  top: 540px;
+  left: 10%;
+}
