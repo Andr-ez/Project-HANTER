@@ -8,38 +8,42 @@
 
 /* Estilos globales para la página de login */
 .login-page {
-   font-family: 'Darumadrop One', sans-serif;
+  font-family: 'Darumadrop One', sans-serif;
   background-color: var(--color-fondo);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
+  position: fixed;
+  inset: 0;
   width: 100%;
 }
 
 /* Flecha regreso */
 .login-page .back-btn {
-  position: absolute;
-  top: 25px;
-  left: 20px;
+  position: absolute;       
+  top: -10px;
+  left: 300px;
   font-size: 30px;          
   color: var(--color-fondo);
   background: none; 
   border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Darumadrop One', sans-serif;
   z-index: 3;
   text-decoration: none;
+  transition: transform .2s ease;
+}
+
+.login-page .back-btn:hover{
+  transform: scale(1.1);
 }
 
 /* Círculo detrás del botón */
 .login-page .back-btn::before {
   content: "";
-  position: absolute;
+  position: absolute;        
   width: 55px;
   height: 55px;
   background: white;
@@ -48,23 +52,38 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1;
+  transition: transform .2s ease;
+}
 
-
+.login-page .back-btn:hover::before {
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 /* Fondo blanco central */
 .login-page .circuloFondo {
-    position: absolute;
-  width: 110%;
-  height: 600px;
+  position: absolute;
+  width: 1900px;
+  height: 550px;
   background: var(--color-blanco);
-  top: 70px; 
+  top:  8%; 
   left: 50%;
   transform: translateX(-50%);
   border-radius: 50%;
   z-index: 0;
 }
 
+
+/* Título */
+.login-page .titulo {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 25px;
+  color: var(--color-titulos);
+  user-select: none;
+}
 
 /* Login */
 .login-page .login-container {
@@ -89,7 +108,8 @@
   align-items: center;
   padding: 10px 15px;
   margin: 10px auto;
-  width: 95%;
+  width: 75%;
+  user-select: none;
 }
 
 .login-page .input-group input {
@@ -112,6 +132,7 @@
   margin: 8px 0;
   color: var(--color-texto);
   text-decoration: none;
+  user-select: none;
 }
 
 /* Botón Login */
@@ -119,45 +140,88 @@
   background: var(--color-fondo);
   border: none;
   color: var(--color-blanco);
+  position: absolute;
+  z-index: 2;
   border-radius: 25px;
   padding: 12px;
   font-size: 18px;
-  width: 75%;
+  width: 10%;
   cursor: pointer;
-  margin-top: 22px;
   font-family: 'Darumadrop One', sans-serif;
   text-decoration: none;
+  user-select: none;
+  transition: transform .2s ease;
+  top: 125px;
+  left: 44.3%;
+}
+
+.login-page .btn-login:hover {
+  transform: scale(1.05);
 }
 
 /* botones de aun no tienes cuenta, unete aqui */
 .login-page .registro {
   font-size: 12px;
   margin-top: 18px;
+  user-select: none;
 }
 
 .login-page .registro a {
   color: var(--color-fondo);
   text-decoration: none;
+  user-select: none;
 }
 
 
-/* decoraciones */
-.login-page .cGDecor-1, .login-page .cGDecor-2, .login-page .cGDecor-3 {
-  position: absolute;
-  background: var(--color-texto);
-  border-radius: 50%;
-}
-
-.login-page .cGDecor-1 { width: 50px; height: 50px; top: 150px; right: 15%; }
-.login-page .cGDecor-2 { width: 60px; height: 60px; top: 180px; right: 80%; }
-.login-page .cGDecor-3 { width: 30px; height: 30px; top: 550px; right: 60%; }
-
+/* decoraciones*/
+.login-page .cGDecor-1,
+.login-page .cGDecor-2,
+.login-page .cGDecor-3,
 .login-page .cADecor-1 {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  border-radius: 50%;   
+}
+
+.login-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 400px;
+  right: 20%;
+  background: var(--color-texto);
+}
+
+.login-page .cGDecor-2 {
+  width: 25px;
+  height: 25px;
+  top: 180px;
+  right: 85%;
+  background: var(--color-texto);
+}
+
+.login-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 100px;
+  right: 20%;
+  background: var(--color-texto);
+}
+
+.login-page .cADecor-1 {
+  width: 40px;
+  height: 40px;
+  top: 500px;
+  right: 70%;
   background: var(--color-fondo);
-  border-radius: 50%;
-  top: 540px;
-  left: 10%;
+}
+
+.login-page .password-group {
+  position: relative;
+}
+
+.login-page .eye-icon {
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  width: 25px;
+ 
 }
