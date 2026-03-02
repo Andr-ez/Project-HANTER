@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import "./001.css";
 import ojoAbierto from "/fotos/ojo abierto.png";
 import ojoCerrado from "/fotos/ojo cerrado.png";
+import keyIcon from "/fotos/key-icon.png";
+import emailIcon from "/fotos/email-icon.png";
 
 
 
@@ -34,7 +36,7 @@ function Login() {
 
             {/* Campos de correo y contraseña */}
               <div className="input-group">
-                <span>📧</span>
+                <img src={emailIcon} alt="Correo" className="email" />
                 <input
                   type="email"
                   placeholder="CORREO@ELECTRONICO.COM"
@@ -43,7 +45,7 @@ function Login() {
               </div>
 
               <div className="input-group password-group">
-                <span>🔑</span>
+                <img src={keyIcon} alt="Contraseña" className="key" />
 
                 <input
                 type={mostrarPassword ? "text" : "password"}
