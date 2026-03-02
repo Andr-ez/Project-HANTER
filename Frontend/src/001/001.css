@@ -1,98 +1,237 @@
-//llamado de React y otras dependencias necesarias para la aplicación
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import "./001.css";
-import ojoAbierto from "/fotos/ojo abierto.png";
-import ojoCerrado from "/fotos/ojo cerrado.png";
-import keyIcon from "/fotos/key-icon.png";
-import emailIcon from "/fotos/email-icon.png";
+:root { 
+  --color-fondo: #3F88C5; 
+  --color-titulos: #2F2E41; 
+  --color-texto: #6E6B7B; 
+  --color-contenedores: #C8C6C6; 
+  --color-blanco: #ffffff;
+}
+
+/* Estilos globales para la página de login */
+.login-page {
+  font-family: 'Darumadrop One', sans-serif;
+  background-color: var(--color-fondo);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+}
+
+/* Flecha regreso */
+.login-page .back-btn {
+  position: absolute;       
+  top: -10px;
+  left: 300px;
+  font-size: 30px;          
+  color: var(--color-fondo);
+  background: none; 
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Darumadrop One', sans-serif;
+  z-index: 3;
+  text-decoration: none;
+  transition: transform .2s ease;
+}
+
+.login-page .back-btn:hover{
+  transform: scale(1.1);
+}
+
+/* Círculo detrás del botón */
+.login-page .back-btn::before {
+  content: "";
+  position: absolute;        
+  width: 55px;
+  height: 55px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: transform .2s ease;
+}
+
+.login-page .back-btn:hover::before {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Fondo blanco central */
+.login-page .circuloFondo {
+  position: absolute;
+  width: 1900px;
+  height: 550px;
+  background: var(--color-blanco);
+  top:  8%; 
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: 0;
+}
 
 
+/* Título */
+.login-page .titulo {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 25px;
+  color: var(--color-titulos);
+  user-select: none;
+}
+
+/* Login */
+.login-page .login-container {
+   width: 85%;
+  margin: 220px auto 0; 
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.login-page .login-container h2 {
+  color: var(--color-titulos);
+  font-size: 45px;
+  margin-bottom: 40px;
+}
+
+/* Inputs */
+.login-page .input-group {
+  background: var(--color-contenedores);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin: 10px auto;
+  width: 75%;
+  user-select: none;
+}
+
+.login-page .input-group input {
+  border: none;
+  background: none;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.login-page .input-group input:focus {
+  outline: none;
+}
+
+/* Olvido Contraseña */
+.login-page .olvido {
+  display: block;
+  font-size: 12px;
+  margin: 8px 0;
+  color: var(--color-texto);
+  text-decoration: none;
+  user-select: none;
+}
+
+/* Botón Login */
+.login-page .btn-login {
+  background: var(--color-fondo);
+  border: none;
+  color: var(--color-blanco);
+  position: absolute;
+  z-index: 2;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 18px;
+  width: 10%;
+  cursor: pointer;
+  font-family: 'Darumadrop One', sans-serif;
+  text-decoration: none;
+  user-select: none;
+  transition: transform .2s ease;
+  top: 125px;
+  left: 44.3%;
+}
+
+.login-page .btn-login:hover {
+  transform: scale(1.05);
+}
+
+/* botones de aun no tienes cuenta, unete aqui */
+.login-page .registro {
+  font-size: 12px;
+  margin-top: 18px;
+  user-select: none;
+}
+
+.login-page .registro a {
+  color: var(--color-fondo);
+  text-decoration: none;
+  user-select: none;
+}
 
 
-//Nombre de la función que define el componente de login en el main.jsx
-function Login() {
-  const [mostrarPassword, setMostrarPassword] = useState(false);
-  useEffect(() => {
-    document.title = "Login";
-    }, []);
+/* decoraciones*/
+.login-page .cGDecor-1,
+.login-page .cGDecor-2,
+.login-page .cGDecor-3,
+.login-page .cADecor-1 {
+  position: absolute;
+  border-radius: 50%;   
+}
 
-    // Retorno del JSX que define la estructura visual de la pagina de login en el main.jsx
-    return (
-      <div className="login-page">
-        <div className="circuloFondo">
-         {/* Flecha Regresar */}
-          <Link to="/" className="back-btn">
-            ←
-          </Link>
-    
-          {/* Título de la página */}
-            <div className="titulo">
-              <h2>INICIA SESIÓN</h2>
-            </div>
+.login-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 400px;
+  right: 20%;
+  background: var(--color-texto);
+}
 
-          {/* Contenedor del Login */}
-          <div className="login-container">
+.login-page .cGDecor-2 {
+  width: 25px;
+  height: 25px;
+  top: 180px;
+  right: 85%;
+  background: var(--color-texto);
+}
 
-            {/* Campos de correo y contraseña */}
-              <div className="input-group">
-                <img src={emailIcon} alt="Correo" className="email" />
-                <input
-                  type="email"
-                  placeholder="CORREO@ELECTRONICO.COM"
-                  required
-                />
-              </div>
+.login-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 100px;
+  right: 20%;
+  background: var(--color-texto);
+}
 
-              <div className="input-group password-group">
-                <img src={keyIcon} alt="Contraseña" className="key" />
+.login-page .cADecor-1 {
+  width: 40px;
+  height: 40px;
+  top: 500px;
+  right: 70%;
+  background: var(--color-fondo);
+}
 
-                <input
-                type={mostrarPassword ? "text" : "password"}
-                placeholder="CONTRASEÑA"
-                required
-                />
+.login-page .password-group {
+  position: relative;
+}
 
-              <img
-                src={mostrarPassword ? ojoCerrado : ojoAbierto}
-                alt="Mostrar contraseña"
-                className="eye-icon"
-                onClick={() => setMostrarPassword(!mostrarPassword)}
-              />
-              </div>
+.login-page .eye-icon {
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  width: 20px;
+  height: 20px;
+}
 
-            {/* Botón de recuperacion de contrasena */}
-              <Link to="/002" className="olvido">
-                ¿OLVIDASTE TU CONTRASEÑA?
-              </Link>
-              
-              <br/>
+.email {
+  width: 20px;
+  height: 20px;
+} 
 
-            {/* Botón de inicio de sesión */}
-              <Link to="/100" className="btn-login">
-                INICIAR SESIÓN
-              </Link>
-            
-            <br/>
-
-            {/* Botón de registro */}
-              <p className="registro">
-                ¿AÚN NO TIENES CUENTA? <Link to="/004">ÚNETE AQUÍ</Link>
-              </p>
-          </div>
-
-            {/* circulos decorativos*/}
-              <div className="cGDecor-1"></div>
-              <div className="cGDecor-2"></div>
-              <div className="cGDecor-3"></div>
-              <div className="cADecor-1"></div>
-
-
-
-        </div>
-      </div>
-   
-    );
-  }
-
-export default Login;
+.key {
+  width: 20px;
+  height: 20px;
+}
