@@ -1,3 +1,6 @@
+/* ============================= */
+/* VARIABLES GLOBALES DE COLOR  */
+/* ============================= */
 :root { 
   --color-fondo: #3F88C5; 
   --color-titulos: #2F2E41; 
@@ -6,7 +9,9 @@
   --color-blanco: #ffffff;
 }
 
-/* Estilos globales para la página de login */
+/* ============================= */
+/* CONTENEDOR PRINCIPAL LOGIN   */
+/* ============================= */
 .login-page {
   font-family: 'Darumadrop One', sans-serif;
   background-color: var(--color-fondo);
@@ -14,11 +19,13 @@
   padding: 0;
   overflow-x: hidden;
   position: fixed;
-  inset: 0;
+  inset: 0;           /* ocupa toda la pantalla */
   width: 100%;
 }
 
-/* Flecha regreso */
+/* ============================= */
+/* BOTÓN REGRESAR               */
+/* ============================= */
 .login-page .back-btn {
   position: absolute;       
   top: -10px;
@@ -30,17 +37,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Darumadrop One', sans-serif;
   z-index: 3;
   text-decoration: none;
-  transition: transform .2s ease;
+  transition: transform .2s ease; /* animación hover */
 }
 
 .login-page .back-btn:hover{
   transform: scale(1.1);
 }
 
-/* Círculo detrás del botón */
+/* Círculo blanco detrás de la flecha */
 .login-page .back-btn::before {
   content: "";
   position: absolute;        
@@ -59,21 +65,24 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 
-/* Fondo blanco central */
+/* ============================= */
+/* FONDO BLANCO CENTRAL         */
+/* ============================= */
 .login-page .circuloFondo {
   position: absolute;
   width: 1900px;
   height: 550px;
   background: var(--color-blanco);
-  top:  8%; 
+  top: 8%; 
   left: 50%;
   transform: translateX(-50%);
   border-radius: 50%;
   z-index: 0;
 }
 
-
-/* Título */
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
 .login-page .titulo {
   position: absolute;
   top: 120px;
@@ -85,22 +94,20 @@
   user-select: none;
 }
 
-/* Login */
+/* ============================= */
+/* CONTENEDOR DEL FORMULARIO    */
+/* ============================= */
 .login-page .login-container {
-   width: 85%;
+  width: 85%;
   margin: 220px auto 0; 
   text-align: center;
   position: relative;
   z-index: 2;
 }
 
-.login-page .login-container h2 {
-  color: var(--color-titulos);
-  font-size: 45px;
-  margin-bottom: 40px;
-}
-
-/* Inputs */
+/* ============================= */
+/* INPUTS                       */
+/* ============================= */
 .login-page .input-group {
   background: var(--color-contenedores);
   border-radius: 20px;
@@ -108,7 +115,7 @@
   align-items: center;
   padding: 10px 15px;
   margin: 10px auto;
-  width: 75%;
+  width: 50%;
   user-select: none;
 }
 
@@ -122,10 +129,12 @@
 }
 
 .login-page .input-group input:focus {
-  outline: none;
+  outline: none; /* elimina borde azul por defecto */
 }
 
-/* Olvido Contraseña */
+/* ============================= */
+/* ENLACE OLVIDÓ CONTRASEÑA     */
+/* ============================= */
 .login-page .olvido {
   display: block;
   font-size: 12px;
@@ -135,7 +144,9 @@
   user-select: none;
 }
 
-/* Botón Login */
+/* ============================= */
+/* BOTÓN LOGIN                  */
+/* ============================= */
 .login-page .btn-login {
   background: var(--color-fondo);
   border: none;
@@ -148,18 +159,18 @@
   width: 10%;
   cursor: pointer;
   font-family: 'Darumadrop One', sans-serif;
-  text-decoration: none;
-  user-select: none;
   transition: transform .2s ease;
   top: 125px;
-  left: 44.3%;
+  left: 45%;
 }
 
 .login-page .btn-login:hover {
   transform: scale(1.05);
 }
 
-/* botones de aun no tienes cuenta, unete aqui */
+/* ============================= */
+/* TEXTO DE REGISTRO            */
+/* ============================= */
 .login-page .registro {
   font-size: 12px;
   margin-top: 18px;
@@ -169,11 +180,11 @@
 .login-page .registro a {
   color: var(--color-fondo);
   text-decoration: none;
-  user-select: none;
 }
 
-
-/* decoraciones*/
+/* ============================= */
+/* ELEMENTOS DECORATIVOS        */
+/* ============================= */
 .login-page .cGDecor-1,
 .login-page .cGDecor-2,
 .login-page .cGDecor-3,
@@ -182,6 +193,7 @@
   border-radius: 50%;   
 }
 
+/* Círculos decorativos de fondo */
 .login-page .cGDecor-1 {
   width: 50px;
   height: 50px;
@@ -214,23 +226,20 @@
   background: var(--color-fondo);
 }
 
+/* ============================= */
+/* PASSWORD Y ÍCONOS            */
+/* ============================= */
 .login-page .password-group {
   position: relative;
 }
 
 .login-page .eye-icon {
   cursor: pointer;
-  font-size: 18px;
-  user-select: none;
   width: 20px;
   height: 20px;
 }
 
-.email {
-  width: 20px;
-  height: 20px;
-} 
-
+.email,
 .key {
   width: 20px;
   height: 20px;
