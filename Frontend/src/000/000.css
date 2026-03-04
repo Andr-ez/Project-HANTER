@@ -6,7 +6,10 @@
   --color-blanco: #ffffff;
 }
 
+/* ================================================= */
 /* Estilos globales para la página de inicio */
+/* ================================================= */
+
 .bienvenido-page {
  font-family: 'Darumadrop One', sans-serif;
   background-color: var(--color-fondo);
@@ -18,7 +21,9 @@
   width: 100%;
 }
 
+/* ================================================= */
 /* Círculo blanco fondo */
+/* ================================================= */
 .bienvenido-page .circuloFondo {
   width: 2200px;
   height: 700px;
@@ -31,7 +36,9 @@
   z-index: 0;
 }
 
+/* ================================================= */
 /* LOGO */
+/* ================================================= */
 .bienvenido-page .logo-container {
   position: absolute;
   top: -43%;
@@ -51,7 +58,9 @@
   -webkit-user-drag: none;
 }
 
+/* ================================================= */
 /* TITULO */
+/* ================================================= */
 .bienvenido-page .title {
   position: absolute;
   top: 5%;
@@ -68,7 +77,9 @@
   -webkit-user-drag: none;
 }
 
+/* ================================================= */
 /* BOTONES CENTRALES */
+/* ================================================= */
 .bienvenido-page .buttons {
   display: flex;
   flex-direction: column;
@@ -104,8 +115,9 @@
   transform: scale(1.05);
 }
 
-
+/* ================================================= */
 /* BOTONES CIRCULARES */
+/* ================================================= */
 .bienvenido-page .btnReporte,
 .bienvenido-page .btnDudas {
   position: absolute;
@@ -140,8 +152,10 @@
   right: 750px;
 }
 
-
+/* ================================================= */
 /* decoraciones*/
+/* ================================================= */
+
 .bienvenido-page .cGDecor-1,
 .bienvenido-page .cGDecor-2,
 .bienvenido-page .cGDecor-3 {
