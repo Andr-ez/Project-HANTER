@@ -10,9 +10,9 @@
 .inicio-page{
   font-family: 'Darumadrop One', sans-serif;
   background: var(--color-fondo);
-  min-height: 100vh;
   overflow-x: hidden;
-  position: relative;
+  position: fixed;
+  inset: 0;
 }
 
 /* FLECHA */
