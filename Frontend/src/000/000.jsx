@@ -46,8 +46,8 @@ function Bienvenido() {
           </div>
 
           {/* Botones secundarios */}
-          <Link to="/003" className="btnDudas">?</Link>
-          <Link to="/004" className="btnReporte">!</Link>
+          <Link to="/proceso" className="btnDudas">?</Link>
+          <Link to="/proceso" className="btnReporte">!</Link>
 
           {/* Elementos decorativos */}
           <div className="cGDecor-1"></div>
