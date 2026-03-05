@@ -1,3 +1,6 @@
+/* ============================= */
+/* VARIABLES DE COLOR GLOBALES   */
+/* ============================= */
 :root { 
   --color-fondo: #3F88C5; 
   --color-titulos: #2F2E41; 
@@ -7,9 +10,8 @@
 }
 
 /* ============================= */
-/* ESTILOS GENERALES REGISTRO */
+/* CONTENEDOR PRINCIPAL          */
 /* ============================= */
-
 .registro-page {
   font-family: 'Darumadrop One', sans-serif;
   background-color: var(--color-fondo);
@@ -17,14 +19,13 @@
   padding: 0;
   overflow-x: hidden;
   position: fixed;
-  inset: 0;
+  inset: 0;        /* ocupa toda la pantalla */
   width: 100%;
 }
 
 /* ============================= */
-/* Fondo blanco */
+/* FONDO BLANCO CENTRAL          */
 /* ============================= */
-
 .registro-page .circuloFondo {
   position: absolute;
   width: 1900px;
@@ -38,9 +39,8 @@
 }
 
 /* ============================= */
-/* BOTÓN REGRESAR */
+/* BOTÓN REGRESAR                */
 /* ============================= */
-
 .registro-page .back-btn {
   position: absolute;
   top: -4px;
@@ -52,13 +52,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform .2s ease;
+  transition: transform .2s ease; /* animación hover */
 }
 
 .registro-page .back-btn:hover {
   transform: scale(1.1);
 }
 
+/* Círculo blanco detrás de la flecha */
 .registro-page .back-btn::before {
   content: "";
   position: absolute;
@@ -78,9 +79,8 @@
 }
 
 /* ============================= */
-/* TÍTULO */
+/* TÍTULO                        */
 /* ============================= */
-
 .registro-page .titulo {
   position: absolute;
   top: -10px;
@@ -93,9 +93,8 @@
 }
 
 /* ============================= */
-/* CONTENEDOR PRINCIPAL */
+/* CONTENEDOR PRINCIPAL FORM     */
 /* ============================= */
-
 .registro-page .principal-container {
   width: 85%;
   margin: 100px auto 0;
@@ -105,20 +104,18 @@
 }
 
 /* ============================= */
-/* FORMULARIO */
+/* FORMULARIO                    */
 /* ============================= */
-
 .registro-page form {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* inputs uno debajo del otro */
   align-items: center;
   gap: 12px;
 }
 
 /* ============================= */
-/* Inputs */
+/* INPUTS                        */
 /* ============================= */
-
 .registro-page .input-group {
   background: var(--color-contenedores);
   border-radius: 20px;
@@ -143,15 +140,14 @@
 }
 
 .registro-page .input-group input:focus {
-  outline: none;
+  outline: none; /* elimina borde azul */
 }
 
 /* ============================= */
-/* Password */
+/* PASSWORD                      */
 /* ============================= */
-
 .registro-page .password-group {
-  position: relative;
+  position: relative; /* permite posicionar el ojo correctamente */
 }
 
 .registro-page .eye-icon {
@@ -161,9 +157,8 @@
 }
 
 /* ============================= */
-/* TEXTO INFORMATIVO */
+/* TEXTO INFORMATIVO             */
 /* ============================= */
-
 .registro-page .info-text {
   font-size: 12px;
   margin-top: 10px;
@@ -172,9 +167,8 @@
 }
 
 /* ============================= */
-/* BOTÓN CREAR CUENTA */
+/* BOTÓN CREAR CUENTA            */
 /* ============================= */
-
 .registro-page .btnRegistro {
   background: var(--color-fondo);
   border: none;
@@ -195,9 +189,8 @@
 }
 
 /* ============================= */
-/* LINK LOGIN */
+/* LINK A LOGIN                  */
 /* ============================= */
-
 .registro-page .registro-link {
   font-size: 12px;
   margin-top: 18px;
@@ -210,9 +203,8 @@
 }
 
 /* ============================= */
-/* MENSAJE DE ÉXITO */
+/* MENSAJE DE ÉXITO              */
 /* ============================= */
-
 .registro-page .mensaje-exito {
   position: relative;
   z-index: 2;
@@ -226,9 +218,8 @@
 }
 
 /* ============================= */
-/* DECORACIONES */
+/* ELEMENTOS DECORATIVOS         */
 /* ============================= */
-
 .registro-page .cGDecor-1,
 .registro-page .cGDecor-2,
 .registro-page .cGDecor-3,
