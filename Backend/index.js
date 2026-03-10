@@ -1,5 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
 import usuariosRouter from './routes/usuarios.js';
 import empleadosRouter from './routes/empleados.js';
 import rolesRouter from './routes/roles.js';
@@ -11,6 +13,8 @@ console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 
 // Montar las rutas
 app.use('/usuarios', usuariosRouter);

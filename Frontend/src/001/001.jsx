@@ -1,13 +1,36 @@
 //llamado de React y otras dependencias necesarias para la aplicación
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import "./001.css";
 
 //Nombre de la función que define el componente de login en el main.jsx
 function Login() {
+    const [usuario, setUsuario] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
   useEffect(() => {
     document.title = "Login";
     }, []);
+
+      const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/usuarios/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre_usuario: usuario, password })
+      });
+      const data = await response.json();
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        navigate("/100"); // redirige al dashboard
+      } else {
+        alert("Credenciales inválidas");
+      }
+    } catch (error) {
+      console.error("Error en login:", error);
+    }
+  };
 
     // Retorno del JSX que define la estructura visual de la pagina de login en el main.jsx
     return (
@@ -32,8 +55,10 @@ function Login() {
         <div className="input-group">
           <span>📧</span>
           <input
-            type="email"
-            placeholder="CORREO@ELECTRONICO.COM"
+            type="text"
+            placeholder="Correo / Usuario"
+            value={usuario}
+            onChange={(e) => setUsuario(e.target.value)}
             required
           />
         </div>
@@ -43,6 +68,8 @@ function Login() {
           <input
             type="password"
             placeholder="CONTRASEÑA"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
@@ -53,13 +80,13 @@ function Login() {
         </Link>
 
           {/* Botón de inicio de sesión */}
-        <Link to="/100" className="btn-login">
+        <button className="btn-login" onClick={handleLogin}>
           INICIAR SESIÓN
-        </Link>
+        </button>
 
         {/* Botón de registro */}
         <p className="registro">
-          ¿AÚN NO TIENES CUENTA? <a href="#">ÚNETE AQUÍ</a>
+          ¿AÚN NO TIENES CUENTA? <a href="/004">ÚNETE AQUÍ</a>
         </p>
       </div>
 
