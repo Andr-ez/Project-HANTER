@@ -14,9 +14,13 @@ console.log('JWT_SECRET:', process.env.JWT_SECRET);
 const app = express();
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", 
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
-// Montar las rutas
+
 app.use('/usuarios', usuariosRouter);
 app.use('/empleados', empleadosRouter);
 app.use('/roles', rolesRouter);
