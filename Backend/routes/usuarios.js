@@ -12,31 +12,67 @@ router.get('/perfil', verificarToken, async (req, res) => {
   try {
     const usuario = await prisma.usuario.findUnique({
       where: { id_usuario: req.usuario.id_usuario },
-      include: { rol: true, empleado: true }
+      include: {
+        empleado: {
+          include: {
+            rol: true
+          }
+        }
+      }
     });
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
     res.json(usuario);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener perfil' });
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener perfil', detalle: error.message });
   }
 });
 
+
 // Crear usuario (signup)
 router.post('/signup', async (req, res) => {
-  const { nombre_usuario, password, id_rol, id_empleado } = req.body;
+  const { nombre_usuario, password, confirm_password, correo } = req.body;
 
   try {
+
+    if (password !== confirm_password) {
+      return res.status(400).json({ error: "Las contraseñas no coinciden" });
+    }
+const empleado = await prisma.empleado.findUnique({
+      where: { correo }
+    });
+
+    if (!empleado) {
+      return res.status(404).json({ error: "Empleado no encontrado" });
+    }
+
+    const usuarioExistente = await prisma.usuario.findUnique({
+      where: { id_empleado: empleado.id_empleado }
+    });
+
+    if (usuarioExistente) {
+      return res.status(400).json({ error: "Ya existe un usuario para este empleado" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const usuario = await prisma.usuario.create({
       data: {
         nombre_usuario,
         password_hash: hashedPassword,
-        id_rol,
-        id_empleado
+        id_empleado: empleado.id_empleado
       }
     });
 
-    res.json(usuario);
+    res.json({
+      id_usuario: usuario.id_usuario,
+      nombre_usuario: usuario.nombre_usuario,
+      id_empleado: usuario.id_empleado
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error al crear usuario', detalle: error.message });
@@ -49,7 +85,12 @@ router.post('/login', async (req, res) => {
 
   try {
     const usuario = await prisma.usuario.findUnique({
-      where: { nombre_usuario }
+      where: { nombre_usuario },
+      include: {
+        empleado: {
+          include: { rol: true }
+        }
+      }
     });
 
     if (!usuario) {
@@ -62,12 +103,22 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id_usuario: usuario.id_usuario },
+      { id_usuario: usuario.id_usuario,
+        id_empleado: usuario.id_empleado,
+        rol: usuario.empleado.rol.nombre_rol },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    res.json({ token });
+    res.json({
+      token,
+      usuario: {
+        id_usuario: usuario.id_usuario,
+        nombre_usuario: usuario.nombre_usuario,
+        correo: usuario.empleado.correo,
+        rol: usuario.empleado.rol.nombre_rol
+      }
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error en login', detalle: error.message });

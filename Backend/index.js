@@ -6,7 +6,7 @@ import usuariosRouter from './routes/usuarios.js';
 import empleadosRouter from './routes/empleados.js';
 import rolesRouter from './routes/roles.js';
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
 console.log('JWT_SECRET:', process.env.JWT_SECRET);
 

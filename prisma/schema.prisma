@@ -1,6 +1,6 @@
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./prisma/dev.db"
 }
 
 generator client {
@@ -8,57 +8,57 @@ generator client {
 }
 
 model Rol {
-  id_rol      Int       @id @default(autoincrement())
-  nombre_rol  String    @unique
-  usuarios    Usuario[]
+  id_rol     Int        @id @default(autoincrement())
+  nombre_rol String     @unique
+  empleados  Empleado[]
 }
 
 model Empleado {
-  id_empleado     Int      @id @default(autoincrement())
-  nombre          String
-  apellido        String
-  correo          String   @unique
-  documento       Int      @unique
-  celular         String   @unique
-  fecha_ingreso   DateTime @default(now())
-  
-  usuario         Usuario?
-  certificados    Certificado[]
-  capacitaciones  EmpleadoCapacitacion[]
+  id_empleado   Int      @id @default(autoincrement())
+  nombre        String
+  apellido      String
+  correo        String   @unique
+  documento     Int      @unique
+  celular       String   @unique
+  fecha_ingreso DateTime @default(now())
+
+  id_rol Int
+  rol    Rol @relation(fields: [id_rol], references: [id_rol], onDelete: Cascade)
+
+  usuario        Usuario?
+  certificados   Certificado[]
+  capacitaciones EmpleadoCapacitacion[]
 }
 
 model Usuario {
-  id_usuario      Int      @id @default(autoincrement())
-  nombre_usuario  String   @unique
-  password_hash   String
-  
-  id_rol          Int
-  rol             Rol      @relation(fields: [id_rol], references: [id_rol], onDelete: Cascade)
-  
-  id_empleado     Int      @unique
-  empleado        Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
-  
+  id_usuario     Int    @id @default(autoincrement())
+  nombre_usuario String @unique
+  password_hash  String
+
+  id_empleado Int      @unique
+  empleado    Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
+
   certificados_emitidos Certificado[] @relation("Emisor")
 }
 
 model Certificado {
-  id_certificado     Int      @id @default(autoincrement())
-  fecha_emision      DateTime @default(now())
-  url_archivo        String
-  
-  id_empleado        Int
-  empleado           Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
-  
-  id_usuario_emisor  Int
-  emisor             Usuario  @relation("Emisor", fields: [id_usuario_emisor], references: [id_usuario], onDelete: Cascade)
+  id_certificado Int      @id @default(autoincrement())
+  fecha_emision  DateTime @default(now())
+  url_archivo    String
+
+  id_empleado Int
+  empleado    Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
+
+  id_usuario_emisor Int
+  emisor            Usuario @relation("Emisor", fields: [id_usuario_emisor], references: [id_usuario], onDelete: Cascade)
 }
 
 model EmpleadoCapacitacion {
-  id_capacitacion     Int      @id @default(autoincrement())
+  id_capacitacion     Int       @id @default(autoincrement())
   nombre_capacitacion String
   fecha_inicio        DateTime
   fecha_fin           DateTime?
-  
-  id_empleado         Int
-  empleado            Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
+
+  id_empleado Int
+  empleado    Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
 }

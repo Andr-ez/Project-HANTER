@@ -9,9 +9,12 @@ CREATE TABLE "Empleado" (
     "id_empleado" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nombre" TEXT NOT NULL,
     "apellido" TEXT NOT NULL,
-    "correo" TEXT,
+    "correo" TEXT NOT NULL,
     "documento" INTEGER NOT NULL,
-    "fecha_ingreso" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "celular" TEXT NOT NULL,
+    "fecha_ingreso" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id_rol" INTEGER NOT NULL,
+    CONSTRAINT "Empleado_id_rol_fkey" FOREIGN KEY ("id_rol") REFERENCES "Rol" ("id_rol") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -19,9 +22,7 @@ CREATE TABLE "Usuario" (
     "id_usuario" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nombre_usuario" TEXT NOT NULL,
     "password_hash" TEXT NOT NULL,
-    "id_rol" INTEGER NOT NULL,
     "id_empleado" INTEGER NOT NULL,
-    CONSTRAINT "Usuario_id_rol_fkey" FOREIGN KEY ("id_rol") REFERENCES "Rol" ("id_rol") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "Usuario_id_empleado_fkey" FOREIGN KEY ("id_empleado") REFERENCES "Empleado" ("id_empleado") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -54,6 +55,9 @@ CREATE UNIQUE INDEX "Empleado_correo_key" ON "Empleado"("correo");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Empleado_documento_key" ON "Empleado"("documento");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Empleado_celular_key" ON "Empleado"("celular");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Usuario_nombre_usuario_key" ON "Usuario"("nombre_usuario");
