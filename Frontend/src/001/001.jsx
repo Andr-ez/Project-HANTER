@@ -70,6 +70,11 @@ function Login() {
             placeholder="CONTRASEÑA"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  }}
             required
           />
         </div>
