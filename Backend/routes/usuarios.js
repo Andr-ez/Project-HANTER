@@ -154,6 +154,17 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ error: "Ya existe un usuario para este empleado" });
     }
 
+    const nombreTomado = await prisma.usuario.findUnique({
+  where: { nombre_usuario }
+});
+if (nombreTomado) {
+  return res.status(400).json({ error: "El nombre de usuario ya está en uso" });
+}
+
+    if (password.length < 4) {
+  return res.status(400).json({ error: "La contraseña debe tener mínimo 4 caracteres" });
+}
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
 // Crea el usuario asociado al empleado en la DB Usuario
