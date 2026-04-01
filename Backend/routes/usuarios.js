@@ -2,10 +2,104 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { verificarToken } from '../middlewares/auth.js';
+import { verificarToken, verificarRol } from '../middlewares/auth.js';
 
 const prisma = new PrismaClient();
 const router = express.Router();
+
+// Listar usuarios
+router.get(
+  '/',
+  verificarToken,
+  verificarRol(['Administrador', 'Supervisor']),
+  async (req, res) => {
+    try {
+      const usuarios = await prisma.usuario.findMany({
+        include: {
+          empleado: {
+            include: { rol: true } // incluir datos del empleado y su rol
+          }
+        }
+      });
+      res.json(usuarios);
+    } catch (error) {
+      console.error("Error al listar usuarios:", error);
+      res.status(500).json({ error: 'Error al listar usuarios', detalle: error.message });
+    }
+  }
+);
+
+//eliminar usuario por ID, solo para admin y supervisor
+router.delete(
+  '/:id',
+  verificarToken,
+  verificarRol(['Administrador', 'Supervisor']),
+  async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+
+      const usuario = await prisma.usuario.findUnique({
+        where: { id_usuario: id }
+      });
+
+      if (!usuario) {
+        return res.status(404).json({ error: 'Usuario no encontrado' });
+      }
+
+      await prisma.usuario.delete({
+        where: { id_usuario: id }
+      });
+
+      res.json({ mensaje: 'Usuario eliminado correctamente' });
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+      res.status(500).json({ error: 'Error al eliminar usuario', detalle: error.message });
+    }
+  }
+);
+
+// Editar usuario por ID
+router.put(
+  '/:id',
+  verificarToken,
+  verificarRol(['Administrador', 'Supervisor']),
+  async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+      const { nombre_usuario, password } = req.body;
+
+      const usuario = await prisma.usuario.findUnique({
+        where: { id_usuario: id }
+      });
+
+      if (!usuario) {
+        return res.status(404).json({ error: 'Usuario no encontrado' });
+      }
+
+      let dataUpdate = {};
+      if (nombre_usuario) {
+        dataUpdate.nombre_usuario = nombre_usuario.trim();
+      }
+      if (password) {
+        if (password.length < 4) {
+          return res.status(400).json({ error: "La contraseña debe tener mínimo 4 caracteres" });
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        dataUpdate.password_hash = hashedPassword;
+      }
+
+      const usuarioActualizado = await prisma.usuario.update({
+        where: { id_usuario: id },
+        data: dataUpdate
+      });
+
+      res.json(usuarioActualizado);
+    } catch (error) {
+      console.error("Error al editar usuario:", error);
+      res.status(500).json({ error: 'Error al editar usuario', detalle: error.message });
+    }
+  }
+);
 
 // Obtener perfil del usuario autenticado, usa su token
 router.get('/perfil', verificarToken, async (req, res) => {
@@ -140,5 +234,7 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Error en login', detalle: error.message });
   }
 });
+
+
 
 export default router;

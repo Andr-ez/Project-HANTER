@@ -17,3 +17,18 @@ export function verificarToken(req, res, next) {
     return res.status(403).json({ error: 'Token inválido o expirado' });
   }
 }
+
+// Middleware para verificar roles permitidos
+export function verificarRol(rolesPermitidos) {
+  return (req, res, next) => {
+    if (!req.usuario) {
+      return res.status(401).json({ error: 'Token no procesado' });
+    }
+
+    if (!rolesPermitidos.includes(req.usuario.rol)) {
+      return res.status(403).json({ error: 'Acceso denegado' });
+    }
+
+    next();
+  };
+}

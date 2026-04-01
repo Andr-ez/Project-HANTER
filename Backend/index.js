@@ -5,6 +5,7 @@ import cors from 'cors';
 import usuariosRouter from './routes/usuarios.js';
 import empleadosRouter from './routes/empleados.js';
 import rolesRouter from './routes/roles.js';
+import { verificarToken, verificarRol } from './middlewares/auth.js';
 
 dotenv.config({ path: '../.env' });
 
@@ -22,8 +23,12 @@ app.use(cors({
 
 
 app.use('/usuarios', usuariosRouter);
-app.use('/empleados', empleadosRouter);
-app.use('/roles', rolesRouter);
+app.use('/empleados',
+  verificarToken,
+  verificarRol(['Administrador', 'Supervisor']), empleadosRouter);
+app.use('/roles',
+  verificarToken,
+  verificarRol(['Administrador', 'Supervisor']), rolesRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {
