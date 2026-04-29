@@ -56,4 +56,5 @@ function Inicio() {
   );
 }
 
+// Exportación del componente para poder usarlo en main.jsx
 export default Inicio;

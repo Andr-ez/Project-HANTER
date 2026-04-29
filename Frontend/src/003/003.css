@@ -1,0 +1,98 @@
+
+
+
+/* Título */
+.nueva-contrasena-page .titulo {
+  top: 120px;
+  z-index: 2;
+  font-size: 25px;
+}
+
+/* Contenedor */
+.nueva-contrasena-page .login-container {
+  width: 85%;
+  margin: 240px auto 0; 
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Inputs */
+.nueva-contrasena-page .input-group {
+  background: var(--color-contenedores);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  margin: 15px auto;
+  width: 75%;
+}
+
+.nueva-contrasena-page .input-group input {
+  border: none;
+  background: none;
+  width: 100%;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.nueva-contrasena-page .input-group input:focus {
+  outline: none;
+}
+
+/* Botón */
+.nueva-contrasena-page .btn-login {
+  background: var(--color-fondo);
+  border: none;
+  color: var(--color-blanco);
+  border-radius: 30px;
+  padding: 15px;
+  font-size: 20px;
+  width: 75%;
+  cursor: pointer;
+  margin-top: 25px;
+  font-family: 'Darumadrop One', sans-serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Decoraciones */
+.nueva-contrasena-page .cGDecor-1,
+.nueva-contrasena-page .cGDecor-2,
+.nueva-contrasena-page .cGDecor-3,
+.nueva-contrasena-page .cADecor-1 {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.nueva-contrasena-page .cGDecor-1 {
+  width: 20px;
+  height: 20px;
+  top: 90px;
+  left: 50%;
+  background: var(--color-fondo);
+}
+
+.nueva-contrasena-page .cGDecor-2 {
+  width: 15px;
+  height: 15px;
+  top: 350px;
+  right: 15%;
+  background: var(--color-texto);
+}
+
+.nueva-contrasena-page .cGDecor-3 {
+  width: 40px;
+  height: 40px;
+  bottom: 30px;
+  left: 45%;
+  background: var(--color-texto);
+}
+
+.nueva-contrasena-page .cADecor-1 {
+  width: 70px;
+  height: 70px;
+  top: 320px;
+  right: 10%;
+  background: var(--color-fondo);
+}

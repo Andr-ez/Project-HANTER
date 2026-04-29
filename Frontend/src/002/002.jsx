@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import "./002.css";
+import emailIcon from "/fotos/icon/email-icon.png";
 
 //Nombre de la función que define el componente de RecuperarContrasena en el main.jsx
 function RecuperarContrasena() {
@@ -36,7 +37,7 @@ function RecuperarContrasena() {
         </label>
 
         <div className="input-group">
-          <span>📧</span>
+          <img src={emailIcon} alt="Correo" className="email" />
           <input
             type="email"
             placeholder="CORREO@ELECTRONICO.COM"
@@ -44,9 +45,9 @@ function RecuperarContrasena() {
           />
         </div>
 
-        <button className="btnEnviarCodigo">
+        <Link to="/005" className="btnEnviarCodigo">
           ENVIAR CODIGO
-        </button>
+        </Link>
 
         <br />
         {/* Segunda parte del proceso de recuperación de contraseña-ingreso del codigo */}
@@ -63,9 +64,9 @@ function RecuperarContrasena() {
           <input type="text" maxLength="1" />
         </div>
 
-        <button className="btnVerificacion">
+        <Link to="/003" className="btnVerificacion">
           VERIFICAR CÓDIGO
-        </button>
+        </Link>
       </div>
 
     </div>
@@ -73,4 +74,5 @@ function RecuperarContrasena() {
   );
 }
 
+// Exportación del componente para poder usarlo en main.jsx
 export default RecuperarContrasena;

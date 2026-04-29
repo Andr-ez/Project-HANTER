@@ -1,0 +1,159 @@
+/* ============================= */
+/* VARIABLES GLOBALES DE COLOR  */
+/* ============================= */
+:root {
+ --color-fondo: #3F88C5;   /* Azul acento */
+  --color-titulos: #2F2E41; /* Gris antracita */
+  --color-texto: #6E6B7B;      /* gris claro, usado tambien para los detalles */
+  --color-contenedores: #C8C6C6;      /* contenedores */
+  --color-blanco: #ffffff;
+}
+
+/* ============================= */
+/* ESTILOS GENERALES             */ 
+/* ============================= */
+body {
+  font-family: 'Darumadrop One', sans-serif;
+  background: var(--color-fondo);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* disposicion base para páginas */
+.page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+
+/* ============================= */
+/* BOTÓN REGRESAR               */
+/* ============================= */
+.back-btn {
+  position: absolute;       
+  top: -10px;
+  left: 300px;
+  font-size: 30px;          
+  color: var(--color-fondo);
+  background: none; 
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  text-decoration: none;
+  transition: transform .2s ease; /* animación hover */
+}
+
+.back-btn:hover{
+  transform: scale(1.1);
+}
+
+/* Círculo blanco detrás de la flecha */
+.back-btn::before {
+  content: "";
+  position: absolute;        
+  width: 55px;
+  height: 55px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: transform .2s ease;
+}
+
+ .back-btn:hover::before {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+
+/* ============================= */
+/* FONDO BLANCO CENTRAL         */
+/* ============================= */
+.circuloFondo {
+  position: absolute;
+  width: 1900px;
+  height: 550px;
+  background: var(--color-blanco);
+  top: 8%; 
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* ============================= */
+/* TÍTULOS PRINCIPALES              */
+/* ============================= */
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  color: var(--color-titulos)
+}
+
+/* ============================= */
+/* PASSWORD         */
+/* ============================= */
+
+.login-page .password-group {
+  position: relative;
+}
+
+/* ============================= */
+/* ICONOS            */ 
+/* ============================= */
+
+.eye-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+
+/* ============================= */
+/* INPUTS                        */
+/* ============================= */
+
+/* este  */
+.input-group img {
+  width: 20px;
+  height: 20px;
+}
+
+.input-group {
+  background: var(--color-contenedores);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  width: 50%;
+  user-select: none;
+}
+
+.input-group input {
+  border: none;
+  background: none;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.input-group input:focus {
+  outline: none; 
+}

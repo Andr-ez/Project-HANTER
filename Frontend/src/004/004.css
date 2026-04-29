@@ -1,146 +1,143 @@
-:root { 
-  --color-fondo: #3F88C5; 
-  --color-titulos: #2F2E41; 
-  --color-texto: #6E6B7B; 
-  --color-contenedores: #C8C6C6; 
-  --color-blanco: #ffffff;
+/* ============================= */
+/* TÍTULO                        */
+/* ============================= */
+.registro-page .title {
+  top: 0px;
+  z-index: 2;
+  font-size: 25px;
 }
 
-/* CONTENEDOR PRINCIPAL DE LA PÁGINA */
-.registro-page{
-  font-family: 'Darumadrop One', sans-serif;
-  background: var(--color-fondo);
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* BOTÓN REGRESAR */
-.registro-page .back-btn{
-  position: absolute;
-  top: 30px;
-  left: 20px;
-  font-size: 28px;
-  color: var(--color-fondo);
-  text-decoration: none;
-  z-index: 3;
-}
-
-.registro-page .back-btn::before{
-  content: "";
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  background: var(--color-blanco);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-}
-
-/* FONDO BLANCO */
-.registro-page .circuloFondo{
-  width: 130%;
-  height: 95%;
-  background: var(--color-blanco);
-  position: fixed;
-  top: 22%;
-  left: 50%;
-  transform: translate(-50%, -20%);
-  border-radius: 50%;
-  z-index: 0;
-}
-
-/* DECORACIONES */
-.registro-page .cGDecor-1,
-.registro-page .cGDecor-2,
-.registro-page .cGDecor-3{
-  position: fixed;
-  background: var(--color-texto);
-  border-radius: 50%;
-}
-
-.registro-page .cGDecor-1{ width: 50px; height: 50px; top: 75px; right: 15%; }
-.registro-page .cGDecor-2{ width: 60px; height: 60px; top: 180px; right: 95%; }
-.registro-page .cGDecor-3{ width: 30px; height: 30px; top: 500px; right: 95%; }
-
-.registro-page .cADecor-1{
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  background: var(--color-fondo);
-  border-radius: 50%;
-  top: 500px;
-  left: 98%;
-}
-
-/* CONTENEDOR */
-.registro-page .principal-container{
+/* ============================= */
+/* CONTENEDOR PRINCIPAL FORM     */
+/* ============================= */
+.registro-page .principal-container {
   width: 85%;
-  margin: 120px auto 0;
+  margin: 100px auto 0;
   text-align: center;
   position: relative;
   z-index: 2;
 }
 
-.registro-page h2{
-  color: var(--color-titulos);
-  font-size: 42px;
-  margin-bottom: 35px;
-}
-
-/* INPUTS */
-.registro-page .input-group{
-  background: var(--color-contenedores);
-  border-radius: 22px;
+/* ============================= */
+/* FORMULARIO                    */
+/* ============================= */
+.registro-page form {
   display: flex;
+  flex-direction: column; /* inputs uno debajo del otro */
   align-items: center;
-  padding: 11px 15px;
-  margin: 12px auto;
-  width: 100%;
+  gap: 12px;
 }
 
-.registro-page .input-group span{
-  font-size: 18px;
+
+
+/* ============================= */
+/* PASSWORD                      */
+/* ============================= */
+.registro-page .password-group {
+  position: relative; /* permite posicionar el ojo correctamente */
 }
 
-.registro-page .input-group input{
-  border: none;
-  background: none;
-  width: 100%;
-  padding-left: 12px;
-  font-size: 14px;
-  font-family: inherit;
-}
-
-.registro-page .input-group input:focus{
-  outline: none;
-}
-
-/* TEXTO FECHA */
-.registro-page .info-text{
+/* ============================= */
+/* TEXTO INFORMATIVO             */
+/* ============================= */
+.registro-page .info-text {
+  font-size: 12px;
+  margin-top: 10px;
   color: var(--color-texto);
-  font-size: 14px;
-  margin-left: 10px;
-  margin-right: 10px;
+  user-select: none;
 }
 
-/* BOTÓN */
-.registro-page .btnCambio{
+/* ============================= */
+/* BOTÓN CREAR CUENTA            */
+/* ============================= */
+.registro-page .btnRegistro {
   background: var(--color-fondo);
   border: none;
   color: var(--color-blanco);
   border-radius: 25px;
-  padding: 14px;
+  padding: 12px;
   font-size: 18px;
-  width: 75%;
+  width: 30%;
   cursor: pointer;
-  margin-top: 25px;
   font-family: inherit;
-  transition: transform .2s ease;
+  margin-top: 5px;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.registro-page .btnCambio:hover{
+.registro-page .btnRegistro:hover {
   transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* ============================= */
+/* LINK A LOGIN                  */
+/* ============================= */
+.registro-page .registro-link {
+  font-size: 12px;
+  margin-top: 18px;
+  user-select: none;
+}
+
+.registro-page .registro-link a {
+  color: var(--color-fondo);
+  text-decoration: none;
+}
+
+/* ============================= */
+/* MENSAJE DE ÉXITO              */
+/* ============================= */
+.registro-page .mensaje-exito {
+  position: relative;
+  z-index: 2;
+  margin-top: 250px;
+  text-align: center;
+}
+
+.registro-page .mensaje-exito h2 {
+  color: var(--color-titulos);
+  margin-bottom: 25px;
+}
+
+/* ============================= */
+/* ELEMENTOS DECORATIVOS         */
+/* ============================= */
+.registro-page .cGDecor-1,
+.registro-page .cGDecor-2,
+.registro-page .cGDecor-3,
+.registro-page .cADecor-1 {
+  position: fixed;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.registro-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 400px;
+  right: 10%;
+  background: var(--color-texto);
+}
+
+.registro-page .cGDecor-2 {
+  width: 25px;
+  height: 25px;
+  top: 180px;
+  right: 85%;
+  background: var(--color-texto);
+}
+
+.registro-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 80px;
+  right: 20%;
+  background: var(--color-texto);
+}
+
+.registro-page .cADecor-1 {
+  width: 40px;
+  height: 40px;
+  top: 550px;
+  right: 80%;
+  background: var(--color-fondo);
 }

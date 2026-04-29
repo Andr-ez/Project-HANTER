@@ -1,58 +1,3 @@
-:root { 
-  --color-fondo: #3F88C5; 
-  --color-titulos: #2F2E41; 
-  --color-texto: #6E6B7B; 
-  --color-contenedores: #C8C6C6; 
-  --color-blanco: #ffffff;
-}
-
-/* CONTENEDOR PRINCIPAL */
-.inicio-page{
-  font-family: 'Darumadrop One', sans-serif;
-  background: var(--color-fondo);
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* FLECHA */
-.inicio-page .back-btn {
-  position: absolute;
-  top: 25px;
-  left: 20px;
-  font-size: 30px;
-  color: var(--color-fondo);
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 3;
-}
-
-.inicio-page .back-btn::before {
-  content: "";
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  background: white;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-}
-
-/* FONDO BLANCO */
-.inicio-page .circuloFondo {
-  width: 130%;
-  height: 80%;
-  background: var(--color-blanco);
-  position: fixed;
-  top: 28%;
-  left: 50%;
-  transform: translate(-50%, -20%);
-  border-radius: 50%;
-  z-index: 0;
-}
 
 /* CONTENIDO */
 .inicio-page .menu-container{
@@ -67,7 +12,6 @@
 /* TÍTULO */
 .inicio-page .menu-container h1{
   font-size: 55px;
-  color: var(--color-titulos);
   margin-bottom: 40px;
 }
 
