@@ -1,0 +1,139 @@
+/* ============================= */
+/* TÍTULO                        */
+/* ============================= */
+.anadir-cert-page .title {
+  top: 55px;
+  z-index: 6;
+  line-height: 1.1;
+}
+
+.anadir-cert-page .title h1 {
+  font-size: 38px;
+  letter-spacing: 4px;
+  margin: 0;
+  color: var(--color-titulos);
+  text-align: center;
+}
+
+/* ============================= */
+/* CONTENIDO PRINCIPAL           */
+/* ============================= */
+.anadir-cert-page .main-content {
+  margin-top: 5px;
+  text-align: center;
+  color: var(--color-titulos);
+  padding: 0 20px;
+  position: relative;
+  z-index: 5;
+}
+
+/* ============================= */
+/* FORMULARIO                    */
+/* ============================= */
+.cert-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+/* ============================= */
+/* CAMPO INDIVIDUAL              */
+/* ============================= */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 55%;
+  gap: 5px;
+}
+
+.field-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--color-texto);
+  user-select: none;
+  padding-left: 4px;
+}
+
+/* ============================= */
+/* OVERRIDE INPUT GROUP          */
+/* Para que ocupe el 100% del    */
+/* form-field en esta página     */
+/* ============================= */
+.anadir-cert-page .input-group {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* ============================= */
+/* ADJUNTAR PDF                  */
+/* ============================= */
+.pdf-adjuntar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.gancho-icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.gancho-icon:hover {
+  transform: scale(1.15) rotate(-10deg);
+  opacity: 0.8;
+}
+
+.nombre-archivo {
+  font-size: 12px;
+  color: var(--color-titulos);
+  letter-spacing: 0.5px;
+  max-width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nombre-archivo.placeholder-archivo {
+  color: var(--color-texto);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ============================= */
+/* BOTÓN AÑADIR                  */
+/* ============================= */
+.btn-anadir {
+  background: var(--color-fondo);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 25px;
+  padding: 16px 40px;
+  font-size: 17px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  line-height: 1.4;
+  margin-top: 10px;
+  width: 55%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-anadir:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 20px rgba(63, 136, 197, 0.4);
+}
+
+.anadir-cert-page .circuloFondo {
+  width: 1900px;
+  height: 600px;
+  top: 4%;
+}

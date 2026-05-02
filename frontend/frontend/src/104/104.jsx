@@ -1,0 +1,419 @@
+// ==============================
+// IMPORTACIONES
+// ==============================
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import "./104.css";
+
+// Íconos
+import menuIcon        from "/fotos/icon/menu-hamburguesa.png";
+import bellIcon        from "/fotos/icon/campana.png";
+import userPlaceholder from "/fotos/icon/user-icon.png";
+
+// PDFs de nómina — solo para fallback de desarrollo
+import nominaEnero    from "/fotos/pdf/nomina/Nomina_Hanter_ENERO_2025.pdf";
+import nominaFebrero  from "/fotos/pdf/nomina/Nomina_Hanter_FEBRERO_2025.pdf";
+import nominaMarzo    from "/fotos/pdf/nomina/Nomina_Hanter_MARZO_2025.pdf";
+import nominaAbril    from "/fotos/pdf/nomina/Nomina_Hanter_ABRIL_2025.pdf";
+import nominaMayo     from "/fotos/pdf/nomina/Nomina_Hanter_MAYO_2025.pdf";
+
+// ==============================
+// COMPONENTE — BOTÓN CON HIJOS
+// ==============================
+function SidebarBtn({ btn, navigate, cerrarMenu }) {
+  const [abierto, setAbierto] = useState(false);
+  const tieneHijos = btn.hijos && btn.hijos.length > 0;
+
+  const handleClick = () => {
+    if (tieneHijos) {
+      setAbierto(prev => !prev);
+    } else {
+      cerrarMenu();
+      navigate(btn.link);
+    }
+  };
+
+  return (
+    <div className="sidebar-item">
+      <button
+        className={`sidebar-btn ${tieneHijos ? "tiene-hijos" : ""} ${abierto ? "abierto" : ""}`}
+        onClick={handleClick}
+      >
+        <span>{btn.nombre}</span>
+        {tieneHijos && (
+          <span className={`sidebar-arrow ${abierto ? "rotado" : ""}`}>›</span>
+        )}
+      </button>
+
+      {tieneHijos && (
+        <div className={`sidebar-hijos ${abierto ? "visible" : ""}`}>
+          {btn.hijos.map(hijo => (
+            <button
+              key={hijo.id}
+              className="sidebar-hijo-btn"
+              onClick={() => {
+                cerrarMenu();
+                navigate(hijo.link);
+              }}
+            >
+              <span className="hijo-dot">·</span>
+              {hijo.nombre}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ==============================
+// UTILIDAD — FORMATO DE PESOS
+// ==============================
+function formatearPesos(valor) {
+  return "$" + Number(valor).toLocaleString("es-CO");
+}
+
+// ==============================
+// COMPONENTE NÓMINA
+// ==============================
+function Nomina() {
+  const navigate = useNavigate();
+
+  const [menuAbierto,    setMenuAbierto]    = useState(false);
+  const [cargando,       setCargando]       = useState(true);
+  const [error,          setError]          = useState(null);
+  const [cargandoNomina, setCargandoNomina] = useState(true);
+
+  const [usuario,      setUsuario]      = useState({ nombre: "", foto: "", rol: "" });
+  const [botones,      setBotones]      = useState([]);
+  const [nominas,      setNominas]      = useState([]);
+  const [seleccionados, setSeleccionados] = useState([]);
+
+  const [filtroAbierto, setFiltroAbierto] = useState(false);
+  const [filtroActivo,  setFiltroActivo]  = useState(null);
+  const filtroRef = useRef(null);
+
+  // ==============================
+  // USE EFFECT INICIAL
+  // ==============================
+  useEffect(() => {
+    document.title = "NÓMINA";
+
+    // ── Cargar sesión ──────────────────────────────────────────
+    const cargarDatos = async () => {
+      try {
+        setCargando(true);
+        const resSesion = await fetch("http://localhost:3000/auth/sesion", {
+          credentials: "include",
+        });
+
+        if (!resSesion.ok) { navigate("/001"); return; }
+
+        const dataSesion = await resSesion.json();
+        setUsuario({
+          nombre: dataSesion.usuario.nombre,
+          foto:   dataSesion.usuario.foto || null,
+          rol:    dataSesion.usuario.rol,
+        });
+        setBotones(dataSesion.botones);
+
+      } catch (err) {
+        console.error("Error al cargar sesión:", err);
+        setError("No se pudo conectar con el servidor.");
+
+        // Fallback mientras se desarrolla
+        setUsuario({ nombre: "Jaime Antonio Marin", foto: null, rol: "EMPLEADO" });
+        setBotones([
+          { id: 1, nombre: "INICIO",         link: "/100",    posicion: ["header", "sidebar"], hijos: [] },
+          { id: 2, nombre: "CERTIFICADOS",   link: "/101",    posicion: ["header", "sidebar"], hijos: [] },
+          { id: 3, nombre: "NOMINA",         link: "/nomina", posicion: ["header", "sidebar"], hijos: [] },
+          { id: 4, nombre: "CAPACITACIONES", link: "/caps",   posicion: ["header", "sidebar"], hijos: [] },
+          {
+            id: 5, nombre: "BENEFICIOS", link: null, posicion: ["sidebar"],
+            hijos: [
+              { id: 51, nombre: "VISUALIZAR", link: "/crono/general"   },
+              { id: 52, nombre: "SOLICITAR",  link: "/crono/induccion" },
+            ]
+          },
+          { id: 7, nombre: "CONFIGURACIÓN", link: "/config", posicion: ["sidebar"], hijos: [] },
+        ]);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    // ── Cargar nóminas ─────────────────────────────────────────
+    const cargarNominas = async () => {
+      try {
+        setCargandoNomina(true);
+
+        // =====================================================================
+        // TODO BACKEND — GET /nomina
+        //
+        // Retorna las nóminas del usuario autenticado.
+        //
+        // Respuesta esperada (array):
+        // [
+        //   {
+        //     id:          number,   — ID único en la BD
+        //     mes:         string,   — Nombre del mes en mayúsculas (ej: "ENERO")
+        //     anio:        number,   — Año (ej: 2025)
+        //     fecha:       string,   — ISO date para ordenar (ej: "2025-01-01")
+        //     salario:     number,   — Valor del salario en pesos
+        //     bonos:       number,   — Valor de los bonos en pesos
+        //     deducciones: number,   — Valor de las deducciones en pesos
+        //     ruta_pdf:    string    — URL/ruta del PDF en el servidor
+        //   },
+        //   ...
+        // ]
+        // =====================================================================
+        const resNomina = await fetch("http://localhost:3000/nomina", {
+          credentials: "include",
+        });
+
+        if (resNomina.ok) {
+          const data = await resNomina.json();
+          setNominas(data);
+        } else {
+          throw new Error("Respuesta no OK del servidor.");
+        }
+
+      } catch (err) {
+        console.error("Error al cargar nóminas:", err);
+        // Fallback de desarrollo con PDFs locales
+        setNominas([
+          { id: 1, mes: "ENERO",    anio: 2025, fecha: "2025-01-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaEnero   },
+          { id: 2, mes: "FEBRERO",  anio: 2025, fecha: "2025-02-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaFebrero  },
+          { id: 3, mes: "MARZO",    anio: 2025, fecha: "2025-03-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaMarzo    },
+          { id: 4, mes: "ABRIL",    anio: 2025, fecha: "2025-04-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaAbril    },
+          { id: 5, mes: "MAYO",     anio: 2025, fecha: "2025-05-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaMayo     },
+        ]);
+      } finally {
+        setCargandoNomina(false);
+      }
+    };
+
+    cargarDatos();
+    cargarNominas();
+  }, [navigate]);
+
+  // Cerrar dropdown al hacer clic fuera
+  useEffect(() => {
+    const handleClickFuera = (e) => {
+      if (filtroRef.current && !filtroRef.current.contains(e.target)) {
+        setFiltroAbierto(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickFuera);
+    return () => document.removeEventListener("mousedown", handleClickFuera);
+  }, []);
+
+  const botonesHeader  = botones.filter(b => b.posicion.includes("header"));
+  const botonesSidebar = botones.filter(b => b.posicion.includes("sidebar"));
+
+  // ── Ordenar según filtro activo ────────────────────────────
+  const nominasFiltradas = [...nominas].sort((a, b) => {
+    if (filtroActivo === "reciente")       return new Date(b.fecha) - new Date(a.fecha);
+    if (filtroActivo === "antigua")        return new Date(a.fecha) - new Date(b.fecha);
+    if (filtroActivo === "bonos-mayor")    return b.bonos - a.bonos;
+    if (filtroActivo === "bonos-menor")    return a.bonos - b.bonos;
+    return 0;
+  });
+
+  const toggleSeleccion  = (id) => setSeleccionados(prev =>
+    prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
+  );
+  const estaSeleccionado = (id) => seleccionados.includes(id);
+
+  const handleDescargar = () => {
+    if (seleccionados.length === 0) {
+      alert("Selecciona al menos una nómina para descargar.");
+      return;
+    }
+    seleccionados.forEach(id => {
+      const nomina = nominas.find(n => n.id === id);
+      if (!nomina) return;
+      const link = document.createElement("a");
+      link.href = nomina.ruta_pdf;
+      link.download = `nomina-${nomina.mes.toLowerCase()}-${nomina.anio}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  };
+
+  // ==============================
+  // RENDER JSX
+  // ==============================
+  return (
+    <div className="nomina-page">
+
+      <div className="circuloFondo"></div>
+
+      {/* Título */}
+      <div className="title">
+        <h1>NOMINA</h1>
+      </div>
+
+      {/* Botón regresar */}
+      <button className="back-btn-104" onClick={() => navigate(-1)}>←</button>
+
+      {/* HEADER */}
+      <header className="header-content">
+        <img
+          src={menuIcon}
+          alt="Menu"
+          className="icon-btn"
+          onClick={() => setMenuAbierto(true)}
+        />
+        <img src={bellIcon} alt="Notificaciones" className="icon-btn" />
+      </header>
+
+      {/* NAV HORIZONTAL */}
+      <nav className="nav-horizontal">
+        {cargando ? (
+          <span className="loading-text">Cargando...</span>
+        ) : (
+          botonesHeader.map(btn => (
+            <button
+              key={btn.id}
+              className={btn.link === "/nomina" ? "active" : ""}
+              onClick={() => navigate(btn.link)}
+            >
+              {btn.nombre}
+            </button>
+          ))
+        )}
+      </nav>
+
+      {/* CONTENIDO PRINCIPAL */}
+      <main className="nomina-main">
+        {error && <p className="error-msg">{error}</p>}
+
+        {/* FILTRO */}
+        <div className="filtro-wrapper nomina-filtro-wrapper" ref={filtroRef}>
+          <button
+            className={`filtro-btn ${filtroActivo ? "activo" : ""}`}
+            onClick={() => setFiltroAbierto(prev => !prev)}
+          >
+            FILTRAR POR
+            <span className="filtro-icono nomina-filtro-icono">▼</span>
+          </button>
+
+          {filtroAbierto && (
+            <div className="filtro-dropdown nomina-filtro-dropdown">
+              {[
+                { key: "reciente",    label: "MAS RECIENTE"                  },
+                { key: "antigua",     label: "MAS ANTIGUA"                   },
+                { key: "bonos-mayor", label: "VALOR DE BONOS MAYOR A MENOR"  },
+                { key: "bonos-menor", label: "VALOR DE BONOS MENOR A MAYOR"  },
+              ].map(op => (
+                <button
+                  key={op.key}
+                  className={`filtro-opcion ${filtroActivo === op.key ? "seleccionada" : ""}`}
+                  onClick={() => {
+                    setFiltroActivo(filtroActivo === op.key ? null : op.key);
+                    setFiltroAbierto(false);
+                  }}
+                >
+                  {op.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* LISTA DE NÓMINAS */}
+        <div className="nomina-lista">
+          {cargandoNomina ? (
+            <span className="loading-text">Cargando nómina...</span>
+          ) : nominasFiltradas.length === 0 ? (
+            <p className="sin-nominas">No hay registros de nómina disponibles.</p>
+          ) : (
+            nominasFiltradas.map(nomina => (
+              <div
+                key={nomina.id}
+                className={`nomina-item ${estaSeleccionado(nomina.id) ? "seleccionado" : ""}`}
+                onClick={() => toggleSeleccion(nomina.id)}
+              >
+                {/* Radio */}
+                <span className={`nomina-radio ${estaSeleccionado(nomina.id) ? "marcado" : ""}`}></span>
+
+                {/* Contenido del mes */}
+                <div className="nomina-item-content">
+                  <span className="nomina-mes">{nomina.mes}</span>
+
+                  <div className="nomina-fila">
+                    <span className="nomina-label">SALARIO</span>
+                    <span className="nomina-puntos"></span>
+                    <span className="nomina-valor">{formatearPesos(nomina.salario)}</span>
+                  </div>
+                  <div className="nomina-fila">
+                    <span className="nomina-label">BONOS</span>
+                    <span className="nomina-puntos"></span>
+                    <span className="nomina-valor">{formatearPesos(nomina.bonos)}</span>
+                  </div>
+                  <div className="nomina-fila">
+                    <span className="nomina-label">DEDUCCIONES</span>
+                    <span className="nomina-puntos"></span>
+                    <span className="nomina-valor">{formatearPesos(nomina.deducciones)}</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* BOTÓN DESCARGAR */}
+        <button
+          className={`btn-descargar nomina-btn-descargar ${seleccionados.length > 0 ? "activo" : ""}`}
+          onClick={handleDescargar}
+        >
+          DESCARGAR
+        </button>
+      </main>
+
+      {/* SIDEBAR */}
+      <aside className={`sidebar ${menuAbierto ? "open" : ""}`}>
+        <button className="close-btn-sidebar" onClick={() => setMenuAbierto(false)}>
+          ←
+        </button>
+        <div className="user-info-sidebar">
+          <div>
+            <span style={{ display: "block", fontSize: "14px" }}>
+              {cargando ? "Cargando..." : usuario.nombre}
+            </span>
+            <span style={{ display: "block", fontSize: "11px", opacity: 0.7 }}>
+              {usuario.rol}
+            </span>
+          </div>
+          <div className="user-avatar-circle">
+            <img src={usuario.foto || userPlaceholder} alt="User" />
+          </div>
+        </div>
+        <nav className="sidebar-nav">
+          {botonesSidebar.map(btn => (
+            <SidebarBtn
+              key={btn.id}
+              btn={btn}
+              navigate={navigate}
+              cerrarMenu={() => setMenuAbierto(false)}
+            />
+          ))}
+        </nav>
+      </aside>
+
+      {menuAbierto && (
+        <div className="overlay" onClick={() => setMenuAbierto(false)} />
+      )}
+
+      {/* Decoraciones */}
+      <div className="cGDecor-1"></div>
+      <div className="cGDecor-2"></div>
+      <div className="nomina-decor-3"></div>
+
+    </div>
+  );
+}
+
+export default Nomina;

@@ -1,0 +1,119 @@
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.login-page .title {
+  top: 120px;
+  z-index: 2;
+  font-size: 25px;
+}
+
+/* ============================= */
+/* CONTENEDOR DEL FORMULARIO    */
+/* ============================= */
+.login-page .login-container {
+  width: 85%;
+  margin: 220px auto 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================= */
+/* INPUTS                       */
+/* ============================= */
+.login-page .input-group {
+  margin: 10px auto;
+}
+
+/* ============================= */
+/* ENLACE OLVIDÓ CONTRASEÑA     */
+/* ============================= */
+.login-page .olvido {
+  display: block;
+  font-size: 12px;
+  margin: 8px 0;
+  color: var(--color-texto);
+  text-decoration: none;
+  user-select: none;
+}
+
+/* ============================= */
+/* BOTÓN LOGIN                  */
+/* ============================= */
+.login-page .btn-login {
+  background: var(--color-fondo);
+  border: none;
+  color: var(--color-blanco);
+  position: absolute;
+  z-index: 2;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 18px;
+  width: 10%;
+  cursor: pointer;
+  font-family: 'Darumadrop One', sans-serif;
+  transition: transform .2s ease;
+  top: 125px;
+  left: 45%;
+}
+
+.login-page .btn-login:hover {
+  transform: scale(1.05);
+}
+
+/* ============================= */
+/* TEXTO DE REGISTRO            */
+/* ============================= */
+.login-page .registro {
+  font-size: 12px;
+  margin-top: 18px;
+  user-select: none;
+}
+
+.login-page .registro a {
+  color: var(--color-fondo);
+  text-decoration: none;
+}
+
+/* ============================= */
+/* ELEMENTOS DECORATIVOS        */
+/* ============================= */
+.login-page .cGDecor-1,
+.login-page .cGDecor-2,
+.login-page .cGDecor-3,
+.login-page .cADecor-1 {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.login-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 400px;
+  right: 20%;
+  background: var(--color-texto);
+}
+
+.login-page .cGDecor-2 {
+  width: 25px;
+  height: 25px;
+  top: 180px;
+  right: 85%;
+  background: var(--color-texto);
+}
+
+.login-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 100px;
+  right: 20%;
+  background: var(--color-texto);
+}
+
+.login-page .cADecor-1 {
+  width: 40px;
+  height: 40px;
+  top: 500px;
+  right: 70%;
+  background: var(--color-fondo);
+}
