@@ -3,7 +3,7 @@
 // ==============================
 
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './008.css';
 
 
@@ -26,9 +26,8 @@ function CalificarSistema() {
   // Estado del comentario adicional
   const [comentario, setComentario] = useState('');
 
-  // Estado de envío
-  const [enviado, setEnviado] = useState(false);
-  const [cargando, setCargando] = useState(false);
+  // Hook de navegación
+  const navigate = useNavigate();
 
   // Cambia el título de la pestaña al cargar el componente
   useEffect(() => {
@@ -40,7 +39,7 @@ function CalificarSistema() {
   // MANEJO DEL ENVÍO DEL FORMULARIO
   // ============================================================
 
-  const handleEnviar = async () => {
+  const handleEnviar = () => {
 
     // Validar que se haya seleccionado una calificación
     if (!calificacion) {
@@ -48,32 +47,8 @@ function CalificarSistema() {
       return;
     }
 
-    setCargando(true);
-
-    try {
-      const response = await fetch('http://localhost:3000/calificaciones', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          calificacion,
-          comentario: comentario.trim(),
-        }),
-      });
-
-      if (response.ok) {
-        setEnviado(true);
-        setCalificacion(null);
-        setComentario('');
-      } else {
-        alert('Ocurrió un error al enviar. Inténtalo de nuevo.');
-      }
-
-    } catch (error) {
-      console.error('Error al enviar calificación:', error);
-      alert('No se pudo conectar con el servidor. Inténtalo más tarde.');
-    } finally {
-      setCargando(false);
-    }
+    // Navegar a la página de confirmación
+    navigate('/008-z');
   };
 
 
@@ -91,7 +66,7 @@ function CalificarSistema() {
 
         {/* Título principal */}
         <div className="title">
-          <h1>SOPORTE<br />TÉCNICO</h1>
+          <h1>SOPORTE TÉCNICO</h1>
         </div>
 
         {/* Subtítulo */}
@@ -101,13 +76,6 @@ function CalificarSistema() {
 
         {/* Contenedor del formulario */}
         <div className="calificar-contenedor">
-
-          {/* Mensaje de éxito tras enviar */}
-          {enviado && (
-            <p className="calificar-exito">
-              ✅ ¡Gracias por tu calificación!
-            </p>
-          )}
 
           {/* Botones de calificación */}
           <div className="calificar-opciones">
@@ -135,9 +103,8 @@ function CalificarSistema() {
           <button
             className="btn-enviar"
             onClick={handleEnviar}
-            disabled={cargando}
           >
-            {cargando ? 'ENVIANDO...' : 'ENVIAR'}
+            ENVIAR
           </button>
 
         </div>

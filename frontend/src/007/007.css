@@ -36,7 +36,7 @@
 /* ============================= */
 .soporte-page .soporte-botones {
   position: absolute;
-  top: 235px;
+  top: 245px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

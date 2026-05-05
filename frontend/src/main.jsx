@@ -11,6 +11,7 @@ import RecuperarContrasena from './002/002.jsx';
 import Registro from './004/004.jsx';
 import SoporteTecnico from './007/007.jsx';
 import CalificarSistema from './008/008.jsx';
+import CalificarGuardada from './008-z/008-z.jsx';
 import ContactoWhatsApp from './009/009.jsx';
 import DudasInquietudes from './010/010.jsx';
 import VideoSolucion from './011/011.jsx';
@@ -21,7 +22,10 @@ import AnadirCertificado from './102/102.jsx';
 import BuscarCertificado from './103/103.jsx';
 import AdminCertificados from './103/103-A.jsx';
 import Nomina from './104/104.jsx';
-
+import Capacitaciones from './125/125.jsx';
+import CursosDisponibles from './126/126.jsx';
+import AdminInscripciones from './126-A/126-A.jsx';
+import HistorialCursos from './133/133.jsx';
 
 
 import './styles.css'; // Estilos globales de la aplicación
@@ -40,6 +44,7 @@ createRoot(document.getElementById('root')).render(
     <Route path="/004" element={<Registro />} />
     <Route path="/007" element={<SoporteTecnico />} />
     <Route path="/008" element={<CalificarSistema />} />
+    <Route path="/008-z" element={<CalificarGuardada />} />
     <Route path="/009" element={<ContactoWhatsApp />} />
     <Route path="/010" element={<DudasInquietudes />} />
     <Route path="/011" element={<VideoSolucion />} />
@@ -50,7 +55,10 @@ createRoot(document.getElementById('root')).render(
     <Route path="/103-A" element={<AdminCertificados />} />
     <Route path="/proceso" element={<ProcesoPage />} />
     <Route path="/104" element={<Nomina />} />
-
+    <Route path="/125" element={<Capacitaciones />} />
+    <Route path="/126" element={<CursosDisponibles />} />
+    <Route path="/126-A" element={<AdminInscripciones />} />
+    <Route path="/133" element={<HistorialCursos />} />
   </Routes>
 </BrowserRouter>
 );

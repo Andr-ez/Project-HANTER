@@ -27,13 +27,13 @@ function DudasInquietudes() {
       <div className="circuloFondo">
 
         {/* Botón regresar */}
-        <Link to="/200" className="back-btn">
+        <Link to="/" className="back-btn">
           ←
         </Link>
 
         {/* Título principal */}
         <div className="title">
-          <h1>DUDAS E<br />INQUIETUDES</h1>
+          <h1>DUDAS  E  INQUIETUDES</h1>
         </div>
 
         {/* Subtítulo */}

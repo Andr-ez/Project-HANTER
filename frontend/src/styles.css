@@ -37,7 +37,7 @@ a {
 .back-btn {
   position: absolute;
   top: -10px;
-  left: 300px;
+  left: 320px;
   font-size: 30px;
   color: var(--color-fondo);
   background: none;
@@ -434,4 +434,12 @@ a {
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-8px); }
+}
+
+/* ============================= */
+/* ANIMACIÓN ENTRADA            */
+/* ============================= */
+@keyframes fadeInUp {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
 }

@@ -1,7 +1,7 @@
 // Importación de hooks y componentes necesarios
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './000.css'; // Estilos de la página
+import './000.css'; 
 
 
 // ============================================================
