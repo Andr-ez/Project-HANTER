@@ -5,8 +5,6 @@
   top: 120px;
   z-index: 2;
   font-size: 25px;
-  color: var(--color-titulos);
-
 }
 
 /* ============================= */
@@ -14,7 +12,7 @@
 /* ============================= */
 .login-page .login-container {
   width: 85%;
-  margin: 220px auto 0; 
+  margin: 220px auto 0;
   text-align: center;
   position: relative;
   z-index: 2;
@@ -26,7 +24,6 @@
 .login-page .input-group {
   margin: 10px auto;
 }
- 
 
 /* ============================= */
 /* ENLACE OLVIDÓ CONTRASEÑA     */
@@ -86,10 +83,9 @@
 .login-page .cGDecor-3,
 .login-page .cADecor-1 {
   position: absolute;
-  border-radius: 50%;   
+  border-radius: 50%;
 }
 
-/* Círculos decorativos de fondo */
 .login-page .cGDecor-1 {
   width: 50px;
   height: 50px;
@@ -121,5 +117,3 @@
   right: 70%;
   background: var(--color-fondo);
 }
-
-

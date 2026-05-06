@@ -1,20 +1,16 @@
-
 /* ============================= */
-/* CÍRCULO BLANCO */
+/* CÍRCULO BLANCO                */
 /* ============================= */
-
 .proceso-page .circuloFondo {
   width: 2200px;
   height: 750px;
-  background-color: var(--color-blanco);
-  border-radius: 50%;
-  position: fixed;
   top: 100%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 0;
 }
 
+/* ============================= */
+/* LOGO                          */
+/* ============================= */
 .proceso-page .logo-container {
   position: absolute;
   top: -40%;
@@ -30,9 +26,8 @@
 }
 
 /* ============================= */
-/* TÍTULO */
+/* TÍTULO                        */
 /* ============================= */
-
 .proceso-page .title {
   top: 0%;
   font-size: 20px;
@@ -40,9 +35,8 @@
 }
 
 /* ============================= */
-/* DESCRIPCIÓN */
+/* DESCRIPCIÓN                   */
 /* ============================= */
-
 .proceso-page .descripcion {
   position: absolute;
   top: 13%;
@@ -56,9 +50,8 @@
 }
 
 /* ============================= */
-/* IMAGEN RANDOM */
+/* IMAGEN RANDOM                 */
 /* ============================= */
-
 .proceso-page .imagen-random {
   position: absolute;
   top: 32%;
@@ -79,9 +72,8 @@
 }
 
 /* ============================= */
-/* BOTÓN VOLVER */
+/* BOTÓN VOLVER                  */
 /* ============================= */
-
 .proceso-page .buttons {
   position: absolute;
   top: 55%;
@@ -105,9 +97,8 @@
 }
 
 /* ============================= */
-/* DECORACIONES */
+/* DECORACIONES                  */
 /* ============================= */
-
 .proceso-page .cGDecor-1,
 .proceso-page .cGDecor-2,
 .proceso-page .cGDecor-3 {

@@ -1,78 +1,112 @@
-//llamado de React y otras dependencias necesarias para la aplicación
-import { useEffect } from "react";
-import { Link } from 'react-router-dom';
+// ==============================
+// IMPORTACIONES
+// ==============================
+
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./002.css";
+
+// Íconos
 import emailIcon from "/fotos/icon/email-icon.png";
 
-//Nombre de la función que define el componente de RecuperarContrasena en el main.jsx
+// ============================================================
+// COMPONENTE RECUPERAR CONTRASEÑA
+// ============================================================
+
 function RecuperarContrasena() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [codigo, setCodigo] = useState("");
 
   useEffect(() => {
     document.title = "RECUPERAR CONTRASEÑA";
   }, []);
 
+  // ============================================================
+  // Manejador de Input Único (Validación)
+  // ============================================================
+  const handleChangeCodigo = (e) => {
+    const valor = e.target.value;
+    if (/^\d{0,6}$/.test(valor)) {
+      setCodigo(valor);
+    }
+  };
+
+  // ============================================================
+  // ESTRUCTURA VISUAL (JSX)
+  // ============================================================
   return (
+    <div className="recuperar-page">
+      <div className="circuloFondo">
 
-  <div className="recuperar-page">
-    <div>
-
-      {/* Flecha Regresar */}
-      <Link to="/001" className="back-btn" aria-label="Regresar">
-        &lt;
-      </Link>
-
-      {/* Fondo */}
-      <div className="circuloFondo"></div>
-      <div className="cGDecor-1"></div>
-      <div className="cGDecor-2"></div>
-      <div className="cGDecor-3"></div>
-      <div className="cADecor-1"></div>
-
-      {/* Contenedor */}
-      <div className="principal-container">
-        <h2>RECUPERAR CONTRASEÑA</h2>
-
-        <label className="info-text">
-          INGRESA TU CORREO PARA RECUPERAR TU CONTRASEÑA
-        </label>
-
-        <div className="input-group">
-          <img src={emailIcon} alt="Correo" className="email" />
-          <input
-            type="email"
-            placeholder="CORREO@ELECTRONICO.COM"
-            required
-          />
-        </div>
-
-        <Link to="/005" className="btnEnviarCodigo">
-          ENVIAR CODIGO
+        {/* Botón regresar */}
+        <Link to="/001" className="back-btn" aria-label="Regresar">
+          ←
         </Link>
 
-        <br />
-        {/* Segunda parte del proceso de recuperación de contraseña-ingreso del codigo */}
-        <label className="label segunda">
-          INGRESA EL CÓDIGO DE VERIFICACIÓN
-        </label>
-
-        <div className="codigo-campos">
-          <input type="text" maxLength="1" />
-          <input type="text" maxLength="1" />
-          <input type="text" maxLength="1" />
-          <input type="text" maxLength="1" />
-          <input type="text" maxLength="1" />
-          <input type="text" maxLength="1" />
+        {/* Título */}
+        <div className="title">
+          <h2>RECUPERAR CONTRASEÑA</h2>
         </div>
 
-        <Link to="/003" className="btnVerificacion">
-          VERIFICAR CÓDIGO
-        </Link>
+        {/* Contenedor principal de recuperación */}
+        <div className="recuperar-container">
+
+          {/* PRIMERA PARTE: Solicitar Código */}
+          <div className="seccion-formulario">
+            <label className="info-text">
+              INGRESA TU CORREO PARA RECUPERAR TU CONTRASEÑA
+            </label>
+
+            <div className="input-group">
+              <img src={emailIcon} alt="Correo" className="email" />
+              <input
+                type="email"
+                placeholder="CORREO@ELECTRONICO.COM"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <button className="btn-action" onClick={() => navigate("/proceso")}>
+              ENVIAR CÓDIGO
+            </button>
+          </div>
+
+          {/* SEGUNDA PARTE: Verificar Código */}
+          <div className="seccion-formulario segunda-fase">
+            <label className="info-text">
+              INGRESA EL CÓDIGO DE VERIFICACIÓN
+            </label>
+
+            <div className="input-group codigo-unico">
+              <input
+                type="text"
+                inputMode="numeric"
+                placeholder="- - - - - -"
+                value={codigo}
+                onChange={handleChangeCodigo}
+                autoComplete="off"
+              />
+            </div>
+
+            <button className="btn-action" onClick={() => navigate("/proceso")}>
+              VERIFICAR CÓDIGO
+            </button>
+          </div>
+
+        </div>
+
+        {/* Elementos decorativos */}
+        <div className="cGDecor-1"></div>
+        <div className="cGDecor-2"></div>
+        <div className="cGDecor-3"></div>
+        <div className="cADecor-1"></div>
+
       </div>
-
     </div>
-  </div>
   );
 }
 
-// Exportación del componente para poder usarlo en main.jsx
 export default RecuperarContrasena;

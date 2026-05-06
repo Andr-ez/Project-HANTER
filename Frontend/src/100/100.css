@@ -1,59 +1,81 @@
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.inicio-page .title {
+  top: 55px;
+  z-index: 6;
+}
 
-/* CONTENIDO */
-.inicio-page .menu-container{
-  width: 85%;
-  max-width: 400px;
-  margin: 125px auto 0;
-  text-align: center;
+.inicio-page .title h1 {
+  font-size: 42px;
+  letter-spacing: 6px;
+  margin: 0;
+  color: var(--color-titulos);
+}
+
+/* ============================= */
+/* NAV HORIZONTAL               */
+/* ============================= */
+.nav-horizontal {
+  margin-top: 145px;
+  background: var(--color-contenedores);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 50px;
+  width: fit-content;
+  max-width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
   position: relative;
-  z-index: 2;
+  z-index: 4;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* TÍTULO */
-.inicio-page .menu-container h1{
-  font-size: 55px;
-  margin-bottom: 40px;
-}
-
-/* BOTONES */
-.inicio-page .menu-btn{
-  display: block;
-  width: 100%;
-  margin: 18px auto;
-  padding: 15px;
+.nav-horizontal button {
+  background: none;
   border: none;
-  border-radius: 30px;
+  font-size: 11px;
+  font-family: 'Darumadrop One', sans-serif;
+  color: var(--color-titulos);
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.nav-horizontal button:hover {
   background: var(--color-fondo);
   color: var(--color-blanco);
-  font-size: 20px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: transform .2s ease;
+  transform: translateY(-1px);
 }
 
-.inicio-page .menu-btn:hover{
-  transform: scale(1.05);
-}
-
-/* DECORACIONES */
-.inicio-page .cGDecor-1,
-.inicio-page .cGDecor-2,
-.inicio-page .cGDecor-3 {
-  position: fixed;
-  background: var(--color-texto);
-  border-radius: 50%;
-}
-
-.inicio-page .cGDecor-1 { width: 50px; height: 50px; top: 150px; right: 15%; }
-.inicio-page .cGDecor-2 { width: 60px; height: 60px; top: 180px; right: 80%; }
-.inicio-page .cGDecor-3 { width: 30px; height: 30px; top: 500px; right: 5%; }
-
-.inicio-page .cADecor-1 {
-  position: fixed;
-  width: 100px;
-  height: 100px;
+.nav-horizontal button.active {
   background: var(--color-fondo);
-  border-radius: 50%;
-  top: 540px;
-  left: 10%;
+  color: var(--color-blanco);
+}
+
+/* ============================= */
+/* CONTENIDO PRINCIPAL          */
+/* ============================= */
+.main-content {
+  margin-top: 50px;
+  text-align: center;
+  color: var(--color-titulos);
+  padding: 0 20px;
+}
+
+.main-content h2 {
+  font-size: 26px;
+  margin: 22px 0;
+  font-weight: 400;
+  letter-spacing: 2px;
+  transition: letter-spacing 0.3s ease;
+}
+
+.main-content h2:hover {
+  letter-spacing: 4px;
 }

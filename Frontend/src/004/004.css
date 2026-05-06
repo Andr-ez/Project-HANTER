@@ -2,7 +2,7 @@
 /* TÍTULO                        */
 /* ============================= */
 .registro-page .title {
-  top: 0px;
+  top: 10px;
   z-index: 2;
   font-size: 25px;
 }
@@ -12,7 +12,7 @@
 /* ============================= */
 .registro-page .principal-container {
   width: 85%;
-  margin: 100px auto 0;
+  margin: 130px auto 0;
   text-align: center;
   position: relative;
   z-index: 2;
@@ -23,18 +23,9 @@
 /* ============================= */
 .registro-page form {
   display: flex;
-  flex-direction: column; /* inputs uno debajo del otro */
+  flex-direction: column;
   align-items: center;
   gap: 12px;
-}
-
-
-
-/* ============================= */
-/* PASSWORD                      */
-/* ============================= */
-.registro-page .password-group {
-  position: relative; /* permite posicionar el ojo correctamente */
 }
 
 /* ============================= */
