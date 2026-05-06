@@ -72,16 +72,16 @@ function Registro() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/usuarios/registro", {
+      const response = await fetch("http://localhost:3000/usuarios/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nombre: formData.nombre,
-          correo: formData.correo,
           nombre_usuario: formData.username,
-          password: formData.password,
+  password: formData.password,
+  confirm_password: formData.confirmPassword,
+  correo: formData.correo
         }),
       });
 

@@ -86,7 +86,7 @@ function Inicio() {
       try {
         setCargando(true);
 
-        const response = await fetch("http://localhost:3000/auth/sesion", {
+        const response = await fetch("http://localhost:3000/usuarios/perfil", {
           credentials: "include",
         });
 
