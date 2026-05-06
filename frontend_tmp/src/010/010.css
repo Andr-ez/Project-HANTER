@@ -1,0 +1,139 @@
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.dudas-page .title {
+  top: 70px;
+  z-index: 2;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.dudas-page .title h1 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ============================= */
+/* SUBTÍTULO                    */
+/* ============================= */
+.dudas-page .dudas-subtitulo {
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-titulos);
+  letter-spacing: 1px;
+  z-index: 2;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+}
+
+/* ============================= */
+/* ETIQUETA SECCIÓN             */
+/* ============================= */
+.dudas-page .dudas-seccion {
+  position: absolute;
+  top: 170px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-titulos);
+  letter-spacing: 2px;
+  z-index: 2;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+}
+
+/* ============================= */
+/* CONTENEDOR DE BOTONES        */
+/* ============================= */
+.dudas-page .dudas-botones {
+  position: absolute;
+  top: 208px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  z-index: 2;
+  width: 100%;
+}
+
+/* ============================= */
+/* BOTONES DE PREGUNTA          */
+/* ============================= */
+.dudas-page .btn-dudas {
+  background-color: var(--color-fondo);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 30px;
+  padding: 13px 24px;
+  font-size: 14px;
+  font-family: 'Darumadrop One', sans-serif;
+  cursor: pointer;
+  width: 260px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  user-select: none;
+  line-height: 1.3;
+  transition: transform .2s ease;
+}
+
+.dudas-page .btn-dudas:hover {
+  transform: scale(1.05);
+}
+
+/* ============================= */
+/* ELEMENTOS DECORATIVOS        */
+/* ============================= */
+.dudas-page .cGDecor-1,
+.dudas-page .cGDecor-2,
+.dudas-page .cGDecor-3,
+.dudas-page .cGDecor-4 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.dudas-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 170px;
+  right: 8%;
+  background: var(--color-texto);
+}
+
+.dudas-page .cGDecor-2 {
+  width: 25px;
+  height: 25px;
+  top: 115px;
+  left: 8%;
+  background: var(--color-texto);
+}
+
+.dudas-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 60px;
+  right: 12%;
+  background: var(--color-texto);
+}
+
+.dudas-page .cGDecor-4 {
+  width: 18px;
+  height: 18px;
+  top: 500px;
+  right: 10%;
+  background: var(--color-texto);
+}
