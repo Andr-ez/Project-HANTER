@@ -1,0 +1,264 @@
+/* ============================= */
+/* MODAL — AVISO DE DESARROLLO  */
+/* ============================= */
+
+/* Fondo oscuro */
+.aviso-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Ventana del modal */
+.aviso-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-blanco);
+  border-radius: 20px;
+  padding: 28px 24px 22px;
+  width: 88%;
+  max-width: 500px;
+  max-height: 100vh;
+  overflow-y: auto;
+  z-index: 101;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translate(-50%, -40%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* Encabezado */
+.aviso-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--color-fondo);
+  padding-bottom: 12px;
+}
+
+.aviso-icono {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.aviso-titulo {
+  margin: 0;
+  font-size: 17px;
+  color: var(--color-fondo);
+  letter-spacing: 1.5px;
+}
+
+/* Cuerpo del texto */
+.aviso-cuerpo {
+  font-size: 12px;
+  color: var(--color-titulos);
+  line-height: 1.7;
+  letter-spacing: 0.4px;
+}
+
+.aviso-cuerpo p {
+  margin: 0 0 10px 0;
+}
+
+.aviso-cuerpo strong {
+  color: var(--color-fondo);
+}
+
+/* Lista de integrantes */
+.aviso-lista {
+  margin: 4px 0 10px 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.aviso-lista li {
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--color-titulos);
+}
+
+/* Botón cerrar */
+.aviso-btn-cerrar {
+  display: block;
+  margin: 18px auto 0;
+  background: var(--color-fondo);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 30px;
+  padding: 11px 50px;
+  font-size: 14px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.aviso-btn-cerrar:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* ============================= */
+/* CÍRCULO BLANCO DE FONDO       */
+/* ============================= */
+.bienvenido-page .circuloFondo {
+  width: 2200px;
+  height: 700px;
+  top: 100%;
+  transform: translate(-50%, -50%);
+}
+ 
+/* ============================= */
+/* LOGO                          */
+/* ============================= */
+.bienvenido-page .logo-container {
+  position: absolute;
+  top: -43%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+ 
+.bienvenido-page .logo-container img {
+  width: 350px;
+  height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+ 
+/* ============================= */
+/* TÍTULO PRINCIPAL              */
+/* ============================= */
+.bienvenido-page .title {
+  top: 5%;
+  font-size: 19px;
+  z-index: 3;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+ 
+/* ============================= */
+/* BOTONES CENTRALES             */
+/* ============================= */
+.bienvenido-page .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+ 
+.bienvenido-page .btnInicioSesion,
+.bienvenido-page .btnRegistrarse {
+  background-color: var(--color-fondo);
+  color: var(--color-titulos);
+  border: none;
+  border-radius: 30px;
+  padding: 8px 45px;
+  font-size: 32px;
+  cursor: pointer;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  user-select: none;
+  transition: transform .2s ease;
+}
+ 
+.bienvenido-page .btnInicioSesion:hover,
+.bienvenido-page .btnRegistrarse:hover {
+  transform: scale(1.05);
+}
+ 
+/* ============================= */
+/* BOTONES CIRCULARES LATERALES  */
+/* ============================= */
+.bienvenido-page .btnReporte,
+.bienvenido-page .btnDudas {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-fondo);
+  color: var(--color-titulos);
+  font-size: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  top: 35%;
+  user-select: none;
+  z-index: 3;
+  transition: transform .2s ease;
+}
+ 
+.bienvenido-page .btnReporte:hover,
+.bienvenido-page .btnDudas:hover {
+  transform: scale(1.1);
+}
+ 
+.bienvenido-page .btnDudas {
+  left: 750px;
+}
+ 
+.bienvenido-page .btnReporte {
+  right: 750px;
+}
+ 
+/* ============================= */
+/* ELEMENTOS DECORATIVOS         */
+/* ============================= */
+.bienvenido-page .cGDecor-1,
+.bienvenido-page .cGDecor-2,
+.bienvenido-page .cGDecor-3 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+ 
+.bienvenido-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 250px;
+  right: 20%;
+  background: var(--color-texto);
+}
+ 
+.bienvenido-page .cGDecor-2 {
+  width: 25px;
+  height: 25px;
+  top: 180px;
+  right: 75%;
+  background: var(--color-texto);
+}
+ 
+.bienvenido-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 100px;
+  right: 20%;
+  background: var(--color-texto);
+}

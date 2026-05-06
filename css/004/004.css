@@ -1,0 +1,134 @@
+/* ============================= */
+/* TÍTULO                        */
+/* ============================= */
+.registro-page .title {
+  top: 10px;
+  z-index: 2;
+  font-size: 25px;
+}
+
+/* ============================= */
+/* CONTENEDOR PRINCIPAL FORM     */
+/* ============================= */
+.registro-page .principal-container {
+  width: 85%;
+  margin: 130px auto 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================= */
+/* FORMULARIO                    */
+/* ============================= */
+.registro-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ============================= */
+/* TEXTO INFORMATIVO             */
+/* ============================= */
+.registro-page .info-text {
+  font-size: 12px;
+  margin-top: 10px;
+  color: var(--color-texto);
+  user-select: none;
+}
+
+/* ============================= */
+/* BOTÓN CREAR CUENTA            */
+/* ============================= */
+.registro-page .btnRegistro {
+  background: var(--color-fondo);
+  border: none;
+  color: var(--color-blanco);
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 18px;
+  width: 30%;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 5px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.registro-page .btnRegistro:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* ============================= */
+/* LINK A LOGIN                  */
+/* ============================= */
+.registro-page .registro-link {
+  font-size: 12px;
+  margin-top: 18px;
+  user-select: none;
+}
+
+.registro-page .registro-link a {
+  color: var(--color-fondo);
+  text-decoration: none;
+}
+
+/* ============================= */
+/* MENSAJE DE ÉXITO              */
+/* ============================= */
+.registro-page .mensaje-exito {
+  position: relative;
+  z-index: 2;
+  margin-top: 250px;
+  text-align: center;
+}
+
+.registro-page .mensaje-exito h2 {
+  color: var(--color-titulos);
+  margin-bottom: 25px;
+}
+
+/* ============================= */
+/* ELEMENTOS DECORATIVOS         */
+/* ============================= */
+.registro-page .cGDecor-1,
+.registro-page .cGDecor-2,
+.registro-page .cGDecor-3,
+.registro-page .cADecor-1 {
+  position: fixed;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.registro-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 400px;
+  right: 10%;
+  background: var(--color-texto);
+}
+
+.registro-page .cGDecor-2 {
+  width: 25px;
+  height: 25px;
+  top: 180px;
+  right: 85%;
+  background: var(--color-texto);
+}
+
+.registro-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 80px;
+  right: 20%;
+  background: var(--color-texto);
+}
+
+.registro-page .cADecor-1 {
+  width: 40px;
+  height: 40px;
+  top: 550px;
+  right: 80%;
+  background: var(--color-fondo);
+}
