@@ -121,8 +121,8 @@ function AnadirCertificado() {
         setBotones([
           { id: 1, nombre: "INICIO",         link: "/100",    posicion: ["header", "sidebar"], hijos: [] },
           { id: 2, nombre: "CERTIFICADOS",   link: "/101",    posicion: ["header", "sidebar"], hijos: [] },
-          { id: 3, nombre: "NOMINA",         link: "/nomina", posicion: ["header", "sidebar"], hijos: [] },
-          { id: 4, nombre: "CAPACITACIONES", link: "/caps",   posicion: ["header", "sidebar"], hijos: [] },
+          { id: 3, nombre: "NOMINA",         link: "/104", posicion: ["header", "sidebar"], hijos: [] },
+          { id: 4, nombre: "CAPACITACIONES", link: "/125",   posicion: ["header", "sidebar"], hijos: [] },
           {
             id: 5,
             nombre: "BENEFICIOS",
