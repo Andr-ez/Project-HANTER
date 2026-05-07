@@ -26,7 +26,7 @@ import Capacitaciones from './125/125.jsx';
 import CursosDisponibles from './126/126.jsx';
 import AdminInscripciones from './126-A/126-A.jsx';
 import HistorialCursos from './133/133.jsx';
-
+import PrivateRoute from './components/PrivateRoute.jsx';
 
 import './styles.css'; // Estilos globales de la aplicación
 
@@ -48,17 +48,17 @@ createRoot(document.getElementById('root')).render(
     <Route path="/009" element={<ContactoWhatsApp />} />
     <Route path="/010" element={<DudasInquietudes />} />
     <Route path="/011" element={<VideoSolucion />} />
-    <Route path="/100" element={<Inicio />} />
-    <Route path="/101" element={<Certificados />} />
-    <Route path="/102" element={<AnadirCertificado />} />
-    <Route path="/103" element={<BuscarCertificado />} />
-    <Route path="/103-A" element={<AdminCertificados />} />
+    <Route path="/100" element={<PrivateRoute><Inicio /></PrivateRoute>} />
+    <Route path="/101" element={<PrivateRoute><Certificados /></PrivateRoute>} />
+    <Route path="/102" element={<PrivateRoute><AnadirCertificado /></PrivateRoute>} />
+    <Route path="/103" element={<PrivateRoute><BuscarCertificado /></PrivateRoute>} />
+    <Route path="/103-A" element={<PrivateRoute><AdminCertificados /></PrivateRoute>} />
     <Route path="/proceso" element={<ProcesoPage />} />
-    <Route path="/104" element={<Nomina />} />
-    <Route path="/125" element={<Capacitaciones />} />
-    <Route path="/126" element={<CursosDisponibles />} />
-    <Route path="/126-A" element={<AdminInscripciones />} />
-    <Route path="/133" element={<HistorialCursos />} />
+    <Route path="/104" element={<PrivateRoute><Nomina /></PrivateRoute>} />
+    <Route path="/125" element={<PrivateRoute><Capacitaciones /></PrivateRoute>} />
+    <Route path="/126" element={<PrivateRoute><CursosDisponibles /></PrivateRoute>} />
+    <Route path="/126-A" element={<PrivateRoute><AdminInscripciones /></PrivateRoute>} />
+    <Route path="/133" element={<PrivateRoute><HistorialCursos /></PrivateRoute>} />
   </Routes>
 </BrowserRouter>
 );

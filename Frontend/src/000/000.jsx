@@ -17,6 +17,7 @@ function Bienvenido() {
   // ============================================================
   useEffect(() => {
     document.title = "Bienvenido";
+    localStorage.removeItem("token"); // Eliminar token al cargar la página de bienvenida
   }, []);
 
   // ============================================================

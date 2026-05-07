@@ -36,6 +36,7 @@ function Login() {
   // Cambia el título de la pestaña al cargar el componente
   useEffect(() => {
     document.title = "Login";
+    localStorage.removeItem("token"); // Eliminar token al cargar la página de login
   }, []);
 
   // ============================================================
