@@ -1,0 +1,147 @@
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.confirmacion-page .title {
+  top: 25px;
+  z-index: 2;
+  font-size: 22px;
+}
+
+.confirmacion-page .title h1 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ============================= */
+/* CONTENEDOR PRINCIPAL         */
+/* ============================= */
+.confirmacion-page .confirmacion-contenedor {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 2;
+  width: 85%;
+}
+
+/* ============================= */
+/* ÍCONO DE ÉXITO               */
+/* ============================= */
+.confirmacion-page .confirmacion-icono {
+  width: 90px;
+  height: 90px;
+  background-color: var(--color-fondo);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+  color: var(--color-blanco);
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================= */
+/* TÍTULO DE CONFIRMACIÓN       */
+/* ============================= */
+.confirmacion-page .confirmacion-titulo {
+  font-size: 22px;
+  color: var(--color-titulos);
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0;
+  line-height: 1.3;
+  animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+/* ============================= */
+/* MENSAJE SECUNDARIO           */
+/* ============================= */
+.confirmacion-page .confirmacion-mensaje {
+  font-size: 11px;
+  color: var(--color-texto);
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin: 0;
+  line-height: 1.6;
+  animation: fadeInUp 0.5s ease 0.3s both;
+}
+
+/* ============================= */
+/* BOTÓN VOLVER AL INICIO       */
+/* ============================= */
+.confirmacion-page .btn-inicio {
+  background-color: var(--color-fondo);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 30px;
+  padding: 13px 0;
+  font-size: 16px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 2px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 260px;
+  text-align: center;
+  user-select: none;
+  text-decoration: none;
+  display: block;
+  transition: transform .2s ease, opacity .2s ease;
+  animation: fadeInUp 0.5s ease 0.4s both;
+  margin-top: 10px;
+}
+
+.confirmacion-page .btn-inicio:hover {
+  transform: scale(1.05);
+}
+
+/* ============================= */
+/* ANIMACIÓN ENTRADA            */
+/* ============================= */
+@keyframes fadeInUp {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================= */
+/* ELEMENTOS DECORATIVOS        */
+/* ============================= */
+.confirmacion-page .cGDecor-1,
+.confirmacion-page .cGDecor-2,
+.confirmacion-page .cGDecor-3 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.confirmacion-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 170px;
+  right: 8%;
+  background: var(--color-texto);
+}
+
+.confirmacion-page .cGDecor-2 {
+  width: 22px;
+  height: 22px;
+  top: 110px;
+  left: 8%;
+  background: var(--color-texto);
+}
+
+.confirmacion-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 60px;
+  right: 12%;
+  background: var(--color-texto);
+}

@@ -1,0 +1,139 @@
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.contacto-page .title {
+  top: 70px;
+  z-index: 2;
+  font-size: 22px;
+}
+
+.contacto-page .title h1 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ============================= */
+/* TEXTO — SIENDO REDIRIGIDO    */
+/* ============================= */
+.contacto-page .contacto-redirigiendo {
+  position: absolute;
+  top: 205px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-titulos);
+  letter-spacing: 1.2px;
+  line-height: 1.6;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ============================= */
+/* BOTÓN PRINCIPAL WHATSAPP     */
+/* ============================= */
+.contacto-page .btn-whatsapp {
+  position: absolute;
+  top: 268px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-fondo);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 30px;
+  padding: 18px 32px;
+  font-size: 17px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1.5px;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+  width: 240px;
+  z-index: 2;
+  user-select: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 18px rgba(63, 136, 197, 0.45);
+}
+
+.contacto-page .btn-whatsapp:hover {
+  transform: translateX(-50%) scale(1.06);
+  box-shadow: 0 6px 24px rgba(63, 136, 197, 0.6);
+}
+
+.contacto-page .btn-whatsapp:active {
+  transform: translateX(-50%) scale(0.97);
+}
+
+/* ============================= */
+/* TEXTO ALTERNATIVO            */
+/* ============================= */
+.contacto-page .contacto-alternativo {
+  position: absolute;
+  top: 388px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-titulos);
+  letter-spacing: 1px;
+  line-height: 1.7;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Número resaltado */
+.contacto-page .contacto-numero {
+  font-size: 13px;
+  color: var(--color-fondo);
+  letter-spacing: 2px;
+}
+
+/* ============================= */
+/* ELEMENTOS DECORATIVOS        */
+/* ============================= */
+.contacto-page .cGDecor-1,
+.contacto-page .cGDecor-2,
+.contacto-page .cGDecor-3,
+.contacto-page .cGDecor-4 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.contacto-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 170px;
+  right: 8%;
+  background: var(--color-texto);
+}
+
+.contacto-page .cGDecor-2 {
+  width: 22px;
+  height: 22px;
+  top: 110px;
+  left: 8%;
+  background: var(--color-texto);
+}
+
+.contacto-page .cGDecor-3 {
+  width: 30px;
+  height: 30px;
+  top: 60px;
+  right: 12%;
+  background: var(--color-texto);
+}
+
+.contacto-page .cGDecor-4 {
+  width: 18px;
+  height: 18px;
+  top: 460px;
+  left: 10%;
+  background: var(--color-texto);
+}

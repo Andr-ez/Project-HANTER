@@ -1,0 +1,283 @@
+/* ============================= */
+/* PERFIL PAGE                  */
+/* ============================= */
+.perfil-page {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* TÃTULO */
+.perfil-page .title {
+  top: 55px;
+  z-index: 6;
+}
+
+.perfil-page .title h1 {
+  font-size: 42px;
+  letter-spacing: 6px;
+  margin: 0;
+  color: var(--color-titulos);
+}
+
+/* SCROLL CONTAINER */
+.perfil-scroll {
+  position: relative;
+  top: -40px;
+  max-width: 700px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: calc(100vh - 230px);
+  overflow-y: auto;
+  padding: 0 16px 40px;
+}
+
+/* ============================= */
+/* TARJETA FOTO + INFO PRINCIPAL */
+/* ============================= */
+.perfil-card-hero {
+  background: var(--color-contenedores);
+  border-radius: 20px;
+  padding: 30px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+/* Foto de perfil grande */
+.perfil-avatar-wrap {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+}
+
+.perfil-avatar-wrap img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-fondo);
+  display: block;
+}
+
+.perfil-avatar-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(63, 136, 197, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.perfil-avatar-wrap:hover .perfil-avatar-overlay {
+  opacity: 1;
+}
+
+.perfil-avatar-overlay span {
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-family: 'Darumadrop One', sans-serif;
+  text-align: center;
+  padding: 0 8px;
+}
+
+/* Input de archivo oculto */
+.perfil-file-input {
+  display: none;
+}
+
+/* Nombre completo en hero */
+.perfil-hero-nombre {
+  font-size: 22px;
+  color: var(--color-titulos);
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 2px;
+  margin: 0;
+  text-align: center;
+}
+
+.perfil-hero-rol {
+  font-size: 12px;
+  color: var(--color-texto);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: center;
+}
+
+.perfil-hero-id {
+  background: var(--color-fondo);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-family: 'Darumadrop One', sans-serif;
+}
+
+/* Upload status */
+.perfil-upload-status {
+  font-size: 11px;
+  color: var(--color-fondo);
+  letter-spacing: 1px;
+  text-align: center;
+  min-height: 18px;
+  transition: opacity 0.3s;
+}
+
+.perfil-upload-status.error {
+  color: #e74c3c;
+}
+
+/* ============================= */
+/* GRID DE CAMPOS               */
+/* ============================= */
+.perfil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.perfil-campo {
+  background: var(--color-contenedores);
+  border-radius: 14px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.perfil-campo-label {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--color-texto);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.perfil-campo-label-icon {
+  font-size: 13px;
+}
+
+.perfil-campo-valor {
+  font-size: 14px;
+  color: var(--color-titulos);
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 0.5px;
+  word-break: break-all;
+}
+
+/* Campo que ocupa toda la fila */
+.perfil-campo-full {
+  grid-column: 1 / -1;
+}
+
+/* ============================= */
+/* SECCIÃ“N CAMBIAR NOMBRE       */
+/* ============================= */
+.perfil-cambiar-nombre {
+  background: var(--color-contenedores);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+}
+
+.perfil-cambiar-titulo {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-texto);
+  margin: 0 0 14px;
+}
+
+.perfil-nombre-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.perfil-nombre-input {
+  flex: 1;
+  background: var(--color-blanco);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'Darumadrop One', sans-serif;
+  font-size: 13px;
+  color: var(--color-titulos);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.perfil-nombre-input:focus {
+  border-color: var(--color-fondo);
+}
+
+.perfil-nombre-btn {
+  background: var(--color-fondo);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-family: 'Darumadrop One', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.perfil-nombre-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.perfil-nombre-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.perfil-nombre-msg {
+  font-size: 11px;
+  margin: 8px 0 0;
+  min-height: 16px;
+  color: var(--color-fondo);
+  letter-spacing: 0.5px;
+}
+
+.perfil-nombre-msg.error {
+  color: #e74c3c;
+}
+
+/* ============================= */
+/* LOADING / ERROR              */
+/* ============================= */
+.perfil-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-size: 14px;
+  color: var(--color-texto);
+  letter-spacing: 2px;
+}
+
+.perfil-error-msg {
+  color: #e74c3c;
+  text-align: center;
+  font-size: 13px;
+  padding: 20px;
+}
