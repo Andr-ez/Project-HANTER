@@ -1,0 +1,107 @@
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.video-page .title {
+  top: 70px;
+  z-index: 2;
+  font-size: 22px;
+}
+
+.video-page .title h1 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ============================= */
+/* SUBTÍTULO                    */
+/* ============================= */
+.video-page .video-subtitulo {
+  position: absolute;
+  top: 205px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-titulos);
+  letter-spacing: 1.5px;
+  line-height: 1.7;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ============================= */
+/* CONTENEDOR DEL VIDEO         */
+/* ============================= */
+.video-page .video-wrapper {
+  position: absolute;
+  top: 268px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82%;
+  max-width: 300px;
+  background: var(--color-contenedores);
+  border-radius: 18px;
+  padding: 12px;
+  box-sizing: border-box;
+  z-index: 2;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================= */
+/* IFRAME DEL VIDEO             */
+/* ============================= */
+.video-page .video-iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  background: #000;
+}
+
+/* ============================= */
+/* ELEMENTOS DECORATIVOS        */
+/* ============================= */
+.video-page .cGDecor-1,
+.video-page .cGDecor-2,
+.video-page .cGDecor-3,
+.video-page .cGDecor-4 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.video-page .cGDecor-1 {
+  width: 50px;
+  height: 50px;
+  top: 170px;
+  right: 8%;
+  background: var(--color-texto);
+}
+
+.video-page .cGDecor-2 {
+  width: 22px;
+  height: 22px;
+  top: 110px;
+  left: 8%;
+  background: var(--color-texto);
+}
+
+.video-page .cGDecor-3 {
+  width: 18px;
+  height: 18px;
+  top: 460px;
+  right: 10%;
+  background: var(--color-texto);
+}
+
+.video-page .cGDecor-4 {
+  width: 28px;
+  height: 28px;
+  top: 60px;
+  right: 12%;
+  background: var(--color-texto);
+}

@@ -1,0 +1,200 @@
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.historial-cursos-page .title {
+  top: 55px;
+  z-index: 6;
+  line-height: 1.15;
+}
+
+.historial-cursos-page .title h1 {
+  font-size: 38px;
+  letter-spacing: 4px;
+  margin: 0;
+  color: var(--color-titulos);
+  text-align: center;
+}
+
+/* ============================= */
+/* BOTÓN REGRESAR               */
+/* ============================= */
+.back-btn-133 {
+  position: absolute;
+  top: 110px;
+  left: calc(50% - 900px + 20px);
+  font-size: 28px;
+  color: var(--color-fondo);
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn-133:hover {
+  transform: scale(1.1);
+}
+
+/* ============================= */
+/* CONTENIDO PRINCIPAL          */
+/* ============================= */
+.historial-cursos-page .main-content {
+  margin-top: 5px;
+  text-align: center;
+  color: var(--color-titulos);
+  padding: 0 20px 40px;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ============================= */
+/* FILTRO                       */
+/* ============================= */
+.historial-cursos-page .filtro-wrapper {
+  position: relative;
+  align-self: flex-start;
+  margin-left: calc(50% - 200px);
+}
+
+.historial-cursos-page .filtro-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-contenedores);
+  border: none;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 11px;
+  font-family: 'Darumadrop One', sans-serif;
+  color: var(--color-titulos);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s ease;
+}
+
+.historial-cursos-page .filtro-btn:hover,
+.historial-cursos-page .filtro-btn.activo {
+  background: var(--color-fondo);
+  color: var(--color-blanco);
+}
+
+.historial-cursos-page .filtro-icono {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.historial-cursos-page .filtro-btn.activo .filtro-icono {
+  transform: rotate(180deg);
+}
+
+.historial-cursos-page .filtro-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 10;
+  min-width: 230px;
+  animation: dropIn 0.18s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.historial-cursos-page .filtro-opcion {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 11px 18px;
+  font-size: 12px;
+  font-family: 'Darumadrop One', sans-serif;
+  color: var(--color-titulos);
+  text-align: left;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+  transition: background 0.15s ease;
+}
+
+.historial-cursos-page .filtro-opcion:hover {
+  background: var(--color-contenedores);
+}
+
+.historial-cursos-page .filtro-opcion.seleccionada {
+  background: var(--color-fondo);
+  color: var(--color-blanco);
+}
+
+/* ============================= */
+/* LISTA HISTORIAL              */
+/* ============================= */
+.historial-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 400px;
+  max-width: 90vw;
+}
+
+.historial-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-contenedores);
+  border-radius: 25px;
+  padding: 11px 18px;
+  user-select: none;
+}
+
+.curso-dot {
+  font-size: 14px;
+  color: var(--color-texto);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.curso-texto {
+  font-size: 11px;
+  color: var(--color-titulos);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sin-cursos {
+  font-size: 12px;
+  color: var(--color-texto);
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+/* ============================= */
+/* DECORACIÓN EXTRA             */
+/* ============================= */
+.historial-cursos-page .cGDecor-3 {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  pointer-events: none;
+  width: 14px;
+  height: 14px;
+  bottom: 80px;
+  left: 48%;
+  animation: float 6s ease-in-out infinite;
+}
