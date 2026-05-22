@@ -67,10 +67,13 @@ model Nomina {
   id_nomina    Int      @id @default(autoincrement())
   mes          Int
   anio         Int
+<<<<<<< HEAD
   salario_base Float    @default(0)
   deducciones  Float    @default(0)
   total_bonos  Float    @default(0)
   total_pago   Float    @default(0)
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
   url_archivo  String
   fecha_carga  DateTime @default(now())
 
@@ -90,11 +93,15 @@ model EmpleadoCapacitacion {
 
 model Notificacion {
   id_notificacion Int      @id @default(autoincrement())
+<<<<<<< HEAD
   tipo            String   @default("general")          // certificado_pendiente | certificado_aprobado | certificado_rechazado | general
   titulo          String   @default("Notificación")
   mensaje         String
   ruta_destino    String?                               // ruta React a la que lleva el botón
   etiqueta_boton  String?                               // texto del botón de acción
+=======
+  mensaje         String
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
   leida           Boolean  @default(false)
   fecha_creacion  DateTime @default(now())
 

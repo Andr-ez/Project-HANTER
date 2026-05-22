@@ -1,5 +1,8 @@
 import express from 'express';
+<<<<<<< HEAD
 import fs from 'fs';
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 import { PrismaClient } from '@prisma/client';
 import { verificarToken, verificarRol } from '../middlewares/auth.js';
 import { subirCertificado } from '../middlewares/upload.js';
@@ -11,8 +14,11 @@ const router = express.Router();
 // POST /certificados/anadir
 // El empleado sube su PDF. Se guarda con estado PENDIENTE.
 // Se crea notificación para todos los administradores.
+<<<<<<< HEAD
 // Usa transacción atómica: si algo falla, el certificado NO
 // queda en la DB y el archivo se borra del disco.
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 // ============================================================
 router.post('/anadir', verificarToken, (req, res) => {
   subirCertificado(req, res, async (err) => {
@@ -26,6 +32,7 @@ router.post('/anadir', verificarToken, (req, res) => {
     const { titulo, institucion, fecha_certificacion } = req.body;
 
     if (!titulo || !institucion || !fecha_certificacion) {
+<<<<<<< HEAD
       fs.unlink(req.file.path, () => {});
       return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
     }
@@ -33,11 +40,22 @@ router.post('/anadir', verificarToken, (req, res) => {
     const rutaRelativa = req.file.path.replace(/\\/g, '/').replace('uploads/', '');
 
     try {
+=======
+      return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
+    }
+
+    try {
+      // Ruta relativa guardada en DB (sin prefijo "uploads/")
+      const rutaRelativa = req.file.path.replace(/\\/g, '/').replace('uploads/', '');
+
+      // Obtener datos del empleado que sube el certificado
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       const usuario = await prisma.usuario.findUnique({
         where: { id_usuario: req.usuario.id_usuario },
         include: { empleado: true }
       });
 
+<<<<<<< HEAD
       if (!usuario || !usuario.empleado) {
         fs.unlink(req.file.path, () => {});
         return res.status(400).json({ error: 'Tu cuenta no tiene un perfil de empleado vinculado.' });
@@ -45,12 +63,28 @@ router.post('/anadir', verificarToken, (req, res) => {
 
       const nombreCompleto = `${usuario.empleado.nombre} ${usuario.empleado.apellido}`;
 
+=======
+      // Crear certificado con estado PENDIENTE
+      const certificado = await prisma.certificado.create({
+        data: {
+          titulo,
+          institucion,
+          fecha_cert: fecha_certificacion,
+          estado: 'PENDIENTE',
+          url_archivo: rutaRelativa,
+          id_empleado: usuario.id_empleado
+        }
+      });
+
+      // Notificar a todos los administradores y supervisores
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       const admins = await prisma.empleado.findMany({
         where: {
           rol: { nombre_rol: { in: ['Administrador', 'Supervisor'] } }
         }
       });
 
+<<<<<<< HEAD
       // TRANSACCION ATOMICA: certificado + notificaciones juntos.
       // Si algo falla, TODO se revierte y el archivo se borra.
       const certificado = await prisma.$transaction(async (tx) => {
@@ -79,6 +113,15 @@ router.post('/anadir', verificarToken, (req, res) => {
         }
 
         return cert;
+=======
+      const nombreCompleto = `${usuario.empleado.nombre} ${usuario.empleado.apellido}`;
+
+      await prisma.notificacion.createMany({
+        data: admins.map(admin => ({
+          id_empleado: admin.id_empleado,
+          mensaje: `El empleado ${nombreCompleto} ha enviado un certificado para revisión: "${titulo}".`
+        }))
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       });
 
       res.json({
@@ -87,7 +130,10 @@ router.post('/anadir', verificarToken, (req, res) => {
       });
 
     } catch (error) {
+<<<<<<< HEAD
       fs.unlink(req.file.path, () => {});
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       console.error('Error al guardar certificado:', error);
       res.status(500).json({ error: 'Error al procesar el certificado.', detalle: error.message });
     }
@@ -104,10 +150,13 @@ router.get('/', verificarToken, async (req, res) => {
       where: { id_usuario: req.usuario.id_usuario }
     });
 
+<<<<<<< HEAD
     if (!usuario) {
       return res.status(404).json({ error: 'Usuario no encontrado.' });
     }
 
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
     const certificados = await prisma.certificado.findMany({
       where: {
         id_empleado: usuario.id_empleado,
@@ -134,6 +183,10 @@ router.get('/', verificarToken, async (req, res) => {
 // ============================================================
 // GET /certificados/pendientes
 // Solo para administradores/supervisores.
+<<<<<<< HEAD
+=======
+// Devuelve todos los certificados PENDIENTES de todos los empleados.
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 // ============================================================
 router.get(
   '/pendientes',
@@ -143,7 +196,13 @@ router.get(
     try {
       const certificados = await prisma.certificado.findMany({
         where: { estado: 'PENDIENTE' },
+<<<<<<< HEAD
         include: { empleado: true },
+=======
+        include: {
+          empleado: true
+        },
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
         orderBy: { fecha_solicitud: 'desc' }
       });
 
@@ -168,6 +227,11 @@ router.get(
 
 // ============================================================
 // PATCH /certificados/:id/aprobar
+<<<<<<< HEAD
+=======
+// Solo administradores/supervisores.
+// Cambia estado a APROBADO y notifica al empleado.
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 // ============================================================
 router.patch(
   '/:id/aprobar',
@@ -189,6 +253,7 @@ router.patch(
         return res.status(400).json({ error: 'Este certificado ya fue procesado.' });
       }
 
+<<<<<<< HEAD
       await prisma.$transaction(async (tx) => {
         await tx.certificado.update({
           where: { id_certificado: id },
@@ -209,6 +274,24 @@ router.patch(
             etiqueta_boton: 'Ver certificado'
           }
         });
+=======
+      // Actualizar estado a APROBADO
+      await prisma.certificado.update({
+        where: { id_certificado: id },
+        data: {
+          estado: 'APROBADO',
+          fecha_emision: new Date(),
+          id_usuario_emisor: req.usuario.id_usuario
+        }
+      });
+
+      // Notificar al empleado
+      await prisma.notificacion.create({
+        data: {
+          id_empleado: certificado.id_empleado,
+          mensaje: `Tu certificado "${certificado.titulo}" fue aprobado y ya está disponible en tu perfil.`
+        }
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       });
 
       res.json({ mensaje: 'Certificado aprobado correctamente.' });
@@ -221,6 +304,11 @@ router.patch(
 
 // ============================================================
 // PATCH /certificados/:id/rechazar
+<<<<<<< HEAD
+=======
+// Solo administradores/supervisores.
+// Cambia estado a RECHAZADO y notifica al empleado.
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 // ============================================================
 router.patch(
   '/:id/rechazar',
@@ -242,6 +330,7 @@ router.patch(
         return res.status(400).json({ error: 'Este certificado ya fue procesado.' });
       }
 
+<<<<<<< HEAD
       await prisma.$transaction(async (tx) => {
         await tx.certificado.update({
           where: { id_certificado: id },
@@ -258,6 +347,19 @@ router.patch(
             etiqueta_boton: 'Nueva solicitud'
           }
         });
+=======
+      await prisma.certificado.update({
+        where: { id_certificado: id },
+        data: { estado: 'RECHAZADO' }
+      });
+
+      // Notificar al empleado
+      await prisma.notificacion.create({
+        data: {
+          id_empleado: certificado.id_empleado,
+          mensaje: `Tu certificado "${certificado.titulo}" fue revisado y no pudo ser aprobado. Contacta a tu administrador para más información.`
+        }
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       });
 
       res.json({ mensaje: 'Certificado rechazado correctamente.' });
@@ -268,4 +370,8 @@ router.patch(
   }
 );
 
+<<<<<<< HEAD
 export default router;
+=======
+export default router;
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f

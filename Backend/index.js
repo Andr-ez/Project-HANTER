@@ -8,7 +8,10 @@ import rolesRouter         from './routes/roles.js';
 import authRouter          from './routes/auth.js';
 import certificadosRouter  from './routes/certificados.js';
 import notificacionesRouter from './routes/notificaciones.js';
+<<<<<<< HEAD
 import nominaRouter        from './routes/nomina.js';
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 import { verificarToken, verificarRol } from './middlewares/auth.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -37,7 +40,10 @@ app.use('/empleados',
 app.use('/roles',
   verificarToken,
   verificarRol(['Administrador', 'Supervisor']), rolesRouter);
+<<<<<<< HEAD
 app.use('/nomina', nominaRouter);
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 
 const PORT = 3000;
 app.listen(PORT, () => {

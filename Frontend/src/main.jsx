@@ -23,7 +23,10 @@ import AnadirCertificado from './101/102/102.jsx';
 import BuscarCertificado from './101/103/103.jsx';
 import SolicitudCertificadosAdmin from './101/103/103-A.jsx';
 import Nomina from './104/104.jsx';
+<<<<<<< HEAD
 import EnviarNominaAdmin from './118-A/118-A.jsx';
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 import Capacitaciones from './125/125.jsx';
 import CursosDisponibles from './126/126.jsx';
 import AdminInscripciones from './126-A/126-A.jsx';
@@ -66,7 +69,10 @@ createRoot(document.getElementById('root')).render(
     <Route path="/103-A" element={<PrivateRoute><SolicitudCertificadosAdmin /></PrivateRoute>} />
     <Route path="/proceso" element={<ProcesoPage />} />
     <Route path="/104" element={<PrivateRoute><Nomina /></PrivateRoute>} />
+<<<<<<< HEAD
     <Route path="/118-A" element={<PrivateRoute><EnviarNominaAdmin /></PrivateRoute>} />
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
     <Route path="/125" element={<PrivateRoute><Capacitaciones /></PrivateRoute>} />
     <Route path="/126" element={<PrivateRoute><CursosDisponibles /></PrivateRoute>} />
     <Route path="/126-A" element={<PrivateRoute><AdminInscripciones /></PrivateRoute>} />

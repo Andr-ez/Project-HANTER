@@ -237,6 +237,7 @@ function Notificaciones() {
         });
         setBotones(dataSesion.botones);
 
+<<<<<<< HEAD
         // --- NOTIFICACIONES DEL USUARIO (backend real) ---
         const resNotif = await fetch("http://localhost:3000/notificaciones", {
           headers: { Authorization: `Bearer ${token}` },
@@ -256,6 +257,25 @@ function Notificaciones() {
           }));
           setNotificaciones(mapeadas);
         }
+=======
+        // --- NOTIFICACIONES DEL USUARIO ---
+        // TODO BACKEND: descomentar cuando el endpoint esté listo
+        //
+        // const resNotif = await fetch("http://localhost:3000/notificaciones", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
+        // if (resNotif.ok) {
+        //   const dataNotif = await resNotif.json();
+        //   setNotificaciones(dataNotif);
+        // }
+        //
+        // Por ahora cargamos ejemplos según el rol:
+        const esAdmin = rolUsuario === "administrador" || rolUsuario === "supervisor";
+        setNotificaciones(esAdmin
+          ? NOTIFICACIONES_ADMIN_EJEMPLO
+          : NOTIFICACIONES_EMPLEADO_EJEMPLO
+        );
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 
       } catch (err) {
         console.error("Error al cargar notificaciones:", err);
@@ -289,13 +309,20 @@ function Notificaciones() {
 
   // ==============================
   // MARCAR COMO LEÍDA
+<<<<<<< HEAD
   // ==============================
   const abrirNotificacion = async (notif) => {
     // Actualizar UI inmediatamente
+=======
+  // TODO BACKEND: fetch PATCH /notificaciones/:id/leer
+  // ==============================
+  const abrirNotificacion = (notif) => {
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
     setNotificaciones(prev =>
       prev.map(n => n.id === notif.id ? { ...n, leida: true } : n)
     );
     setNotificacionActiva(notif);
+<<<<<<< HEAD
     // Persistir en backend si no estaba leída
     if (!notif.leida) {
       const token = localStorage.getItem("token");
@@ -304,6 +331,8 @@ function Notificaciones() {
         headers: { Authorization: `Bearer ${token}` },
       }).catch(err => console.error("Error al marcar notificación:", err));
     }
+=======
+>>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
   };
 
   // ==============================
