@@ -89,11 +89,14 @@ function CursosDisponibles() {
   useEffect(() => {
     document.title = "CURSOS DISPONIBLES";
 
+    const token = localStorage.getItem("token");
+
     const cargarDatos = async () => {
       try {
         setCargando(true);
-        const token = localStorage.getItem("token");
-        const resSesion = await fetch("http://localhost:3000/auth/sesion", { headers: { "Authorization": `Bearer ${token}` } });
+        const resSesion = await fetch("http://localhost:3000/auth/sesion", {
+          headers: { "Authorization": `Bearer ${token}` },
+        });
         if (!resSesion.ok) { navigate("/001"); return; }
         const dataSesion = await resSesion.json();
         setUsuario({
@@ -129,23 +132,11 @@ function CursosDisponibles() {
       try {
         setCargandoCursos(true);
 
-        // =====================================================================
-        // TODO BACKEND — GET /cursos/disponibles
-        //
-        // Retorna los cursos disponibles para inscripción.
-        //
-        // Respuesta esperada (array):
-        // [
-        //   {
-        //     id:           number,  — ID único del curso
-        //     nombre:       string,  — Nombre del curso
-        //     fecha_inicio: string,  — Fecha de inicio (DD/MM/AA)
-        //     tipo:         string,  — Tipo/categoría del curso
-        //   },
-        //   ...
-        // ]
-        // =====================================================================
-        const resCursos = await fetch("http://localhost:3000/cursos/disponibles", { credentials: "include" });
+        // GET /cursos/disponibles — cursos activos para inscripción.
+        // Respuesta: [{ id, nombre, fecha_inicio, tipo, descripcion }]
+        const resCursos = await fetch("http://localhost:3000/cursos/disponibles", {
+          headers: { "Authorization": `Bearer ${token}` },
+        });
         if (resCursos.ok) {
           const data = await resCursos.json();
           setCursos(data);
@@ -190,7 +181,7 @@ function CursosDisponibles() {
     if (filtroActivo === "fecha") {
       const [dA, mA, yA] = a.fecha_inicio.split("/");
       const [dB, mB, yB] = b.fecha_inicio.split("/");
-      return new Date(`20${yA}`, mA - 1, dA) - new Date(`20${yB}`, mB - 1, dB);
+      return new Date(yA, mA - 1, dA) - new Date(yB, mB - 1, dB);
     }
     if (filtroActivo === "tipo") return a.nombre.localeCompare(b.nombre);
     return 0;
@@ -204,41 +195,31 @@ function CursosDisponibles() {
     setEnviando(true);
 
     try {
-      // =====================================================================
-      // TODO BACKEND — POST /cursos/inscripcion
-      //
-      // Crea una solicitud de inscripción pendiente de aprobación por admin.
-      // El administrador la verá en la página 126-A.
-      //
-      // Body esperado:
-      // {
-      //   id_curso: number,   — ID del curso seleccionado
-      // }
-      //
-      // Respuesta esperada:
-      // { mensaje: "Solicitud enviada correctamente", id_solicitud: number }
-      //
-      // Después de crear la solicitud, el backend debe enviar una notificación
-      // al administrador indicando que hay una nueva solicitud de inscripción.
-      // =====================================================================
+      const token = localStorage.getItem("token");
+
+      // POST /cursos/inscripcion — crea una solicitud PENDIENTE.
+      // El admin la verá en la página 126-A y se le notifica.
       const res = await fetch("http://localhost:3000/cursos/inscripcion", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
         body: JSON.stringify({ id_curso: cursoSeleccionado.id }),
       });
+
+      const data = await res.json();
 
       if (res.ok) {
         setInscripcionExitosa(true);
       } else {
-        const data = await res.json();
-        alert(data.mensaje || "Error al enviar la solicitud.");
+        alert(data.mensaje || data.error || "Error al enviar la solicitud.");
         setCursoSeleccionado(null);
       }
     } catch (err) {
       console.error("Error al inscribir:", err);
-      // En desarrollo (sin backend) simulamos éxito localmente
-      setInscripcionExitosa(true);
+      alert("No se pudo conectar con el servidor.");
+      setCursoSeleccionado(null);
     } finally {
       setEnviando(false);
     }
@@ -261,11 +242,10 @@ function CursosDisponibles() {
         <h1>CURSOS<br />DISPONIBLES</h1>
       </div>
 
-      <button className="back-btn-126" onClick={() => navigate("/125")}>←</button>
 
       <header className="header-content">
         <img src={menuIcon} alt="Menu" className="icon-btn" onClick={() => setMenuAbierto(true)} />
-        <img src={bellIcon} alt="Notificaciones" className="icon-btn" />
+        <img src={bellIcon} alt="Notificaciones" className="icon-btn" onClick={() => navigate("/500")} />
       </header>
 
       <nav className="nav-horizontal">

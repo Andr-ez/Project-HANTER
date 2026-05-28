@@ -1,3 +1,7 @@
+.nomina-page {
+  height: 100vh;
+  overflow: hidden;
+}
 /* ============================= */
 /* TÍTULO                        */
 /* ============================= */
@@ -72,6 +76,7 @@
 .nomina-filtro-wrapper {
   align-self: flex-start;
   margin-left: calc(50% - 200px);
+  top: 0px;
 }
 
 .nomina-filtro-icono {
@@ -254,7 +259,6 @@
   left: 48%;
   animation: float 6s ease-in-out infinite;
 }
-<<<<<<< HEAD
 
 /* Botón visible solo para administradores: lleva a /118-A */
 .btn-enviar-nomina-admin {
@@ -284,5 +288,12 @@
   border-top: 1px solid rgba(255, 255, 255, 0.35);
   font-weight: bold;
 }
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+
+.descargar-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+}
+

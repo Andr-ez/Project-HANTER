@@ -5,10 +5,14 @@ import { verificarToken } from '../middlewares/auth.js';
 const prisma = new PrismaClient();
 const router = express.Router();
 
+// ============================================================
 // GET /notificaciones
-// Devuelve las notificaciones del empleado autenticado (más recientes primero)
+// Devuelve las notificaciones del empleado autenticado
+// (más recientes primero).
+// ============================================================
 router.get('/', verificarToken, async (req, res) => {
   try {
+    // Se obtiene el empleado vinculado a la cuenta autenticada.
     const usuario = await prisma.usuario.findUnique({
       where: { id_usuario: req.usuario.id_usuario }
     });
@@ -25,8 +29,10 @@ router.get('/', verificarToken, async (req, res) => {
   }
 });
 
+// ============================================================
 // PATCH /notificaciones/:id/leer
-// Marca una notificación como leída
+// Marca UNA notificación como leída.
+// ============================================================
 router.patch('/:id/leer', verificarToken, async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -40,14 +46,17 @@ router.patch('/:id/leer', verificarToken, async (req, res) => {
   }
 });
 
+// ============================================================
 // PATCH /notificaciones/leer-todas
-// Marca todas las notificaciones del usuario como leídas
+// Marca como leídas TODAS las notificaciones sin leer del usuario.
+// ============================================================
 router.patch('/leer-todas', verificarToken, async (req, res) => {
   try {
     const usuario = await prisma.usuario.findUnique({
       where: { id_usuario: req.usuario.id_usuario }
     });
 
+    // updateMany: actualiza en lote solo las que están sin leer.
     await prisma.notificacion.updateMany({
       where: { id_empleado: usuario.id_empleado, leida: false },
       data: { leida: true }

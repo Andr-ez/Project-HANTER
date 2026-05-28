@@ -243,10 +243,9 @@ function EnviarNominaAdmin() {
       <div className="circuloFondo"></div>
 
       <div className="title">
-        <h1>ENVIAR<br />NÓMINA</h1>
+        <h1>ENVIAR NÓMINA</h1>
       </div>
 
-      <button className="back-btn-118" onClick={() => navigate(-1)}>←</button>
 
       <header className="header-content">
         <img src={menuIcon} alt="Menu" className="icon-btn" onClick={() => setMenuAbierto(true)} />

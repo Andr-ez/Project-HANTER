@@ -1,4 +1,4 @@
-//IMPORTACIONES DE REACT 
+//IMPORTACIONES DE REACT
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -18,19 +18,18 @@ import VideoSolucion from './011/011.jsx';
 import Inicio from './100/100.jsx';
 import ProcesoPage from './pagina-proceso/proceso-page.jsx';
 import Certificados from './101/101.jsx';
-import CertificadosAdmin from './101/101-A.jsx';
-import AnadirCertificado from './101/102/102.jsx';
-import BuscarCertificado from './101/103/103.jsx';
-import SolicitudCertificadosAdmin from './101/103/103-A.jsx';
+import AnadirCertificado from './102/102.jsx';
+import BuscarCertificado from './103/103.jsx';
+import SolicitudCertificadosAdmin from './103/103-A.jsx';
 import Nomina from './104/104.jsx';
-<<<<<<< HEAD
 import EnviarNominaAdmin from './118-A/118-A.jsx';
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 import Capacitaciones from './125/125.jsx';
+import AdminCrearCurso from './125-A/125-A.jsx';
 import CursosDisponibles from './126/126.jsx';
 import AdminInscripciones from './126-A/126-A.jsx';
 import HistorialCursos from './133/133.jsx';
+import AdminGestionUsuarios from './150-A/150-A.jsx';
+import AdminCursosUsuarios  from './151-A/151-A.jsx';
 import Notificaciones from './500/500.jsx';
 import Perfil from './perfil/perfil.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
@@ -48,7 +47,7 @@ if (temaGuardado === "dark") {
 
 
 // Renderizado de la aplicación con rutas definidas Y LINKs
-createRoot(document.getElementById('root')).render( 
+createRoot(document.getElementById('root')).render(
 <BrowserRouter>
   <Routes>
     <Route path="/" element={<Bienvenido />} />
@@ -63,20 +62,19 @@ createRoot(document.getElementById('root')).render(
     <Route path="/011" element={<VideoSolucion />} />
     <Route path="/100" element={<PrivateRoute><Inicio /></PrivateRoute>} />
     <Route path="/101" element={<PrivateRoute><Certificados /></PrivateRoute>} />
-    <Route path="/101-A" element={<PrivateRoute><CertificadosAdmin /></PrivateRoute>} />
     <Route path="/102" element={<PrivateRoute><AnadirCertificado /></PrivateRoute>} />
     <Route path="/103" element={<PrivateRoute><BuscarCertificado /></PrivateRoute>} />
     <Route path="/103-A" element={<PrivateRoute><SolicitudCertificadosAdmin /></PrivateRoute>} />
     <Route path="/proceso" element={<ProcesoPage />} />
     <Route path="/104" element={<PrivateRoute><Nomina /></PrivateRoute>} />
-<<<<<<< HEAD
     <Route path="/118-A" element={<PrivateRoute><EnviarNominaAdmin /></PrivateRoute>} />
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
     <Route path="/125" element={<PrivateRoute><Capacitaciones /></PrivateRoute>} />
+    <Route path="/125-A" element={<PrivateRoute><AdminCrearCurso /></PrivateRoute>} />
     <Route path="/126" element={<PrivateRoute><CursosDisponibles /></PrivateRoute>} />
     <Route path="/126-A" element={<PrivateRoute><AdminInscripciones /></PrivateRoute>} />
     <Route path="/133" element={<PrivateRoute><HistorialCursos /></PrivateRoute>} />
+    <Route path="/150-A" element={<PrivateRoute><AdminGestionUsuarios /></PrivateRoute>} />
+    <Route path="/151-A" element={<PrivateRoute><AdminCursosUsuarios /></PrivateRoute>} />
     <Route path="/500" element={<PrivateRoute><Notificaciones /></PrivateRoute>} />
     <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />
   </Routes>

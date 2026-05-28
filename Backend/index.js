@@ -2,16 +2,15 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import usuariosRouter      from './routes/usuarios.js';
-import empleadosRouter     from './routes/empleados.js';
-import rolesRouter         from './routes/roles.js';
-import authRouter          from './routes/auth.js';
-import certificadosRouter  from './routes/certificados.js';
+import usuariosRouter       from './routes/usuarios.js';
+import empleadosRouter      from './routes/empleados.js';
+import rolesRouter          from './routes/roles.js';
+import authRouter           from './routes/auth.js';
+import certificadosRouter   from './routes/certificados.js';
 import notificacionesRouter from './routes/notificaciones.js';
-<<<<<<< HEAD
-import nominaRouter        from './routes/nomina.js';
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+import nominaRouter         from './routes/nomina.js';
+import cursosRouter         from './routes/cursos.js';
+import adminUsuariosRouter  from './routes/admin-usuarios.js';
 import { verificarToken, verificarRol } from './middlewares/auth.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -34,16 +33,15 @@ app.use('/auth',            authRouter);
 app.use('/usuarios',        usuariosRouter);
 app.use('/certificados',    verificarToken, certificadosRouter);
 app.use('/notificaciones',  notificacionesRouter);
+app.use('/cursos',          cursosRouter);
+app.use('/admin/usuarios', adminUsuariosRouter);
 app.use('/empleados',
   verificarToken,
   verificarRol(['Administrador', 'Supervisor']), empleadosRouter);
 app.use('/roles',
   verificarToken,
   verificarRol(['Administrador', 'Supervisor']), rolesRouter);
-<<<<<<< HEAD
 app.use('/nomina', nominaRouter);
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 
 const PORT = 3000;
 app.listen(PORT, () => {

@@ -1,0 +1,235 @@
+/* ============================= */
+/* 151-A — CURSOS DE USUARIOS    */
+/* ============================= */
+
+/* ----- TÍTULO ----- */
+.admin-cursos-page .title {
+  top: 55px;
+  z-index: 6;
+  line-height: 1.15;
+}
+
+.admin-cursos-page .title h1 {
+  font-size: 34px;
+  letter-spacing: 4px;
+  margin: 0;
+  color: var(--color-titulos);
+  text-align: center;
+}
+
+/* ----- BOTÓN REGRESAR ----- */
+.back-btn-151A {
+  position: absolute;
+  top: 110px;
+  left: calc(50% - 900px + 20px);
+  font-size: 28px;
+  color: var(--color-fondo);
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn-151A:hover {
+  transform: scale(1.1);
+}
+
+/* ----- CONTENIDO PRINCIPAL ----- */
+.admin-cursos-page .main-content {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--color-titulos);
+  padding: 0 20px 60px;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.cursos-subtitulo {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--color-texto);
+  margin: 4px 0;
+}
+
+/* ----- LISTA ----- */
+.cursos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 460px;
+  max-width: 90vw;
+}
+
+.sin-cursos {
+  font-size: 12px;
+  color: var(--color-texto);
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+/* ----- TARJETA ----- */
+.curso-card {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--color-contenedores);
+  transition: box-shadow 0.2s ease;
+}
+
+.curso-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ----- FILA PRINCIPAL ----- */
+.curso-fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+
+.curso-fila:hover {
+  background: #b8b6b6;
+}
+
+.curso-fila.expandida {
+  background: #d6e8f7;
+  border-bottom: 1px solid rgba(63, 136, 197, 0.2);
+}
+
+.curso-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+  flex: 1;
+  overflow: hidden;
+}
+
+.curso-empleado {
+  font-size: 10px;
+  color: var(--color-fondo);
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.curso-nombre {
+  font-size: 11px;
+  color: var(--color-titulos);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.curso-arrow {
+  font-size: 10px;
+  color: var(--color-texto);
+  flex-shrink: 0;
+}
+
+/* ----- BADGE DE ESTADO ----- */
+.curso-estado-badge {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  color: white;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.estado-MATRICULADO { background: #3F88C5; }
+.estado-EN_PROGRESO { background: #e0a23c; }
+.estado-COMPLETADO  { background: #4caf7d; }
+
+/* ----- PANEL EXPANDIDO ----- */
+.curso-detalle {
+  background: white;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: dropIn 0.2s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.curso-datos {
+  text-align: left;
+}
+
+.curso-datos p {
+  margin: 5px 0;
+  font-size: 12px;
+  color: var(--color-titulos);
+  letter-spacing: 0.5px;
+}
+
+.curso-datos strong {
+  color: var(--color-fondo);
+}
+
+/* ----- BOTONES DE ACCIÓN ----- */
+.curso-acciones {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-en-progreso,
+.btn-completado {
+  flex: 1;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 0;
+  font-size: 12px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-en-progreso { background: #e0a23c; }
+.btn-completado  { background: #4caf7d; }
+
+.btn-en-progreso:hover:not(:disabled) {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(224, 162, 60, 0.4);
+}
+
+.btn-completado:hover:not(:disabled) {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(76, 175, 125, 0.4);
+}
+
+.btn-en-progreso:disabled,
+.btn-completado:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ----- DECORACIÓN ----- */
+.admin-cursos-page .cGDecor-1,
+.admin-cursos-page .cGDecor-2 {
+  z-index: 0;
+}

@@ -1,3 +1,8 @@
+.certificados-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
 /* ============================= */
 /* TÍTULO                       */
 /* ============================= */
@@ -68,6 +73,14 @@
   padding: 0 20px;
   position: relative;
   z-index: 5;
+  height: calc(100vh - 280px);
+  padding: 0 10px 40px 20px;
+  overflow-y: auto; 
+  max-width: 760px;
+  width: 760px;
+  left: 50%;
+  transform: translateX(-50%);
+
 }
 
 /* ============================= */

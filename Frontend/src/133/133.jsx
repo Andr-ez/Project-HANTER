@@ -60,6 +60,39 @@ function SidebarBtn({ btn, navigate, cerrarMenu }) {
 }
 
 // ==============================
+// ETIQUETA DE ESTADO
+// Traduce el estado de la inscripción a un texto y color legibles.
+// ==============================
+const ESTADO_INFO = {
+  PENDIENTE:   { texto: "PENDIENTE",          color: "#e0a800" },
+  MATRICULADO: { texto: "APROBADA",           color: "#2e8b57" },
+  EN_PROGRESO: { texto: "EN REALIZACIÓN",     color: "#2c7be5" },
+  COMPLETADO:  { texto: "COMPLETADO",         color: "#1e7e34" },
+  DECLINADO:   { texto: "RECHAZADA",          color: "#c0392b" },
+};
+
+function EstadoBadge({ estado }) {
+  const info = ESTADO_INFO[estado] || { texto: estado || "—", color: "#777" };
+  return (
+    <span
+      style={{
+        background: info.color,
+        color: "#fff",
+        borderRadius: "12px",
+        padding: "3px 10px",
+        fontSize: "10px",
+        letterSpacing: "0.5px",
+        fontFamily: "'Darumadrop One', sans-serif",
+        whiteSpace: "nowrap",
+        marginLeft: "auto",
+      }}
+    >
+      {info.texto}
+    </span>
+  );
+}
+
+// ==============================
 // COMPONENTE HISTORIAL CURSOS
 // ==============================
 function HistorialCursos() {
@@ -84,11 +117,14 @@ function HistorialCursos() {
   useEffect(() => {
     document.title = "HISTORIAL CURSOS";
 
+    const token = localStorage.getItem("token");
+
     const cargarDatos = async () => {
       try {
         setCargando(true);
-        const token = localStorage.getItem("token");
-        const resSesion = await fetch("http://localhost:3000/auth/sesion", { headers: { "Authorization": `Bearer ${token}` } });
+        const resSesion = await fetch("http://localhost:3000/auth/sesion", {
+          headers: { "Authorization": `Bearer ${token}` },
+        });
 
         if (!resSesion.ok) { navigate("/001"); return; }
 
@@ -127,24 +163,12 @@ function HistorialCursos() {
       try {
         setCargandoCursos(true);
 
-        // =====================================================================
-        // TODO BACKEND — GET /cursos/historial
-        //
-        // Retorna los cursos cursados/completados por el usuario autenticado.
-        //
-        // Respuesta esperada (array):
-        // [
-        //   {
-        //     id:           number,  — ID único del registro
-        //     nombre:       string,  — Nombre del curso
-        //     fecha_inicio: string,  — Fecha de inicio (DD/MM/AA)
-        //     tipo:         string,  — Tipo/categoría del curso
-        //     estado:       string,  — "COMPLETADO" | "EN PROGRESO" | "ABANDONADO"
-        //   },
-        //   ...
-        // ]
-        // =====================================================================
-        const resCursos = await fetch("http://localhost:3000/cursos/historial", { credentials: "include" });
+        // GET /cursos/historial — todas las postulaciones del usuario.
+        // Respuesta: [{ id, nombre, fecha_inicio, tipo, estado }]
+        // estado: PENDIENTE | MATRICULADO | DECLINADO | EN_PROGRESO | COMPLETADO
+        const resCursos = await fetch("http://localhost:3000/cursos/historial", {
+          headers: { "Authorization": `Bearer ${token}` },
+        });
 
         if (resCursos.ok) {
           const data = await resCursos.json();
@@ -157,11 +181,11 @@ function HistorialCursos() {
         console.error("Error al cargar historial:", err);
         // Fallback de desarrollo
         setCursos([
-          { id: 1, nombre: "EXCEL BÁSICO",             fecha_inicio: "10/01/2025", tipo: "HERRAMIENTAS OFIMÁTICAS", estado: "COMPLETADO"   },
-          { id: 2, nombre: "COMUNICACIÓN EFECTIVA",    fecha_inicio: "15/02/2025", tipo: "HABILIDADES BLANDAS",     estado: "COMPLETADO"   },
-          { id: 3, nombre: "INTRODUCCIÓN A PYTHON",    fecha_inicio: "01/03/2025", tipo: "TECNOLOGÍA",              estado: "COMPLETADO"   },
-          { id: 4, nombre: "INGLÉS NIVEL 1",           fecha_inicio: "20/03/2025", tipo: "IDIOMAS",                 estado: "EN PROGRESO"  },
-          { id: 5, nombre: "PRIMEROS AUXILIOS",        fecha_inicio: "05/04/2025", tipo: "SALUD Y SEGURIDAD",       estado: "COMPLETADO"   },
+          { id: 1, nombre: "EXCEL BÁSICO",          fecha_inicio: "10/01/2025", tipo: "HERRAMIENTAS OFIMÁTICAS", estado: "COMPLETADO"  },
+          { id: 2, nombre: "COMUNICACIÓN EFECTIVA", fecha_inicio: "15/02/2025", tipo: "HABILIDADES BLANDAS",     estado: "COMPLETADO"  },
+          { id: 3, nombre: "INTRODUCCIÓN A PYTHON", fecha_inicio: "01/03/2025", tipo: "TECNOLOGÍA",              estado: "EN_PROGRESO" },
+          { id: 4, nombre: "INGLÉS NIVEL 1",        fecha_inicio: "20/03/2025", tipo: "IDIOMAS",                 estado: "PENDIENTE"   },
+          { id: 5, nombre: "PRIMEROS AUXILIOS",     fecha_inicio: "05/04/2025", tipo: "SALUD Y SEGURIDAD",       estado: "DECLINADO"   },
         ]);
       } finally {
         setCargandoCursos(false);
@@ -191,7 +215,7 @@ function HistorialCursos() {
     if (filtroActivo === "fecha") {
       const [dA, mA, yA] = a.fecha_inicio.split("/");
       const [dB, mB, yB] = b.fecha_inicio.split("/");
-      return new Date(`20${yA}`, mA - 1, dA) - new Date(`20${yB}`, mB - 1, dB);
+      return new Date(yA, mA - 1, dA) - new Date(yB, mB - 1, dB);
     }
     if (filtroActivo === "tipo") return a.nombre.localeCompare(b.nombre);
     return 0;
@@ -213,7 +237,7 @@ function HistorialCursos() {
 
       <header className="header-content">
         <img src={menuIcon} alt="Menu" className="icon-btn" onClick={() => setMenuAbierto(true)} />
-        <img src={bellIcon} alt="Notificaciones" className="icon-btn" />
+        <img src={bellIcon} alt="Notificaciones" className="icon-btn" onClick={() => navigate("/500")} />
       </header>
 
       <nav className="nav-horizontal">
@@ -277,9 +301,14 @@ function HistorialCursos() {
             <p className="sin-cursos">No tienes cursos en tu historial aún.</p>
           ) : (
             cursosFiltrados.map(curso => (
-              <div key={curso.id} className="historial-item">
+              <div
+                key={curso.id}
+                className="historial-item"
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
                 <span className="curso-dot">○</span>
                 <span className="curso-texto">CURSO DE {curso.nombre}</span>
+                <EstadoBadge estado={curso.estado} />
               </div>
             ))
           )}

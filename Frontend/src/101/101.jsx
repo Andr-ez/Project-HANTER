@@ -3,6 +3,7 @@
 // ==============================
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ToggleDarkMode from "../components/ToggleDarkMode";
 import "./101.css";
 
 // Íconos
@@ -133,6 +134,7 @@ function Certificados() {
 
   const botonesHeader  = botones.filter(b => b.posicion.includes("header"));
   const botonesSidebar = botones.filter(b => b.posicion.includes("sidebar"));
+  const esAdmin = usuario.rol === "Administrador" || usuario.rol === "Supervisor";
 
   // ==============================
   // RENDER JSX
@@ -191,6 +193,18 @@ function Certificados() {
           <button className="cert-btn" onClick={() => navigate("/103")}>
             BUSCAR<br />CERTIFICADO
           </button>
+
+          {/* Botones visibles SOLO para administradores */}
+          {esAdmin && (
+            <>
+              <button
+                className="caps-btn"
+                onClick={() => navigate("/103-A")}
+              >
+                REVISAR<br />CERTIFICADOS
+              </button>
+            </>
+          )}
         </div>
       </main>
 
@@ -229,6 +243,10 @@ function Certificados() {
             />
           ))}
         </nav>
+
+        <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                  <ToggleDarkMode />
+        </div>
       </aside>
 
       {menuAbierto && (

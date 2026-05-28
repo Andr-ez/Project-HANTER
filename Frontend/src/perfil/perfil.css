@@ -7,7 +7,7 @@
   position: relative;
 }
 
-/* TÃTULO */
+/* TÍTULO */
 .perfil-page .title {
   top: 55px;
   z-index: 6;
@@ -23,7 +23,7 @@
 /* SCROLL CONTAINER */
 .perfil-scroll {
   position: relative;
-  top: -40px;
+  top: 0px;
   max-width: 700px;
   left: 50%;
   transform: translateX(-50%);

@@ -1,0 +1,407 @@
+/* ============================= */
+/* 150-A — GESTIÓN DE USUARIOS   */
+/* ============================= */
+
+/* ----- TÍTULO ----- */
+.admin-usuarios-page .title {
+  top: 55px;
+  z-index: 6;
+  line-height: 1.15;
+}
+
+.admin-usuarios-page .title h1 {
+  font-size: 34px;
+  letter-spacing: 4px;
+  margin: 0;
+  color: var(--color-titulos);
+  text-align: center;
+}
+
+/* ----- BOTÓN REGRESAR ----- */
+.back-btn-150A {
+  position: absolute;
+  top: 110px;
+  left: calc(50% - 900px + 20px);
+  font-size: 28px;
+  color: var(--color-fondo);
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn-150A:hover {
+  transform: scale(1.1);
+}
+
+/* ----- CONTENIDO PRINCIPAL ----- */
+.admin-usuarios-page .main-content {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--color-titulos);
+  padding: 0 20px 60px;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ----- ACCIONES SUPERIORES ----- */
+.usuarios-acciones-top {
+  display: flex;
+  gap: 10px;
+  width: 460px;
+  max-width: 90vw;
+}
+
+.btn-crear-usuario,
+.btn-gestionar-cursos {
+  flex: 1;
+  border: none;
+  border-radius: 20px;
+  padding: 11px 0;
+  font-size: 12px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-crear-usuario {
+  background: #4caf7d;
+  color: white;
+}
+
+.btn-crear-usuario:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 14px rgba(76, 175, 125, 0.4);
+}
+
+.btn-gestionar-cursos {
+  background: var(--color-fondo);
+  color: white;
+}
+
+.btn-gestionar-cursos:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 14px rgba(63, 136, 197, 0.4);
+}
+
+/* ----- LISTA DE USUARIOS ----- */
+.usuarios-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 460px;
+  max-width: 90vw;
+}
+
+.sin-usuarios {
+  font-size: 12px;
+  color: var(--color-texto);
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+/* ----- TARJETA ----- */
+.usuario-card {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--color-contenedores);
+  transition: box-shadow 0.2s ease;
+}
+
+.usuario-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ----- FILA PRINCIPAL ----- */
+.usuario-fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+
+.usuario-fila:hover {
+  background: #b8b6b6;
+}
+
+.usuario-fila.expandida {
+  background: #d6e8f7;
+  border-bottom: 1px solid rgba(63, 136, 197, 0.2);
+}
+
+.usuario-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: white;
+  border: 2px solid rgba(63, 136, 197, 0.3);
+}
+
+.usuario-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.usuario-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  flex: 1;
+  overflow: hidden;
+}
+
+.usuario-nombre {
+  font-size: 12px;
+  color: var(--color-fondo);
+  letter-spacing: 0.8px;
+  font-weight: bold;
+}
+
+.usuario-correo {
+  font-size: 10px;
+  color: var(--color-titulos);
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.usuario-arrow {
+  font-size: 10px;
+  color: var(--color-texto);
+  flex-shrink: 0;
+}
+
+/* Badge que marca a los administradores (no editables aquí) */
+.usuario-rol-badge {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  background: var(--color-titulos);
+  color: white;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Badge para empleados que aún no han creado su cuenta */
+.usuario-pendiente-badge {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  background: #e0a23c;
+  color: white;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ----- PANEL EXPANDIDO ----- */
+.usuario-detalle {
+  background: white;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: dropIn 0.2s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ----- CAMPO FOTO ----- */
+.campo-foto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.foto-preview {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-fondo);
+}
+
+.btn-cambiar-foto {
+  background: var(--color-contenedores);
+  color: var(--color-titulos);
+  font-size: 11px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1px;
+  padding: 6px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-cambiar-foto:hover {
+  background: var(--color-fondo);
+  color: white;
+}
+
+/* ----- CAMPOS DE TEXTO ----- */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+
+.campo span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--color-fondo);
+  font-weight: bold;
+}
+
+.campo input {
+  background: var(--color-contenedores);
+  border: none;
+  border-radius: 12px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-family: 'Darumadrop One', sans-serif;
+  color: var(--color-titulos);
+}
+
+.campo input:focus {
+  outline: 2px solid var(--color-fondo);
+}
+
+.campo input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ----- BOTONES DE ACCIÓN ----- */
+.usuario-acciones,
+.modal-acciones {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.btn-guardar,
+.btn-eliminar,
+.btn-cancelar {
+  flex: 1;
+  border: none;
+  border-radius: 20px;
+  padding: 11px 0;
+  font-size: 13px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-guardar {
+  background: #4caf7d;
+  color: white;
+}
+
+.btn-guardar:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(76, 175, 125, 0.4);
+}
+
+.btn-eliminar {
+  background: #e05c5c;
+  color: white;
+}
+
+.btn-eliminar:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(224, 92, 92, 0.4);
+}
+
+.btn-cancelar {
+  background: var(--color-contenedores);
+  color: var(--color-titulos);
+}
+
+.btn-cancelar:hover {
+  transform: scale(1.04);
+}
+
+/* ----- MODAL CREAR ----- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.25s ease;
+  padding: 20px;
+}
+
+.modal-crear {
+  background: white;
+  border-radius: 22px;
+  padding: 24px 26px;
+  width: 420px;
+  max-width: 92vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  animation: dropIn 0.22s ease;
+}
+
+.modal-crear h2 {
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: var(--color-titulos);
+  text-align: center;
+  margin: 0 0 6px;
+}
+
+/* Nota explicativa del modal de creación */
+.modal-nota {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--color-texto);
+  text-align: center;
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+
+/* ----- DECORACIÓN ----- */
+.admin-usuarios-page .cGDecor-1,
+.admin-usuarios-page .cGDecor-2 {
+  z-index: 0;
+}

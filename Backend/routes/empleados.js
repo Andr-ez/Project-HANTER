@@ -4,7 +4,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 const router = express.Router();
 
-// Crear empleado
+// ============================================================
+// POST /empleados
+// Crea un empleado y lo enlaza a un rol existente (por id_rol).
+// ============================================================
 router.post('/', async (req, res) => {
   try {
     const { nombre, apellido, correo, documento, celular, id_rol } = req.body;
@@ -26,7 +29,7 @@ router.post('/', async (req, res) => {
         correo,
         documento,
         celular,
-        rol: { connect: { id_rol: Number(id_rol) } }
+        rol: { connect: { id_rol: Number(id_rol) } } // enlaza al rol indicado
       },
       include: { rol: true } // incluir el rol en la respuesta
     });
@@ -38,8 +41,10 @@ router.post('/', async (req, res) => {
   }
 });
 
-
-// Listar empleados
+// ============================================================
+// GET /empleados
+// Lista todos los empleados con su rol.
+// ============================================================
 router.get('/', async (req, res) => {
   try {
     const empleados = await prisma.empleado.findMany({
@@ -52,7 +57,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Eliminar empleado por ID
+// ============================================================
+// DELETE /empleados/:id
+// Elimina un empleado por su ID.
+// ============================================================
 router.delete(
   '/:id', async (req, res) => {
     try {
@@ -80,7 +88,10 @@ router.delete(
   }
 );
 
-// Editar empleado por ID
+// ============================================================
+// PUT /empleados/:id
+// Edita un empleado. id_rol es opcional: si llega, se reconecta el rol.
+// ============================================================
 router.put(
   '/:id', async (req, res) => {
     try {
@@ -115,6 +126,7 @@ router.put(
           correo,
           documento,
           celular,
+          // solo reconecta el rol si vino id_rol en el body
           ...(id_rol && { rol: { connect: { id_rol: Number(id_rol) } } })
         },
         include: { rol: true }

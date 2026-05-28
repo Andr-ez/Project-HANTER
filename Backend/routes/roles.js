@@ -4,7 +4,10 @@ import  {PrismaClient}  from '@prisma/client';
 const prisma = new PrismaClient();
 const router = express.Router();
 
-// Crear rol
+// ============================================================
+// POST /roles
+// Crea un nuevo rol (ej: "Administrador", "Usuario").
+// ============================================================
 router.post('/', async (req, res) => {
   const { nombre_rol } = req.body;
 
@@ -19,7 +22,10 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Listar roles
+// ============================================================
+// GET /roles
+// Lista todos los roles existentes.
+// ============================================================
 router.get('/', async (req, res) => {
   try {
     const roles = await prisma.rol.findMany();

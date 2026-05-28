@@ -1,3 +1,7 @@
+.enviar-nomina-page {
+  height: 100vh;
+  overflow: hidden;
+}
 /* ============================= */
 /* TÍTULO                        */
 /* ============================= */
@@ -16,28 +20,10 @@
 }
 
 /* ============================= */
-/* BOTÓN REGRESAR                */
-/* ============================= */
-.back-btn-118 {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 7;
-  background: var(--color-fondo);
-  color: var(--color-blanco);
-  border: none;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-/* ============================= */
 /* CONTENIDO PRINCIPAL           */
 /* ============================= */
 .enviar-nomina-page .main-content {
-  margin-top: 5px;
+  margin-top: 35px;
   text-align: center;
   color: var(--color-titulos);
   padding: 0 20px 40px;
@@ -53,7 +39,7 @@
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  margin-top: 10px;
+  margin-top: 2dvb;
 }
 
 /* ============================= */

@@ -1,8 +1,5 @@
 import express from 'express';
-<<<<<<< HEAD
 import fs from 'fs';
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 import { PrismaClient } from '@prisma/client';
 import { verificarToken, verificarRol } from '../middlewares/auth.js';
 import { subirCertificado } from '../middlewares/upload.js';
@@ -14,16 +11,14 @@ const router = express.Router();
 // POST /certificados/anadir
 // El empleado sube su PDF. Se guarda con estado PENDIENTE.
 // Se crea notificación para todos los administradores.
-<<<<<<< HEAD
 // Usa transacción atómica: si algo falla, el certificado NO
 // queda en la DB y el archivo se borra del disco.
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 // ============================================================
 router.post('/anadir', verificarToken, (req, res) => {
+  // subirCertificado procesa el PDF; el flujo continúa en su callback.
   subirCertificado(req, res, async (err) => {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      return res.status(400).json({ error: err.message }); // error de Multer (tipo/tamaño)
     }
     if (!req.file) {
       return res.status(400).json({ error: 'Debes adjuntar un archivo PDF.' });
@@ -32,30 +27,20 @@ router.post('/anadir', verificarToken, (req, res) => {
     const { titulo, institucion, fecha_certificacion } = req.body;
 
     if (!titulo || !institucion || !fecha_certificacion) {
-<<<<<<< HEAD
-      fs.unlink(req.file.path, () => {});
+      fs.unlink(req.file.path, () => {}); // borra el archivo ya subido si faltan datos
       return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
     }
 
+    // Ruta relativa para guardar en BD (sin el prefijo uploads/).
     const rutaRelativa = req.file.path.replace(/\\/g, '/').replace('uploads/', '');
 
     try {
-=======
-      return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
-    }
-
-    try {
-      // Ruta relativa guardada en DB (sin prefijo "uploads/")
-      const rutaRelativa = req.file.path.replace(/\\/g, '/').replace('uploads/', '');
-
-      // Obtener datos del empleado que sube el certificado
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+      // Se obtiene el empleado vinculado a la cuenta autenticada.
       const usuario = await prisma.usuario.findUnique({
         where: { id_usuario: req.usuario.id_usuario },
         include: { empleado: true }
       });
 
-<<<<<<< HEAD
       if (!usuario || !usuario.empleado) {
         fs.unlink(req.file.path, () => {});
         return res.status(400).json({ error: 'Tu cuenta no tiene un perfil de empleado vinculado.' });
@@ -63,28 +48,13 @@ router.post('/anadir', verificarToken, (req, res) => {
 
       const nombreCompleto = `${usuario.empleado.nombre} ${usuario.empleado.apellido}`;
 
-=======
-      // Crear certificado con estado PENDIENTE
-      const certificado = await prisma.certificado.create({
-        data: {
-          titulo,
-          institucion,
-          fecha_cert: fecha_certificacion,
-          estado: 'PENDIENTE',
-          url_archivo: rutaRelativa,
-          id_empleado: usuario.id_empleado
-        }
-      });
-
-      // Notificar a todos los administradores y supervisores
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+      // Destinatarios de la notificación: todos los admins/supervisores.
       const admins = await prisma.empleado.findMany({
         where: {
           rol: { nombre_rol: { in: ['Administrador', 'Supervisor'] } }
         }
       });
 
-<<<<<<< HEAD
       // TRANSACCION ATOMICA: certificado + notificaciones juntos.
       // Si algo falla, TODO se revierte y el archivo se borra.
       const certificado = await prisma.$transaction(async (tx) => {
@@ -99,6 +69,7 @@ router.post('/anadir', verificarToken, (req, res) => {
           }
         });
 
+        // createMany: una notificación por cada admin de una sola vez.
         if (admins.length > 0) {
           await tx.notificacion.createMany({
             data: admins.map(admin => ({
@@ -113,15 +84,6 @@ router.post('/anadir', verificarToken, (req, res) => {
         }
 
         return cert;
-=======
-      const nombreCompleto = `${usuario.empleado.nombre} ${usuario.empleado.apellido}`;
-
-      await prisma.notificacion.createMany({
-        data: admins.map(admin => ({
-          id_empleado: admin.id_empleado,
-          mensaje: `El empleado ${nombreCompleto} ha enviado un certificado para revisión: "${titulo}".`
-        }))
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       });
 
       res.json({
@@ -130,10 +92,7 @@ router.post('/anadir', verificarToken, (req, res) => {
       });
 
     } catch (error) {
-<<<<<<< HEAD
-      fs.unlink(req.file.path, () => {});
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+      fs.unlink(req.file.path, () => {}); // limpia el disco si la transacción falló
       console.error('Error al guardar certificado:', error);
       res.status(500).json({ error: 'Error al procesar el certificado.', detalle: error.message });
     }
@@ -150,13 +109,11 @@ router.get('/', verificarToken, async (req, res) => {
       where: { id_usuario: req.usuario.id_usuario }
     });
 
-<<<<<<< HEAD
     if (!usuario) {
       return res.status(404).json({ error: 'Usuario no encontrado.' });
     }
 
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+    // Solo los aprobados: los pendientes/rechazados no se muestran al empleado.
     const certificados = await prisma.certificado.findMany({
       where: {
         id_empleado: usuario.id_empleado,
@@ -165,6 +122,7 @@ router.get('/', verificarToken, async (req, res) => {
       orderBy: { fecha_emision: 'desc' }
     });
 
+    // Se reformatea cada registro a lo que espera el frontend.
     const resultado = certificados.map(c => ({
       id:          c.id_certificado,
       titulo:      c.titulo,
@@ -183,10 +141,7 @@ router.get('/', verificarToken, async (req, res) => {
 // ============================================================
 // GET /certificados/pendientes
 // Solo para administradores/supervisores.
-<<<<<<< HEAD
-=======
-// Devuelve todos los certificados PENDIENTES de todos los empleados.
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+// Lista los certificados en espera de revisión.
 // ============================================================
 router.get(
   '/pendientes',
@@ -194,15 +149,10 @@ router.get(
   verificarRol(['Administrador', 'Supervisor']),
   async (req, res) => {
     try {
+      // include: empleado -> para mostrar de quién es cada certificado.
       const certificados = await prisma.certificado.findMany({
         where: { estado: 'PENDIENTE' },
-<<<<<<< HEAD
         include: { empleado: true },
-=======
-        include: {
-          empleado: true
-        },
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
         orderBy: { fecha_solicitud: 'desc' }
       });
 
@@ -227,11 +177,7 @@ router.get(
 
 // ============================================================
 // PATCH /certificados/:id/aprobar
-<<<<<<< HEAD
-=======
-// Solo administradores/supervisores.
-// Cambia estado a APROBADO y notifica al empleado.
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+// Solo admin/supervisor. Cambia el estado a APROBADO y avisa al empleado.
 // ============================================================
 router.patch(
   '/:id/aprobar',
@@ -249,18 +195,19 @@ router.patch(
       if (!certificado) {
         return res.status(404).json({ error: 'Certificado no encontrado.' });
       }
+      // Evita reprocesar un certificado ya aprobado o rechazado.
       if (certificado.estado !== 'PENDIENTE') {
         return res.status(400).json({ error: 'Este certificado ya fue procesado.' });
       }
 
-<<<<<<< HEAD
+      // Transacción: aprobar el certificado + notificar al empleado.
       await prisma.$transaction(async (tx) => {
         await tx.certificado.update({
           where: { id_certificado: id },
           data: {
             estado: 'APROBADO',
             fecha_emision: new Date(),
-            id_usuario_emisor: req.usuario.id_usuario
+            id_usuario_emisor: req.usuario.id_usuario // queda registrado quién lo aprobó
           }
         });
 
@@ -274,24 +221,6 @@ router.patch(
             etiqueta_boton: 'Ver certificado'
           }
         });
-=======
-      // Actualizar estado a APROBADO
-      await prisma.certificado.update({
-        where: { id_certificado: id },
-        data: {
-          estado: 'APROBADO',
-          fecha_emision: new Date(),
-          id_usuario_emisor: req.usuario.id_usuario
-        }
-      });
-
-      // Notificar al empleado
-      await prisma.notificacion.create({
-        data: {
-          id_empleado: certificado.id_empleado,
-          mensaje: `Tu certificado "${certificado.titulo}" fue aprobado y ya está disponible en tu perfil.`
-        }
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       });
 
       res.json({ mensaje: 'Certificado aprobado correctamente.' });
@@ -304,11 +233,7 @@ router.patch(
 
 // ============================================================
 // PATCH /certificados/:id/rechazar
-<<<<<<< HEAD
-=======
-// Solo administradores/supervisores.
-// Cambia estado a RECHAZADO y notifica al empleado.
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
+// Solo admin/supervisor. Cambia el estado a RECHAZADO y avisa al empleado.
 // ============================================================
 router.patch(
   '/:id/rechazar',
@@ -330,7 +255,7 @@ router.patch(
         return res.status(400).json({ error: 'Este certificado ya fue procesado.' });
       }
 
-<<<<<<< HEAD
+      // Transacción: rechazar el certificado + notificar al empleado.
       await prisma.$transaction(async (tx) => {
         await tx.certificado.update({
           where: { id_certificado: id },
@@ -347,19 +272,6 @@ router.patch(
             etiqueta_boton: 'Nueva solicitud'
           }
         });
-=======
-      await prisma.certificado.update({
-        where: { id_certificado: id },
-        data: { estado: 'RECHAZADO' }
-      });
-
-      // Notificar al empleado
-      await prisma.notificacion.create({
-        data: {
-          id_empleado: certificado.id_empleado,
-          mensaje: `Tu certificado "${certificado.titulo}" fue revisado y no pudo ser aprobado. Contacta a tu administrador para más información.`
-        }
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       });
 
       res.json({ mensaje: 'Certificado rechazado correctamente.' });
@@ -370,8 +282,4 @@ router.patch(
   }
 );
 
-<<<<<<< HEAD
 export default router;
-=======
-export default router;
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f

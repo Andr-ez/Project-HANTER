@@ -134,6 +134,9 @@ function Capacitaciones() {
   const botonesHeader  = botones.filter(b => b.posicion.includes("header"));
   const botonesSidebar = botones.filter(b => b.posicion.includes("sidebar"));
 
+  // ¿El usuario es administrador? (para mostrar opciones extra)
+  const esAdmin = usuario.rol === "Administrador" || usuario.rol === "Supervisor";
+
   // ==============================
   // RENDER JSX
   // ==============================
@@ -156,7 +159,12 @@ function Capacitaciones() {
           className="icon-btn"
           onClick={() => setMenuAbierto(true)}
         />
-        <img src={bellIcon} alt="Notificaciones" className="icon-btn" />
+        <img
+          src={bellIcon}
+          alt="Notificaciones"
+          className="icon-btn"
+          onClick={() => navigate("/500")}
+        />
       </header>
 
       {/* NAV HORIZONTAL */}
@@ -194,6 +202,25 @@ function Capacitaciones() {
           >
             HISTORIAL DE<br />CURSOS CURSADOS
           </button>
+
+          {/* Botones visibles SOLO para administradores */}
+          {esAdmin && (
+            <>
+              <button
+                className="caps-btn"
+                onClick={() => navigate("/125-A")}
+              >
+                AGREGAR<br />NUEVO CURSO
+              </button>
+
+              <button
+                className="caps-btn"
+                onClick={() => navigate("/126-A")}
+              >
+                SOLICITUDES DE<br />INSCRIPCIÓN
+              </button>
+            </>
+          )}
         </div>
       </main>
 

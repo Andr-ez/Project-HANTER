@@ -63,7 +63,7 @@ function SidebarBtn({ btn, navigate, cerrarMenu }) {
 // COMPONENTE ADMIN — SOLICITUDES DE INSCRIPCIÓN
 // Muestra todas las solicitudes de inscripción PENDIENTES.
 // El administrador puede matricular o declinar cada solicitud.
-// Al decidir, se envía una notificación al empleado.
+// Al decidir, el backend envía una notificación al empleado.
 // ==============================
 function AdminInscripciones() {
   const navigate = useNavigate();
@@ -91,18 +91,20 @@ function AdminInscripciones() {
   useEffect(() => {
     document.title = "ADMIN — INSCRIPCIONES";
 
+    const token = localStorage.getItem("token");
+
     const cargarDatos = async () => {
       try {
         setCargando(true);
-        const token = localStorage.getItem("token");
-        const resSesion = await fetch("http://localhost:3000/auth/sesion", { headers: { "Authorization": `Bearer ${token}` } });
+        const resSesion = await fetch("http://localhost:3000/auth/sesion", {
+          headers: { "Authorization": `Bearer ${token}` },
+        });
         if (!resSesion.ok) { navigate("/001"); return; }
 
         const dataSesion = await resSesion.json();
 
-        // Redirigir si el usuario NO es administrador
-        // TODO BACKEND: el campo rol debe venir en la respuesta de /auth/sesion
-        if (dataSesion.usuario.rol !== "Administrador") {
+        // Redirigir si el usuario NO es administrador/supervisor
+        if (dataSesion.usuario.rol !== "Administrador" && dataSesion.usuario.rol !== "Supervisor") {
           navigate("/126");
           return;
         }
@@ -141,32 +143,13 @@ function AdminInscripciones() {
       try {
         setCargandoSolicitud(true);
 
-        // =====================================================================
-        // TODO BACKEND — GET /cursos/inscripciones/pendientes
-        //
-        // Solo accesible por usuarios con rol = "ADMINISTRADOR".
-        // Retorna TODAS las solicitudes de inscripción con estado = "PENDIENTE"
-        // de TODOS los empleados.
-        //
-        // Respuesta esperada (array):
-        // [
-        //   {
-        //     id:              number,  — ID único de la solicitud
-        //     id_usuario:      number,  — ID del empleado que solicitó
-        //     nombre_empleado: string,  — Nombre completo del empleado
-        //     id_curso:        number,  — ID del curso solicitado
-        //     nombre_curso:    string,  — Nombre del curso
-        //     fecha_inicio:    string,  — Fecha de inicio del curso (DD/MM/AA)
-        //     tipo_curso:      string,  — Tipo/categoría del curso
-        //     fecha_solicitud: string,  — Fecha en que se envió la solicitud (DD/MM/AA)
-        //     estado:          string   — Siempre "PENDIENTE" en este endpoint
-        //   },
-        //   ...
-        // ]
-        // =====================================================================
+        // GET /cursos/inscripciones/pendientes — solo admin.
+        // Respuesta: [{ id, id_usuario, nombre_empleado, id_curso,
+        //               nombre_curso, fecha_inicio, tipo_curso,
+        //               fecha_solicitud, estado }]
         const resSolicitudes = await fetch(
           "http://localhost:3000/cursos/inscripciones/pendientes",
-          { credentials: "include" }
+          { headers: { "Authorization": `Bearer ${token}` } }
         );
 
         if (resSolicitudes.ok) {
@@ -233,7 +216,7 @@ function AdminInscripciones() {
     if (filtroActivo === "fecha")    {
       const [dA, mA, yA] = a.fecha_solicitud.split("/");
       const [dB, mB, yB] = b.fecha_solicitud.split("/");
-      return new Date(`20${yA}`, mA - 1, dA) - new Date(`20${yB}`, mB - 1, dB);
+      return new Date(yA, mA - 1, dA) - new Date(yB, mB - 1, dB);
     }
     if (filtroActivo === "curso")    return a.nombre_curso.localeCompare(b.nombre_curso);
     if (filtroActivo === "empleado") return a.nombre_empleado.localeCompare(b.nombre_empleado);
@@ -242,85 +225,58 @@ function AdminInscripciones() {
 
   // ==============================
   // MATRICULAR EMPLEADO
+  // PATCH /cursos/inscripciones/:id/matricular — notifica al empleado.
   // ==============================
   const handleMatricular = async (solicitud) => {
     try {
-      // =====================================================================
-      // TODO BACKEND — PATCH /cursos/inscripciones/:id/matricular
-      //
-      // Solo accesible por ADMINISTRADOR.
-      // Cambia el estado de la solicitud a "MATRICULADO".
-      // El backend debe enviar una notificación al empleado (id_usuario)
-      // informando que fue matriculado en el curso (nombre_curso).
-      //
-      // Notificación al empleado:
-      // {
-      //   tipo:    "MATRICULA_APROBADA",
-      //   mensaje: "Has sido matriculado en el curso {nombre_curso}. Inicio: {fecha_inicio}.",
-      //   id_usuario: solicitud.id_usuario
-      // }
-      //
-      // Respuesta esperada: { mensaje: "Empleado matriculado correctamente" }
-      // =====================================================================
+      const token = localStorage.getItem("token");
       const res = await fetch(
         `http://localhost:3000/cursos/inscripciones/${solicitud.id}/matricular`,
-        { method: "PATCH", credentials: "include" }
+        { method: "PATCH", headers: { "Authorization": `Bearer ${token}` } }
       );
+
+      const data = await res.json();
 
       if (res.ok) {
         setSolicitudes(prev => prev.filter(s => s.id !== solicitud.id));
         if (expandida === solicitud.id) setExpandida(null);
+        alert("✓ Empleado matriculado. Fue notificado.");
       } else {
-        const data = await res.json();
-        alert(data.mensaje || "Error al matricular.");
+        alert(data.error || data.mensaje || "Error al matricular.");
       }
     } catch (err) {
       console.error("Error al matricular:", err);
-      // En desarrollo (sin backend) simulamos la acción localmente
-      setSolicitudes(prev => prev.filter(s => s.id !== solicitud.id));
-      if (expandida === solicitud.id) setExpandida(null);
+      alert("No se pudo conectar con el servidor.");
     }
   };
 
   // ==============================
   // DECLINAR MATRÍCULA
+  // PATCH /cursos/inscripciones/:id/declinar — notifica al empleado.
   // ==============================
   const handleDeclinar = async (solicitud) => {
+    const confirmar = window.confirm("¿Seguro que quieres declinar esta solicitud?");
+    if (!confirmar) return;
+
     try {
-      // =====================================================================
-      // TODO BACKEND — PATCH /cursos/inscripciones/:id/declinar
-      //
-      // Solo accesible por ADMINISTRADOR.
-      // Cambia el estado de la solicitud a "DECLINADO".
-      // El backend debe enviar una notificación al empleado (id_usuario)
-      // informando que su solicitud fue declinada.
-      //
-      // Notificación al empleado:
-      // {
-      //   tipo:    "MATRICULA_DECLINADA",
-      //   mensaje: "Tu solicitud de inscripción al curso {nombre_curso} fue declinada.",
-      //   id_usuario: solicitud.id_usuario
-      // }
-      //
-      // Respuesta esperada: { mensaje: "Solicitud declinada correctamente" }
-      // =====================================================================
+      const token = localStorage.getItem("token");
       const res = await fetch(
         `http://localhost:3000/cursos/inscripciones/${solicitud.id}/declinar`,
-        { method: "PATCH", credentials: "include" }
+        { method: "PATCH", headers: { "Authorization": `Bearer ${token}` } }
       );
+
+      const data = await res.json();
 
       if (res.ok) {
         setSolicitudes(prev => prev.filter(s => s.id !== solicitud.id));
         if (expandida === solicitud.id) setExpandida(null);
+        alert("Solicitud declinada. El empleado fue notificado.");
       } else {
-        const data = await res.json();
-        alert(data.mensaje || "Error al declinar.");
+        alert(data.error || data.mensaje || "Error al declinar.");
       }
     } catch (err) {
       console.error("Error al declinar:", err);
-      // En desarrollo (sin backend) simulamos la acción localmente
-      setSolicitudes(prev => prev.filter(s => s.id !== solicitud.id));
-      if (expandida === solicitud.id) setExpandida(null);
+      alert("No se pudo conectar con el servidor.");
     }
   };
 
@@ -336,11 +292,9 @@ function AdminInscripciones() {
         <h1>SOLICITUDES<br />DE INSCRIPCIÓN</h1>
       </div>
 
-      <button className="back-btn-126A" onClick={() => navigate("/125")}>←</button>
-
       <header className="header-content">
         <img src={menuIcon} alt="Menu" className="icon-btn" onClick={() => setMenuAbierto(true)} />
-        <img src={bellIcon} alt="Notificaciones" className="icon-btn" />
+        <img src={bellIcon} alt="Notificaciones" className="icon-btn" onClick={() => navigate("/500")} />
       </header>
 
       <nav className="nav-horizontal">

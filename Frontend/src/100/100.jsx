@@ -134,7 +134,6 @@ function Inicio() {
               { id: 52, nombre: "SOLICITAR", link: "/crono/induccion" },
             ]
           },
-          { id: 7, nombre: "CONFIGURACIÓN", link: "/config",     posicion: ["sidebar"], hijos: [] },
         ]);
       } finally {
         setCargando(false);
@@ -332,7 +331,7 @@ function Inicio() {
           ))}
         </nav>
 
-          <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+          <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(255, 255, 255, 0.89)" }}>
           <ToggleDarkMode />
         </div>
       </aside>

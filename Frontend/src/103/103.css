@@ -1,8 +1,12 @@
+.buscar-cert-page  {
+  height: 100vh;
+  overflow: hidden;
+}
 /* ============================= */
 /* TÍTULO                        */
 /* ============================= */
-.buscar-cert-page .title {
-  top: 55px;
+.buscar-cert-page   .title {
+  top: 70px;
   z-index: 6;
   line-height: 1.15;
 }
@@ -49,7 +53,7 @@
 /* CONTENIDO PRINCIPAL           */
 /* ============================= */
 .buscar-cert-page .main-content {
-  margin-top: 5px;
+  margin-top: 10px;
   text-align: center;
   color: var(--color-titulos);
   padding: 0 20px 40px;
@@ -68,6 +72,7 @@
   position: relative;
   align-self: flex-start;
   margin-left: calc(50% - 200px);
+  top: 20px;
 }
 
 .filtro-btn {
@@ -84,6 +89,7 @@
   cursor: pointer;
   letter-spacing: 1px;
   transition: background 0.2s ease;
+
 }
 
 .filtro-btn:hover,

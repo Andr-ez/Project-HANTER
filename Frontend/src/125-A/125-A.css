@@ -1,0 +1,188 @@
+.admin-crear-curso-page {
+  height: 100vh;
+  overflow: hidden;
+}
+/* ============================= */
+/* TÍTULO                       */
+/* ============================= */
+.admin-crear-curso-page .title {
+  top: 50px;
+  z-index: 6;
+  line-height: 1.15;
+}
+
+.admin-crear-curso-page .title h1 {
+  font-size: 36px;
+  letter-spacing: 4px;
+  margin: 0;
+  color: var(--color-titulos);
+  text-align: center;
+}
+
+
+/* ============================= */
+/* CONTENIDO PRINCIPAL          */
+/* ============================= */
+.admin-crear-curso-page .main-content {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--color-titulos);
+  padding: 0 20px 40px;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================= */
+/* FORMULARIO                   */
+/* ============================= */
+.curso-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 320px;
+  max-width: 90vw;
+  margin-top: 10px;
+}
+
+.curso-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'Darumadrop One', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--color-titulos);
+  text-align: left;
+}
+
+.curso-input,
+.curso-textarea {
+  background: var(--color-contenedores);
+  border: none;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--color-titulos);
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.curso-textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.curso-input:focus,
+.curso-textarea:focus {
+  box-shadow: 0 0 0 2px var(--color-fondo);
+}
+
+/* ============================= */
+/* BOTÓN ENVIAR                 */
+/* ============================= */
+.curso-submit-btn {
+  background: var(--color-fondo);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 18px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 6px;
+}
+
+.curso-submit-btn:hover:not(:disabled) {
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.curso-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.curso-submit-btn.secundario {
+  background: var(--color-contenedores);
+  color: var(--color-titulos);
+}
+
+/* ============================= */
+/* MENSAJE DE ÉXITO             */
+/* ============================= */
+.curso-exito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 320px;
+  max-width: 90vw;
+  margin-top: 30px;
+  background: var(--color-contenedores);
+  border-radius: 20px;
+  padding: 30px 24px;
+}
+
+.curso-exito-icono {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-fondo);
+  color: var(--color-blanco);
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.curso-exito-titulo {
+  font-family: 'Darumadrop One', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--color-titulos);
+  margin: 0;
+}
+
+.curso-exito-texto {
+  font-size: 13px;
+  color: var(--color-titulos);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.curso-exito-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.curso-exito-acciones .curso-submit-btn {
+  margin-top: 0;
+}
+
+/* ============================= */
+/* MENSAJE DE ERROR             */
+/* ============================= */
+.admin-crear-curso-page .error-msg {
+  color: #c0392b;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.admin-crear-curso-page .loading-text {
+  color: var(--color-titulos);
+  font-size: 13px;
+}
+
+.admin-crear-curso-page .nav-horizontal {
+top: -10px;
+}

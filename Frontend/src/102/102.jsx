@@ -3,6 +3,8 @@
 // ==============================
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+
+
 import "./102.css";
 
 import menuIcon        from "/fotos/icon/menu-hamburguesa.png";
@@ -352,6 +354,7 @@ function AnadirCertificado() {
             <SidebarBtn key={btn.id} btn={btn} navigate={navigate} cerrarMenu={() => setMenuAbierto(false)} />
           ))}
         </nav>
+
       </aside>
 
       {menuAbierto && <div className="overlay" onClick={() => setMenuAbierto(false)} />}

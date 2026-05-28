@@ -10,16 +10,6 @@ import menuIcon        from "/fotos/icon/menu-hamburguesa.png";
 import bellIcon        from "/fotos/icon/campana.png";
 import userPlaceholder from "/fotos/icon/user-icon.png";
 
-<<<<<<< HEAD
-=======
-// PDFs de nómina — solo para fallback de desarrollo
-import nominaEnero    from "/fotos/pdf/nomina/Nomina_Hanter_ENERO_2025.pdf";
-import nominaFebrero  from "/fotos/pdf/nomina/Nomina_Hanter_FEBRERO_2025.pdf";
-import nominaMarzo    from "/fotos/pdf/nomina/Nomina_Hanter_MARZO_2025.pdf";
-import nominaAbril    from "/fotos/pdf/nomina/Nomina_Hanter_ABRIL_2025.pdf";
-import nominaMayo     from "/fotos/pdf/nomina/Nomina_Hanter_MAYO_2025.pdf";
-
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 // ==============================
 // COMPONENTE — BOTÓN CON HIJOS
 // ==============================
@@ -73,11 +63,7 @@ function SidebarBtn({ btn, navigate, cerrarMenu }) {
 // UTILIDAD — FORMATO DE PESOS
 // ==============================
 function formatearPesos(valor) {
-<<<<<<< HEAD
   return "$" + Number(valor || 0).toLocaleString("es-CO");
-=======
-  return "$" + Number(valor).toLocaleString("es-CO");
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 }
 
 // ==============================
@@ -100,30 +86,20 @@ function Nomina() {
   const [filtroActivo,  setFiltroActivo]  = useState(null);
   const filtroRef = useRef(null);
 
-<<<<<<< HEAD
   // Saber si el usuario es admin para mostrarle el botón de enviar nómina
   const esAdmin = usuario.rol === "Administrador" || usuario.rol === "Supervisor";
 
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
   // ==============================
   // USE EFFECT INICIAL
   // ==============================
   useEffect(() => {
     document.title = "NÓMINA";
-<<<<<<< HEAD
     const token = localStorage.getItem("token");
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 
     // ── Cargar sesión ──────────────────────────────────────────
     const cargarDatos = async () => {
       try {
         setCargando(true);
-<<<<<<< HEAD
-=======
-        const token = localStorage.getItem("token");
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
         const resSesion = await fetch("http://localhost:3000/auth/sesion", {
           headers: { "Authorization": `Bearer ${token}` },
         });
@@ -140,70 +116,21 @@ function Nomina() {
 
       } catch (err) {
         console.error("Error al cargar sesión:", err);
-<<<<<<< HEAD
         setError("No se pudo verificar la sesión.");
-=======
-        setError(".");
-
-        // Fallback mientras se desarrolla
-        setUsuario({ nombre: "Jaime Antonio Marin", foto: null, rol: "EMPLEADO" });
-        setBotones([
-          { id: 1, nombre: "INICIO",         link: "/100",    posicion: ["header", "sidebar"], hijos: [] },
-          { id: 2, nombre: "CERTIFICADOS",   link: "/101",    posicion: ["header", "sidebar"], hijos: [] },
-          { id: 3, nombre: "NOMINA",         link: "/104", posicion: ["header", "sidebar"], hijos: [] },
-          { id: 4, nombre: "CAPACITACIONES", link: "/125",   posicion: ["header", "sidebar"], hijos: [] },
-          {
-            id: 5, nombre: "BENEFICIOS", link: null, posicion: ["sidebar"],
-            hijos: [
-              { id: 51, nombre: "VISUALIZAR", link: "/crono/general"   },
-              { id: 52, nombre: "SOLICITAR",  link: "/crono/induccion" },
-            ]
-          },
-          { id: 7, nombre: "CONFIGURACIÓN", link: "/config", posicion: ["sidebar"], hijos: [] },
-        ]);
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       } finally {
         setCargando(false);
       }
     };
 
     // ── Cargar nóminas ─────────────────────────────────────────
-<<<<<<< HEAD
     // GET /nomina  →  el backend ya devuelve SOLO el envío más
     // reciente por cada mes/año.
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
     const cargarNominas = async () => {
       try {
         setCargandoNomina(true);
 
-<<<<<<< HEAD
         const resNomina = await fetch("http://localhost:3000/nomina", {
           headers: { "Authorization": `Bearer ${token}` },
-=======
-        // =====================================================================
-        // TODO BACKEND — GET /nomina
-        //
-        // Retorna las nóminas del usuario autenticado.
-        //
-        // Respuesta esperada (array):
-        // [
-        //   {
-        //     id:          number,   — ID único en la BD
-        //     mes:         string,   — Nombre del mes en mayúsculas (ej: "ENERO")
-        //     anio:        number,   — Año (ej: 2025)
-        //     fecha:       string,   — ISO date para ordenar (ej: "2025-01-01")
-        //     salario:     number,   — Valor del salario en pesos
-        //     bonos:       number,   — Valor de los bonos en pesos
-        //     deducciones: number,   — Valor de las deducciones en pesos
-        //     ruta_pdf:    string    — URL/ruta del PDF en el servidor
-        //   },
-        //   ...
-        // ]
-        // =====================================================================
-        const resNomina = await fetch("http://localhost:3000/nomina", {
-          credentials: "include",
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
         });
 
         if (resNomina.ok) {
@@ -215,18 +142,7 @@ function Nomina() {
 
       } catch (err) {
         console.error("Error al cargar nóminas:", err);
-<<<<<<< HEAD
         setNominas([]);
-=======
-        // Fallback de desarrollo con PDFs locales
-        setNominas([
-          { id: 1, mes: "ENERO",    anio: 2025, fecha: "2025-01-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaEnero   },
-          { id: 2, mes: "FEBRERO",  anio: 2025, fecha: "2025-02-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaFebrero  },
-          { id: 3, mes: "MARZO",    anio: 2025, fecha: "2025-03-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaMarzo    },
-          { id: 4, mes: "ABRIL",    anio: 2025, fecha: "2025-04-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaAbril    },
-          { id: 5, mes: "MAYO",     anio: 2025, fecha: "2025-05-01", salario: 2300000, bonos: 100000, deducciones: 150000, ruta_pdf: nominaMayo     },
-        ]);
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       } finally {
         setCargandoNomina(false);
       }
@@ -275,10 +191,7 @@ function Nomina() {
       const link = document.createElement("a");
       link.href = nomina.ruta_pdf;
       link.download = `nomina-${nomina.mes.toLowerCase()}-${nomina.anio}.pdf`;
-<<<<<<< HEAD
       link.target = "_blank";
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -298,9 +211,6 @@ function Nomina() {
         <h1>NOMINA</h1>
       </div>
 
-      {/* Botón regresar */}
-      <button className="back-btn-104" onClick={() => navigate(-1)}>←</button>
-
       {/* HEADER */}
       <header className="header-content">
         <img
@@ -309,16 +219,12 @@ function Nomina() {
           className="icon-btn"
           onClick={() => setMenuAbierto(true)}
         />
-<<<<<<< HEAD
         <img
           src={bellIcon}
           alt="Notificaciones"
           className="icon-btn"
           onClick={() => navigate("/500")}
         />
-=======
-        <img src={bellIcon} alt="Notificaciones" className="icon-btn" />
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
       </header>
 
       {/* NAV HORIZONTAL */}
@@ -329,11 +235,7 @@ function Nomina() {
           botonesHeader.map(btn => (
             <button
               key={btn.id}
-<<<<<<< HEAD
               className={btn.link === "/104" ? "active" : ""}
-=======
-              className={btn.link === "/nomina" ? "active" : ""}
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
               onClick={() => navigate(btn.link)}
             >
               {btn.nombre}
@@ -346,7 +248,6 @@ function Nomina() {
       <main className="nomina-main">
         {error && <p className="error-msg">{error}</p>}
 
-<<<<<<< HEAD
         {/* BOTÓN ADMIN — ENVIAR NÓMINA */}
         {esAdmin && (
           <button
@@ -357,8 +258,6 @@ function Nomina() {
           </button>
         )}
 
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
         {/* FILTRO */}
         <div className="filtro-wrapper nomina-filtro-wrapper" ref={filtroRef}>
           <button
@@ -410,11 +309,7 @@ function Nomina() {
 
                 {/* Contenido del mes */}
                 <div className="nomina-item-content">
-<<<<<<< HEAD
                   <span className="nomina-mes">{nomina.mes} {nomina.anio}</span>
-=======
-                  <span className="nomina-mes">{nomina.mes}</span>
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
 
                   <div className="nomina-fila">
                     <span className="nomina-label">SALARIO</span>
@@ -431,27 +326,27 @@ function Nomina() {
                     <span className="nomina-puntos"></span>
                     <span className="nomina-valor">{formatearPesos(nomina.deducciones)}</span>
                   </div>
-<<<<<<< HEAD
                   <div className="nomina-fila nomina-fila-total">
                     <span className="nomina-label">TOTAL DEL PAGO</span>
                     <span className="nomina-puntos"></span>
                     <span className="nomina-valor">{formatearPesos(nomina.total)}</span>
                   </div>
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
                 </div>
-              </div>
+                
+            </div>
             ))
           )}
         </div>
-
-        {/* BOTÓN DESCARGAR */}
-        <button
-          className={`btn-descargar nomina-btn-descargar ${seleccionados.length > 0 ? "activo" : ""}`}
-          onClick={handleDescargar}
-        >
-          DESCARGAR
-        </button>
+{/* BOTÓN DESCARGAR */}
+                <div className="descargar-btn">
+                <button
+                  className={`btn-descargar nomina-btn-descargar ${seleccionados.length > 0 ? "activo" : ""}`}
+                  onClick={handleDescargar}
+                >
+                  DESCARGAR
+                </button>
+              </div>
+        
       </main>
 
       {/* SIDEBAR */}
@@ -502,8 +397,4 @@ function Nomina() {
   );
 }
 
-<<<<<<< HEAD
 export default Nomina;
-=======
-export default Nomina;
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
