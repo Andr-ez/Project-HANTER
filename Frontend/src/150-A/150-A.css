@@ -1,3 +1,8 @@
+.admin-usuarios-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
 /* ============================= */
 /* 150-A — GESTIÓN DE USUARIOS   */
 /* ============================= */
@@ -17,34 +22,13 @@
   text-align: center;
 }
 
-/* ----- BOTÓN REGRESAR ----- */
-.back-btn-150A {
-  position: absolute;
-  top: 110px;
-  left: calc(50% - 900px + 20px);
-  font-size: 28px;
-  color: var(--color-fondo);
-  background: white;
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 6;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.back-btn-150A:hover {
-  transform: scale(1.1);
+.admin-usuarios-page .nav-horizontal {
+  top: 0px;
 }
 
 /* ----- CONTENIDO PRINCIPAL ----- */
 .admin-usuarios-page .main-content {
-  margin-top: 10px;
+  margin-top: 55px;
   text-align: center;
   color: var(--color-titulos);
   padding: 0 20px 60px;

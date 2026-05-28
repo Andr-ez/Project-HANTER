@@ -208,7 +208,6 @@ function AdminCursosUsuarios() {
         <h1>CURSOS<br />DE USUARIOS</h1>
       </div>
 
-      <button className="back-btn-151A" onClick={() => navigate("/150-A")}>←</button>
 
       <header className="header-content">
         <img src={menuIcon} alt="Menu" className="icon-btn" onClick={() => setMenuAbierto(true)} />

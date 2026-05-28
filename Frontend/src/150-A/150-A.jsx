@@ -322,8 +322,6 @@ function AdminGestionUsuarios() {
         <h1>GESTIÓN<br />DE USUARIOS</h1>
       </div>
 
-      <button className="back-btn-150A" onClick={() => navigate("/100")}>←</button>
-
       <header className="header-content">
         <img src={menuIcon} alt="Menu" className="icon-btn" onClick={() => setMenuAbierto(true)} />
         <img src={bellIcon} alt="Notificaciones" className="icon-btn" onClick={() => navigate("/500")} />

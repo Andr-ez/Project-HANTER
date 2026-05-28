@@ -9,9 +9,9 @@ generator client {
 }
 
 model Rol {
-  id_rol     Int        @id @default(autoincrement())
-  nombre_rol String     @unique
-  empleados  Empleado[]
+  id_rol      Int        @id @default(autoincrement())
+  nombre_rol  String     @unique
+  empleados   Empleado[]
 }
 
 model Empleado {
@@ -32,10 +32,7 @@ model Empleado {
   nominas        Nomina[]
   capacitaciones EmpleadoCapacitacion[]
   notificaciones Notificacion[]
-<<<<<<< HEAD
   inscripciones  Inscripcion[]
-=======
->>>>>>> e4395f269f0cb66a24009cc3bea97d48f8d76b12
 }
 
 model Usuario {
@@ -51,25 +48,14 @@ model Usuario {
 }
 
 model Certificado {
-<<<<<<< HEAD
   id_certificado  Int       @id @default(autoincrement())
   titulo          String
   institucion     String
-  fecha_cert      String                          // Fecha que el empleado escribe (DD/MM/AA)
-  estado          String    @default("PENDIENTE")  // PENDIENTE | APROBADO | RECHAZADO
+  fecha_cert      String    // Fecha que el empleado escribe (DD/MM/AA)
+  estado          String    @default("PENDIENTE") // PENDIENTE | APROBADO | RECHAZADO
   fecha_solicitud DateTime  @default(now())
   fecha_emision   DateTime?
-  url_archivo     String                          // ruta relativa a uploads/certificados/
-=======
-  id_certificado  Int      @id @default(autoincrement())
-  titulo          String
-  institucion     String
-  fecha_cert      String                        // Fecha que el empleado escribe (DD/MM/AA)
-  estado          String   @default("PENDIENTE") // PENDIENTE | APROBADO | RECHAZADO
-  fecha_solicitud DateTime @default(now())
-  fecha_emision   DateTime?
-  url_archivo     String                        // ruta relativa a uploads/certificados/
->>>>>>> e4395f269f0cb66a24009cc3bea97d48f8d76b12
+  url_archivo     String    // ruta relativa a uploads/certificados/
 
   id_empleado Int
   empleado    Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
@@ -82,19 +68,10 @@ model Nomina {
   id_nomina    Int      @id @default(autoincrement())
   mes          Int
   anio         Int
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> e4395f269f0cb66a24009cc3bea97d48f8d76b12
   salario_base Float    @default(0)
   deducciones  Float    @default(0)
   total_bonos  Float    @default(0)
   total_pago   Float    @default(0)
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
->>>>>>> e4395f269f0cb66a24009cc3bea97d48f8d76b12
   url_archivo  String
   fecha_carga  DateTime @default(now())
 
@@ -114,30 +91,17 @@ model EmpleadoCapacitacion {
 
 model Notificacion {
   id_notificacion Int      @id @default(autoincrement())
-<<<<<<< HEAD
-  tipo            String   @default("general")     // certificado_* | inscripcion_* | general
-  titulo          String   @default("Notificación")
-  mensaje         String
-  ruta_destino    String?                          // ruta React a la que lleva el botón
-  etiqueta_boton  String?                          // texto del botón de acción
-=======
-<<<<<<< HEAD
   tipo            String   @default("general")          // certificado_pendiente | certificado_aprobado | certificado_rechazado | general
   titulo          String   @default("Notificación")
   mensaje         String
   ruta_destino    String?                               // ruta React a la que lleva el botón
   etiqueta_boton  String?                               // texto del botón de acción
-=======
-  mensaje         String
->>>>>>> 1241af5cbdd6a74e2b2b16db50396414a031a06f
->>>>>>> e4395f269f0cb66a24009cc3bea97d48f8d76b12
   leida           Boolean  @default(false)
   fecha_creacion  DateTime @default(now())
 
   id_empleado Int
   empleado    Empleado @relation(fields: [id_empleado], references: [id_empleado], onDelete: Cascade)
 }
-<<<<<<< HEAD
 
 // ============================================================
 // NUEVO — CAPACITACIONES
@@ -147,10 +111,10 @@ model Notificacion {
 model Curso {
   id_curso       Int      @id @default(autoincrement())
   nombre         String
-  tipo           String                            // categoría: TECNOLOGÍA, IDIOMAS, etc.
+  tipo           String   // categoría: TECNOLOGÍA, IDIOMAS, etc.
   fecha_inicio   DateTime
   descripcion    String?
-  activo         Boolean  @default(true)            // si sigue disponible para inscripción
+  activo         Boolean  @default(true) // si sigue disponible para inscripción
   fecha_creacion DateTime @default(now())
 
   inscripciones Inscripcion[]
@@ -159,7 +123,7 @@ model Curso {
 // Solicitud de un empleado para inscribirse a un curso.
 model Inscripcion {
   id_inscripcion  Int       @id @default(autoincrement())
-  estado          String    @default("PENDIENTE")  // PENDIENTE | MATRICULADO | DECLINADO | EN_PROGRESO | COMPLETADO
+  estado          String    @default("PENDIENTE") // PENDIENTE | MATRICULADO | DECLINADO | EN_PROGRESO | COMPLETADO
   fecha_solicitud DateTime  @default(now())
   fecha_decision  DateTime?
 
@@ -169,5 +133,3 @@ model Inscripcion {
   id_curso Int
   curso    Curso @relation(fields: [id_curso], references: [id_curso], onDelete: Cascade)
 }
-=======
->>>>>>> e4395f269f0cb66a24009cc3bea97d48f8d76b12
