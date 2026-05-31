@@ -1,10 +1,25 @@
-# 🏢 Project HANTER
+# 🏢 HANTER — Sistema de Gestión de Empleados
 
-Sistema de gestión de recursos humanos para empresas. Permite administrar empleados, certificados, nóminas y capacitaciones desde una interfaz web con roles diferenciados.
+Sistema de gestión de recursos humanos para empresas. Permite administrar empleados, certificados, nóminas y capacitaciones desde una interfaz web con roles diferenciados. Construido con React + Vite en el frontend y Node.js + Express + Prisma en el backend.
 
 ---
 
-## 📁 Estructura del Repositorio
+## 🧰 Requisitos previos
+
+Antes de empezar, asegúrate de tener instalado en tu PC:
+
+| Herramienta | Versión mínima | Descarga |
+|---|---|---|
+| **Node.js** | v18 o superior | https://nodejs.org (versión LTS) |
+| **Git** | Cualquier versión reciente | https://git-scm.com |
+| **VS Code** *(recomendado)* | Cualquier versión | https://code.visualstudio.com |
+
+> ✅ Al instalar Node.js, **npm** queda incluido automáticamente.  
+> ✅ No necesitas instalar SQLite, Java ni Maven — el proyecto los maneja por su cuenta.
+
+---
+
+## 📁 Estructura del repositorio
 
 ```
 Project-HANTER/
@@ -15,6 +30,80 @@ Project-HANTER/
 ├── Backend/                    # Servidor Node.js / Express
 └── Frontend/                   # App React / Vite
 ```
+
+---
+
+## ⚙️ Variables de entorno
+
+En la **raíz** del proyecto debe existir un archivo `.env` con el siguiente contenido:
+
+```env
+DATABASE_URL="file:./prisma/dev.db"
+JWT_SECRET="clave_secreta_hanter"
+PORT=3000
+```
+
+> ⚠️ Este archivo **no se sube a GitHub** (está en `.gitignore`). Si clonas el proyecto desde cero, créalo manualmente.
+
+---
+
+## 🚀 Instalación y puesta en marcha
+
+Sigue estos pasos **en orden**:
+
+### 1. Instalar dependencias del Backend
+
+```bash
+cd Backend
+npm install
+```
+
+### 2. Instalar dependencias del Frontend
+
+```bash
+cd ../Frontend
+npm install
+```
+
+### 3. Generar la base de datos (migraciones)
+
+```bash
+cd ../prisma
+npx prisma migrate deploy
+npx prisma generate
+```
+
+### 4. Poblar la base de datos con datos iniciales
+
+```bash
+cd ../Backend
+npx prisma db seed
+```
+
+### 5. Levantar el servidor Backend
+
+```bash
+cd Backend
+node index.js
+```
+
+### 6. Levantar el servidor Frontend
+
+> Abre una **segunda terminal** para este paso.
+
+```bash
+cd Frontend
+npm run dev
+```
+
+---
+
+## 🌐 URLs del proyecto
+
+| Servicio | URL |
+|---|---|
+| Frontend | http://localhost:5173 |
+| Backend (API) | http://localhost:3000 |
 
 ---
 
@@ -43,7 +132,7 @@ El ORM **Prisma** gestiona una base de datos **SQLite** (`prisma/dev.db`). El cl
 - Un `Certificado` puede tener un emisor (`Usuario` administrador que lo aprueba).
 - Una `Inscripcion` conecta un `Empleado` con un `Curso`.
 
-### Comandos Prisma
+### Comandos Prisma útiles
 
 ```bash
 # Desde la raíz del repositorio
@@ -90,7 +179,7 @@ Backend/
 
 ### Endpoints principales
 
-| Método | Ruta | Descripción | Auth requerida |
+| Método | Ruta | Descripción | Auth |
 |---|---|---|---|
 | `GET` | `/auth/sesion` | Datos del usuario + botones de navegación | Token |
 | `POST` | `/certificados/anadir` | Subir certificado (PDF + datos) | Token |
@@ -128,14 +217,6 @@ Backend/uploads/
 └── nominas/            # PDFs de nóminas
 ```
 
-### Arrancar el servidor
-
-```bash
-cd Backend
-npm install
-node index.js         # Corre en http://localhost:3000
-```
-
 ---
 
 ## 🖥️ Frontend — React + Vite
@@ -148,14 +229,6 @@ node index.js         # Corre en http://localhost:3000
 | `react-dom` | Renderizado en el DOM |
 | `react-router-dom` v7 | Navegación SPA con rutas declarativas |
 | `vite` + `@vitejs/plugin-react-swc` | Bundler y servidor de desarrollo |
-
-### Arrancar el frontend
-
-```bash
-cd Frontend
-npm install
-npm run dev           # Corre en http://localhost:5173
-```
 
 ---
 
@@ -172,37 +245,27 @@ El sistema usa **JWT (JSON Web Tokens)**:
 
 ---
 
+## 👥 Roles del sistema
+
+| Rol | Descripción |
+|---|---|
+| **Administrador** | Acceso total al sistema |
+| **Supervisor** | Gestión de empleados y certificados |
+| **Empleado** | Acceso a su perfil, cursos y certificados |
+
+---
+
 ## 🌗 Modo Oscuro
 
 El tema se guarda en `localStorage` bajo la clave `"tema"` (`"dark"` / `"light"`). Al cargar la app, `main.jsx` aplica el atributo `data-theme="dark"` al `<html>` si corresponde. Los colores se definen con variables CSS en `styles.css`.
 
 ---
 
-## 🚀 Flujo de Inicio Rápido
-
-```bash
-# 1. Instalar dependencias
-npm install              # raíz (Prisma)
-cd Backend && npm install
-cd ../Frontend && npm install
-
-# 2. Configurar entorno
-cp .env.example .env     # Completar JWT_SECRET
-
-# 3. Inicializar base de datos
-cd ..
-npx prisma migrate dev --name init
-npx prisma db seed       # Si hay seed configurado
-
-# 4. Iniciar servicios (dos terminales)
-cd Backend && node index.js        # :3000
-cd Frontend && npm run dev         # :5173
-```
-
----
-
-## 📎 Notas
+## 📝 Notas
 
 - El archivo `.env` en la raíz es compartido entre Prisma y el Backend (`dotenv.config({ path: '../.env' })`).
+- La base de datos se genera como un archivo local `prisma/dev.db` — no requiere servidor de base de datos externo.
+- Los archivos subidos (fotos de perfil, certificados, nóminas) se almacenan en `Backend/uploads/`.
 - La carpeta `Backend/src/` contiene una estructura Java/Spring (vestigio de un backend alternativo) que **no está activa** en el flujo Node.js.
 - Los archivos PDF de ejemplo en `Frontend/fotos/pdf/` son datos de prueba para desarrollo.
+- El seed inicial crea usuarios con roles predefinidos para pruebas.
