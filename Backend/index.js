@@ -32,16 +32,16 @@ app.use(cors({
 app.use('/auth',            authRouter);
 app.use('/usuarios',        usuariosRouter);
 app.use('/certificados',    verificarToken, certificadosRouter);
-app.use('/notificaciones',  notificacionesRouter);
-app.use('/cursos',          cursosRouter);
-app.use('/admin/usuarios', adminUsuariosRouter);
+app.use('/notificaciones',  verificarToken, notificacionesRouter);
+app.use('/cursos',          verificarToken, cursosRouter);
+app.use('/admin/usuarios',  adminUsuariosRouter);
 app.use('/empleados',
   verificarToken,
   verificarRol(['Administrador', 'Supervisor']), empleadosRouter);
 app.use('/roles',
   verificarToken,
   verificarRol(['Administrador', 'Supervisor']), rolesRouter);
-app.use('/nomina', nominaRouter);
+app.use('/nomina',          verificarToken, nominaRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {

@@ -1,5 +1,7 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { verificarToken } from '../middlewares/auth.js';
 
 const prisma = new PrismaClient();
@@ -65,6 +67,81 @@ router.get('/sesion', verificarToken, async (req, res) => {
   } catch (error) {
     console.error('Error en /auth/sesion:', error);
     res.status(500).json({ error: 'Error al obtener sesión', detalle: error.message });
+  }
+});
+
+// ============================================================
+// POST /auth/login
+// Inicio de sesión. Acepta nombre de usuario o correo.
+// Si las credenciales son válidas, devuelve un token JWT
+// (con id_usuario, id_empleado y rol) y los datos del usuario.
+// ============================================================
+router.post('/login', async (req, res) => {
+  const { nombre_usuario, password } = req.body;
+
+  try {
+    // Intento 1: buscar la cuenta por nombre de usuario.
+    let usuario = await prisma.usuario.findUnique({
+      where: { nombre_usuario },
+      include: { empleado: { include: { rol: true } } }
+    });
+
+    // Intento 2: si no se encontró y el texto parece un correo,
+    // se busca el empleado por correo y luego su cuenta.
+    if (!usuario && nombre_usuario.includes('@')) {
+      const empleado = await prisma.empleado.findUnique({
+        where: { correo: nombre_usuario },
+        include: { rol: true }
+      });
+
+      if (!empleado) {
+        return res.status(404).json({ error: 'Empleado no encontrado' });
+      }
+
+      usuario = await prisma.usuario.findFirst({
+        where: { id_empleado: empleado.id_empleado },
+        include: { empleado: { include: { rol: true } } }
+      });
+    }
+
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Compara la contraseña recibida contra el hash guardado.
+    const validPassword = await bcrypt.compare(password, usuario.password_hash);
+    if (!validPassword) {
+      return res.status(401).json({ error: 'Contraseña incorrecta' });
+    }
+
+    // Genera el token con los datos que el resto de la app necesita.
+    const token = jwt.sign(
+      { id_usuario: usuario.id_usuario,
+        id_empleado: usuario.id_empleado,
+        rol: usuario.empleado.rol.nombre_rol },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    // Registra la fecha/hora del último inicio de sesión.
+    await prisma.usuario.update({
+      where: { id_usuario: usuario.id_usuario },
+      data: { ultimo_login: new Date() }
+    });
+
+    res.json({
+      token,
+      usuario: {
+        id_usuario:     usuario.id_usuario,
+        nombre_usuario: usuario.nombre_usuario,
+        correo:         usuario.empleado.correo,
+        rol:            usuario.empleado.rol.nombre_rol,
+        foto_perfil:    usuario.empleado.foto_perfil
+      }
+    });
+  } catch (error) {
+    console.error('Error en /auth/login:', error);
+    res.status(500).json({ error: 'Error en login', detalle: error.message });
   }
 });
 

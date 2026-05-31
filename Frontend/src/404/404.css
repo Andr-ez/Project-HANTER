@@ -1,0 +1,94 @@
+/* ============================= */
+/* PÁGINA 404 — NO ENCONTRADA    */
+/* ============================= */
+
+.not-found-page {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--color-fondo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 24px;
+  animation: fadeInUp 0.45s ease both;
+}
+
+/* Número grande */
+.not-found-code {
+  margin: 0;
+  font-size: clamp(80px, 18vw, 140px);
+  font-family: 'Darumadrop One', sans-serif;
+  color: var(--color-blanco);
+  letter-spacing: 8px;
+  line-height: 1;
+}
+
+/* Título */
+.not-found-titulo {
+  margin: 0;
+  font-size: clamp(14px, 3vw, 20px);
+  font-family: 'Darumadrop One', sans-serif;
+  color: var(--color-blanco);
+  letter-spacing: 3px;
+}
+
+/* Descripción */
+.not-found-desc {
+  margin: 0;
+  font-size: 13px;
+  font-family: 'Darumadrop One', sans-serif;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 1px;
+}
+
+/* Botones */
+.not-found-acciones {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.not-found-btn {
+  background: var(--color-blanco);
+  color: var(--color-titulos);
+  border: none;
+  border-radius: 30px;
+  padding: 11px 28px;
+  font-size: 14px;
+  font-family: 'Darumadrop One', sans-serif;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.not-found-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.not-found-btn--inicio {
+  background: var(--color-titulos);
+  color: var(--color-blanco);
+}
+
+@media (max-width: 600px) {
+  .not-found-acciones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .not-found-btn {
+    width: 220px;
+    text-align: center;
+  }
+}

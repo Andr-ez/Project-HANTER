@@ -33,6 +33,7 @@ import AdminCursosUsuarios  from './151-A/151-A.jsx';
 import Notificaciones from './500/500.jsx';
 import Perfil from './perfil/perfil.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import PaginaNoEncontrada from './404/404.jsx';
 
 
 import './styles.css'; // Estilos globales de la aplicación
@@ -77,6 +78,7 @@ createRoot(document.getElementById('root')).render(
     <Route path="/151-A" element={<PrivateRoute><AdminCursosUsuarios /></PrivateRoute>} />
     <Route path="/500" element={<PrivateRoute><Notificaciones /></PrivateRoute>} />
     <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />
+    <Route path="*" element={<PaginaNoEncontrada />} />
   </Routes>
 </BrowserRouter>
 );

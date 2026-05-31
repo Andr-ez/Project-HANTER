@@ -3,10 +3,15 @@ node_modules
 npm-debug.log
 yarn-error.log
 
+# Variables de entorno (¡nunca subir!)
+.env
+.env.*
+
 # Prisma / SQLite
 prisma/dev.db
 prisma/dev.db-journal
-
+prisma/prisma/dev.db
+prisma/prisma/dev.db-journal
 
 # Build / Generated
 /dist

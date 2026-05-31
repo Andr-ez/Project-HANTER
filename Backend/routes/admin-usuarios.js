@@ -295,6 +295,10 @@ router.delete('/:id_empleado', async (req, res) => {
       });
     }
 
+    await prisma.empleado.delete({
+      where: { id_empleado: id }
+    });
+
     res.json({ mensaje: 'Usuario eliminado correctamente.' });
   } catch (error) {
     console.error('Error al eliminar usuario:', error);

@@ -154,6 +154,8 @@
 /* BARRA ACCIONES (badge + filtro) */
 /* ============================= */
 .notif-barra-acciones {
+  position: relative;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -205,8 +207,7 @@
 }
 
 .notif-filtro-dropdown {
-  position: absolute;
-  right: 0;
+  position: fixed;
   top: calc(100% + 8px);
   background: white;
   border-radius: 14px;
@@ -528,4 +529,19 @@
   .notif-btn-accion        { padding: 12px 28px; font-size: 13px; }
   .notif-detalle-wrapper   { padding: 16px 18px 70px; }
   .sidebar                 { width: 240px; }
+}
+/* ── Botón reintentar (estado error de conexión) ── */
+.notif-btn-reintentar {
+  margin-top: 16px;
+  padding: 8px 24px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--color-primario, #4a6fa5);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.notif-btn-reintentar:hover {
+  opacity: 0.85;
 }

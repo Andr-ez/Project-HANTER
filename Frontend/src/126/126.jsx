@@ -121,7 +121,6 @@ function CursosDisponibles() {
               { id: 52, nombre: "SOLICITAR",  link: "/crono/induccion" },
             ],
           },
-          { id: 7, nombre: "CONFIGURACIÓN", link: "/config", posicion: ["sidebar"], hijos: [] },
         ]);
       } finally {
         setCargando(false);
