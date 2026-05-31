@@ -51,6 +51,13 @@ PORT=3000
 
 Sigue estos pasos **en orden**:
 
+### 0. Instalar dependencias del generales
+
+```bash
+cd Project-HANTER-main
+npm install
+```
+
 ### 1. Instalar dependencias del Backend
 
 ```bash
